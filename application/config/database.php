@@ -77,7 +77,7 @@ $db['default'] = array(
 	'dsn'	=> 'mysql:host=localhost;dbname=angiproject',
 	'hostname' => 'localhost',
 	'username' => 'angi',
-	'password' => 'angi123',
+	'password' => 'Angi123@#',
 	'database' => 'angiproject',
 	'dbdriver' => 'pdo',
 	'dbprefix' => '',
