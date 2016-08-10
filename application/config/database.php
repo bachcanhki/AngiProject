@@ -74,12 +74,12 @@ $active_group = 'default';
 $query_builder = TRUE;
 
 $db['default'] = array(
-	'dsn'	=> 'mysql:host=localhost;dbname=angiproject',
+	'dsn'	=> '',
 	'hostname' => 'localhost',
-	'username' => 'angi',
+	'username' => 'hobe817_angi',
 	'password' => 'Angi123@#',
-	'database' => 'angiproject',
-	'dbdriver' => 'pdo',
+	'database' => 'hobe817_angi',
+	'dbdriver' => 'mysqli',
 	'dbprefix' => '',
 	'pconnect' => TRUE,
 	'db_debug' => (ENVIRONMENT !== 'production'),

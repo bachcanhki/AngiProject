@@ -3,7 +3,7 @@
  */
 function sticky_relocate() {
     var window_top = $(window).scrollTop();
-    var div_top = $('.stick-point').offset().top;
+    var div_top = $('.stick-point').offset() ? $('.stick-point').offset().top : 0;
     if (window_top > div_top) {
         $('.restaurant-place').addClass('stick');
         $('.stick-point').height($('.restaurant-place').outerHeight());
@@ -20,7 +20,7 @@ function signinEventBinding(){
            type : "POST",
            data : $(this).serialize(),
            dataType:'json',
-           url: 'home/login', // target element(s) to be updated with server response 
+           url: $(this).attr('action'), // target element(s) to be updated with server response 
            cache : false,
            //check this in firefox browser
            success : function(response){ console.log(response); 

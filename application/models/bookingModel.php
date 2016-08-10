@@ -14,16 +14,30 @@ class BookingModel extends CI_Model
         return $query->result();
     }
     
-    public function Admin_FindBy($offset=0, $limit=20){
-        $sql = 'select '.$this->table.'.*, ';
-        $sql.= $this->memberships.'.memName as userName, ';
-        $sql.= $this->restaurants.'.nameRe as restaurantName ';
-        $sql.= 'from '.$this->table;
-        $sql.= ' left join '.$this->memberships.' on '.$this->table.'.userID = '.$this->memberships.'.userID';
-        $sql.= ' left join '.$this->restaurants.' on '.$this->restaurants.'.restaurantID = '.$this->restaurants.'.restaurantID'; 
-        $sql.= ' order by dateBooking desc ';
-        $sql.= ' limit '.$limit.' offset '.$offset;
-        $query = $this->db->query($sql);
+    public function Admin_FindBy($restaurantID = null, $userID = null, $offset=0, $limit=20, &$count=0){    
+        $from = 'from '.$this->table;
+        $from.= ' left join '.$this->memberships.' on '.$this->table.'.userID = '.$this->memberships.'.userID';
+        $from.= ' left join '.$this->restaurants.' on '.$this->restaurants.'.restaurantID = '.$this->table.'.restaurantID'; 
+        
+        $where = ' where 1 = 1 ';
+        if ($restaurantID != null)
+            $where .= ' and '.$this->table.'.restaurantID = '.$restaurantID;
+        if ($userID != null)
+            $where .= ' and '.$this->table.'.userID = '.$userID;
+             
+        $select = 'select distinct '.$this->table.'.bookingID ';
+
+        //count
+        $query = $this->db->query($select.$from.$where);
+        $count = $query->num_rows();
+        
+        $select = 'select '.$this->table.'.*, ';
+        $select.= $this->memberships.'.memName as userName, ';
+        $select.= $this->restaurants.'.nameRe as restaurantName ';  
+        $paging = ' limit '.$limit.' offset '.$offset;
+        $order = ' order by dateBooking desc ';
+          
+        $query = $this->db->query($select.$from.$where.$order.$paging);
         return $query->result();
     }
     
@@ -40,6 +54,13 @@ class BookingModel extends CI_Model
         if ($query->num_rows() > 0)
             return $query->row();
         return null;
+    }
+    
+    public function CheckExisted($data){
+        $query = $this->db->get_where($this->table, $data, 1);
+        if ($query->num_rows() > 0)
+            return true;
+        return false;
     }
     
     function Count_All()

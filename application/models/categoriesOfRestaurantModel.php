@@ -12,6 +12,13 @@ class CategoriesOfRestaurantModel extends CI_Model
         return $query->result();
     }
     
+    function GetById($id)
+    {
+        $query = $this->db->get_where($this->table, array('categoryOfResID'=>$id), 1);
+        $record = $query->row();
+        return $record;
+    }
+    
     function ListByStatus($status=1)
     {                                          
         $query = $this->db->get_where($this->table, array('statusCOR'=>$status));
@@ -21,12 +28,6 @@ class CategoriesOfRestaurantModel extends CI_Model
     function Count_All()
     {
         return $this->db->count_all($this->table);
-    }
-    function Admin_GetById($id)
-    {
-        $query = $this->db->get_where($this->table, array('categoryOfResID'=>$id), 1);
-        $record = $query->row();
-        return $record;
     }
     
     function Create($info)

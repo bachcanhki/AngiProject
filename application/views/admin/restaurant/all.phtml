@@ -1,7 +1,7 @@
 <div class="panel panel-default">
   <!-- Default panel contents -->
   <div class="panel-heading">
-    <a class="btn btn-default" href="<?php echo base_url()?>admin/add_restaurant" role="button">Thêm</a>
+    Danh mục quán ăn/ nhà hàng
   </div>
   <div class="panel-body">
     
@@ -27,7 +27,7 @@
             <td><?php echo $user->nameRe; ?></td>
             <td><?php echo $user->phoneRe; ?></td>
             <td><?php echo $user->address; ?></td>   
-            <td class="text-center"><?php echo $user->statusRes == 1 ? 'Hoạt động' : 'Chưa kích hoạt'; ?></td>
+            <td class="text-center"><?php echo $user->statusRes ? 'Hoạt động' : 'Chưa kích hoạt'; ?></td>
             <td class="text-center">
             <a class="btn btn-info" href="<?php echo base_url()?>admin/edit_restaurant/<?php echo $user->restaurantID; ?>">Sửa</a>
             <a class="btn btn-danger" onclick="return resModule.delete('<?php echo $user->nameRe; ?>');" href="<?php echo base_url()?>admin/delete_restaurant/<?php echo $user->restaurantID; ?>">Xóa</a>   

@@ -1,83 +1,65 @@
-<link rel="stylesheet" href="<?php echo base_url()?>css/user.css">
+<h1><?php echo $title; ?></h1>
+<table class="table table-striped table-bordered">
+    <thead>
+        <tr>
+            <th class="col-lg-1">ID</th>    
+            <th>Ngày đặt</th>    
+            <th>Ngày tạo</th>    
+            <th>Cửa hàng</th> 
+            <th>Người đặt</th> 
+            <th class="text-center col-lg-2">Trạng thái</th>
+            <th class="col-lg-2"></th>
+        </tr>
+    </thead>
+    <tbody>
+        <?php if ($rows > 0){ ?>
+        <?php foreach ($result as $item) {?>
+        <tr>
+            <td><?php echo $item->bookingID; ?></td>
+            <td><?php echo $item->dateBooking; ?></td>  
+            <td><?php echo $item->dateCreateBo; ?></td>   
+            <td><?php echo $item->restaurantName; ?></td>
+            <td><?php echo $item->userName; ?></td>
+            <td class="text-center"><?php 
+                switch ($item->statusBo){
+                    case 0:
+                        echo 'Mới đặt';
+                        break;
+                    case 1:
+                        echo 'Đã xử lý';
+                        break;
+                    case 10:
+                        echo 'Hoàn thành';
+                        break;
+                    case 99:
+                        echo 'Hủy';
+                        break;
+                }
+            ?></td>
+            <td class="text-center">
+            <a class="btn btn-info" href="<?php echo base_url()?>user_profile/edit_booking/<?php echo $item->bookingID; ?>">Xem</a>
+            <a class="btn btn-danger" onclick="return bookingModule.delete('<?php echo $item->bookingID; ?>');" 
+                href="<?php echo base_url()?>user_profile/delete_booking/<?php echo $item->bookingID; ?>">Xóa</a>   
+            </td>
+        </tr>
+        <?php } ?>
+        <?php } ?>
+    </tbody>
+    <tfoot>
+        <tr>
+        <td colspan="7">                      
+        <?php echo $pagination; ?>
+        </td>
+        </tr>
+    </tfoot>
+  </table>
 
-
-<div class="container">
-    <div class="row">
-        <div class="breadcrumb"></div>
-
-        <div class="col-md-3">
-            <table class="profile-stt">
-                <tr>
-                    <td><img src="http://cdn.pasgo.vn/images/Profile/no_avatar.png"></td>
-                    <td>
-                        <p>ID ĂnGì: <strong>123</strong></p>
-                        <p>ĐT: <strong>01646223394</strong></p>
-                    </td>
-                </tr>
-
-                <tr>
-                    <td style="padding: 0 8px 20px"><button>Chọn ảnh</button></td>
-                    <td></td>
-                </tr>
-            </table>
-            <ul class="profile-sidebar">
-                <li><a href="../user_profile"><i class="fa fa-user" aria-hidden="true"></i> Thông tin tài khoản</a></li>
-                <li><a href="../user_profile/restaurant_banner"><i class="fa fa-picture-o" aria-hidden="true"></i> Banner nhà hàng</a></li>
-                <li><a href="../user_profile/restaurant_infor"><i class="fa fa-wpforms" aria-hidden="true"></i> Thông tin nhà hàng</a></li>
-                <li><a href="../user_profile/restaurant_price"><i class="fa fa-usd" aria-hidden="true"></i> Bảng giá</a></li>
-                <li class="active"><i class="fa fa-cogs" aria-hidden="true"></i> Quản lý đặt chỗ</li>
-                <li><a href="../user_profile/change_Password"><i class="fa fa-unlock-alt" aria-hidden="true"></i> Đổi mật khẩu</a></li>
-                <li><a href="../booking/user_booking_history"><i class="fa fa-cutlery" aria-hidden="true"></i> Lịch sử đặt chỗ</a></li>
-                <li><a><i class="fa fa-power-off" aria-hidden="true"></i> Thoát</a></li>
-            </ul>
-        </div>
-
-        <div class="col-md-9">
-            <h1>Lịch sử đặt chỗ</h1>
-
-            <table class="table table-striped">
-                <thead>
-                <tr>
-                    <th>Ngày đặt chỗ</th>
-                    <th>ID khách hàng</th>
-                    <th>Số điện thoại</th>
-                    <th>Số người</th>
-                    <th>Thời gian</th>
-                    <th>Tình trạng</th>
-                </tr>
-                </thead>
-                <tbody>
-                <tr>
-                    <th>21/04/16</th>
-                    <th>34567</th>
-                    <th>01646223394</th>
-                    <th>8</th>
-                    <th>20:00 | 21/05/16</th>
-                    <th>Đang chờ</th>
-                </tr>
-
-                <tr>
-                    <th>21/04/16</th>
-                    <th>34567</th>
-                    <th>01646223394</th>
-                    <th>8</th>
-                    <th>20:00 | 21/05/16</th>
-                    <th>Đang chờ</th>
-                </tr>
-
-                <tr>
-                    <th>21/04/16</th>
-                    <th>34567</th>
-                    <th>01646223394</th>
-                    <th>8</th>
-                    <th>20:00 | 21/05/16</th>
-                    <th>Đang chờ</th>
-                </tr>
-                </tbody>
-            </table>
-
-
-            <div class="statistic-book"></div>
-        </div>
-    </div>
-</div>
+<script type="text/javascript">
+    window.bookingModule = window.bookingModule || {};
+    
+    bookingModule.delete = bookingModule.delete || function(name){
+        if (confirm('Xóa ' + name + '?'))
+            return true;
+        return false;
+    }
+</script>

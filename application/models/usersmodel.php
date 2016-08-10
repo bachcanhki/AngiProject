@@ -29,13 +29,17 @@ class UsersModel extends CI_Model
         $record = $query->row();
         return $record;
     }
-    function Create($newsInfo)
+    
+    function Create($info)
     {
         //cat mang 2 chieu thang 2 mang mot chieu
-        $array_user = $newsInfo['user'];
-        $array_mem = $newsInfo['mem'];
+        $array_user = $info['user'];
+        $array_mem = $info['mem'];
+        $array_add = $info['add'];
         //Bat dau trans
-        $this->db->trans_begin();        
+        $this->db->trans_begin();   
+        $this->db->insert($this->address, $array_add); 
+        $addressId = $this->db->insert_id();
         //Insert du lieu vao bang user
         $this->db->insert($this->table, $array_user);
         //Tráº£ ra user_id vua insert
@@ -44,7 +48,8 @@ class UsersModel extends CI_Model
         {
             //Neu insert thanh cong vao bang user
             //add them user_id vao mang chua thong tin chi tiet
-            $array_mem['userID'] = $user_id;
+            $array_mem['userID'] = $user_id;     
+            $array_mem['addressID'] = $addressId;
             $this->db->insert($this->memberships, $array_mem);
         }
         if ($this->db->trans_status() == false)
@@ -59,11 +64,18 @@ class UsersModel extends CI_Model
         }        
     }
     
-    function Update($id, $newsInfo)
+    function Update($id, $info)
     {
+        $array_user = $info['user'];
+        $array_mem = isset($info['mem']) ? $info['mem'] : null;
+        $array_add = isset($info['add']) ? $info['add'] : null;
         $this->db->trans_begin();
-        $this->db->update($this->table, $newsInfo['user'], array('userID'=>$id));
-        $this->db->update($this->memberships, $newsInfo['mem'], array('userID'=>$id));
+        
+        $this->db->update($this->table, $array_user, array('userID'=>$id));
+        if ($array_mem != null)
+            $this->db->update($this->memberships, $array_mem, array('userID'=>$id));
+        if ($array_add != null)
+            $this->db->update($this->address, $array_add, array('addressID'=>$array_mem['addressID']));
         if ($this->db->trans_status() == false)
         {
             $this->db->trans_rollback();
@@ -75,6 +87,24 @@ class UsersModel extends CI_Model
             return true;
         }
     }
+    
+    function UpdateMemberships($memId, $memInfo)
+    {                                                         
+        $this->db->trans_begin();
+        
+        $this->db->update($this->memberships, $memInfo, array('memID'=>$memId));
+        if ($this->db->trans_status() == false)
+        {
+            $this->db->trans_rollback();
+            return 0;
+        }
+        else
+        {
+            $this->db->trans_commit();
+            return 1;
+        }
+    }
+    
     //Xoa thong tin user trong bang users
     function Delete($id)
     {
@@ -99,19 +129,87 @@ class UsersModel extends CI_Model
     function Admin_GetUserById($userid = "")
     {
         $sql = 'select '.$this->table.'.*, ';
-        $sql.= $this->memberships.'.addressID,'.$this->memberships.'.imageID,'.$this->memberships.'.memGender,'.$this->memberships.'.memBirthDay, memName, ';
-        $sql.= $this->address.'.address ';
+        $sql.= $this->memberships.'.addressID,'.$this->memberships.'.imageID,'.$this->memberships.'.memGender,'.$this->memberships.'.memBirthDay, memID, memName, memBirthDay, ';
+        $sql.= $this->address.'.address,'.$this->address.'.provinceID,'.$this->address.'.districtID,'.$this->address.'.wardID, ';
+        $sql.= $this->images.'.addressImage ';
         $sql.= 'from '.$this->table;
         $sql.= ' left join '.$this->memberships.' on '.$this->table.'.userID = '.$this->memberships.'.userID';
         $sql.= ' left join '.$this->address.' on '.$this->address.'.addressID = '.$this->memberships.'.addressID';
         $sql.= ' left join '.$this->images.' on '.$this->images.'.imageID = '.$this->memberships.'.imageID';
-        $sql.= ' where '.$this->table.'.userID = \''.$userid.'\'';
+        $sql.= ' where '.$this->table.'.userID = '.$userid.' ';    
         $sql.= ' limit 1';
         $query = $this->db->query($sql);
         if ($query->num_rows() > 0)
             return $query->row();
         return null;
     }
+    
+    function CheckUserInLogin($named = "", $pwd='', & $flag, & $msg)
+    {
+        $flag=false;
+        $msg='';
+        
+        $sql = 'SELECT userID FROM '.$this->table.' WHERE userName = \''.$named.'\' OR userMail = \''.$named.'\' limit 1 ';   
+        
+        $query = $this->db->query($sql);
+        if ($query->num_rows() == 0){
+            $msg = 'Tên đăng nhập không đúng';
+            $flag = false;
+            return null;
+        }     
+        $userID = $query->row()->userID;  
+        $sql = 'select '.$this->table.'.*, ';
+        $sql.= $this->memberships.'.memName ';
+        $sql.= ' from '.$this->table;
+        $sql.= ' left join '.$this->memberships.' on '.$this->table.'.userID = '.$this->memberships.'.userID ';
+        $sql.= ' where '.$this->table.'.userID = '.$userID.' AND '.$this->table.'.userPass = md5(\''.$pwd.'\') ';      
+        $sql.= ' limit 1';
+        $query = $this->db->query($sql);
+        
+        if ($query->num_rows() == 0)  {
+            $msg = 'Mật khẩu không đúng';
+            $flag = false;
+            return null;
+        }
+        $flag = true; 
+        return $query->row();
+    }
+    
+    function GetUserByNamed($named = "")
+    {
+        $sql = 'select '.$this->table.'.*, ';
+        $sql.= $this->memberships.'.addressID,'.$this->memberships.'.imageID,'.$this->memberships.'.memGender,'.$this->memberships.'.memBirthDay, memID, memName, memBirthDay, ';
+        $sql.= $this->address.'.address,'.$this->address.'.provinceID,'.$this->address.'.districtID,'.$this->address.'.wardID, ';
+        $sql.= $this->images.'.addressImage ';
+        $sql.= 'from '.$this->table;
+        $sql.= ' left join '.$this->memberships.' on '.$this->table.'.userID = '.$this->memberships.'.userID';
+        $sql.= ' left join '.$this->address.' on '.$this->address.'.addressID = '.$this->memberships.'.addressID';
+        $sql.= ' left join '.$this->images.' on '.$this->images.'.imageID = '.$this->memberships.'.imageID';
+        $sql.= ' where ('.$this->table.'.userName = \''.$named.'\'';
+        $sql.= ' or '.$this->table.'.userMail = \''.$named.'\') ';
+        $sql.= ' limit 1';
+        $query = $this->db->query($sql);
+        if ($query->num_rows() > 0)
+            return $query->row();
+        return null;
+    }
+    
+    //Liet ke chi tiet tat cac user
+    function CheckNameOrEmailExisted($named = "", $id = '')
+    {
+        $sql = 'select 1 ';
+        $sql.= 'from '.$this->table;
+        $sql.= ' where ('.$this->table.'.userName = \''.$named.'\'';
+        $sql.= ' or '.$this->table.'.userMail = \''.$named.'\') ';
+        if ($id != ''){
+            $sql.= ' and '.$this->table.'.userID != '.$id.' ';    
+        }               
+        $query = $this->db->query($sql);   
+        if ($query->num_rows() != null)
+            return true;
+        return false;
+    }
+    
     //Lay ra danh sach user theo offset
     function Admin_GetUser($level=0, $limit = 10, $offset = 0)
     {

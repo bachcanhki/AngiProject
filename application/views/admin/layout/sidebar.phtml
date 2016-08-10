@@ -4,16 +4,27 @@
     </a>
 
     <h4>
-        <a><?php echo $user; ?></a>
+        <a><?php echo $fullname; ?></a>
     </h4>
 </div>
 
 <ul class="manage-sb">
     <li>
-        <a href="../admin">
+        <a href="">
             <i class="material-icons">dashboard</i>
             <span class="title">Bảng tổng quát</span>
         </a>
+    </li>
+    <li>
+        <a href="javascrip:;">
+            <i class="material-icons">description</i>
+            <span class="title">Tin tức</span>
+            <span class="arrow material-icons">keyboard_arrow_right</span>
+        </a>
+        <ul class="sub-menu">                              
+            <li><a href="<?php echo base_url(); ?>admin/news">Tất cả</a></li>    
+            <li><a href="<?php echo base_url(); ?>admin/add_news">Thêm mới</a></li>
+        </ul>
     </li>
     <li>
         <a href="javascrip:;">
@@ -22,8 +33,7 @@
             <span class="arrow material-icons">keyboard_arrow_right</span>
         </a>
         <ul class="sub-menu">                              
-            <li><a href="<?php echo base_url(); ?>admin/restaurant">Tất cả</a></li>
-            <li><a href="<?php echo base_url(); ?>admin/add_restaurant">Thêm mới</a></li>
+            <li><a href="<?php echo base_url(); ?>admin/restaurant">Tất cả</a></li>    
         </ul>
     </li>
 
@@ -67,7 +77,7 @@
         <ul class="sub-menu">
             <li><a>Trang web</a></li>
             <li><a>Lượng truy cập</a></li>
-            <li><a>Thống kê</a></li>
+            <li><a href="<?php echo base_url(); ?>admin/report_statistics">Thống kê</a></li>
         </ul>
     </li>
 
@@ -78,9 +88,11 @@
         </a>
     </li>
     <li>
-        <a  href="<?php echo base_url(); ?>home/logout"><i class="fa fa-reply-all">Đăng xuất</i></a>
-
-    </li>
+        <a href="<?php echo base_url(); ?>home/logout">
+            <i class="material-icons">undo</i>
+            <span class="title">Đăng xuất</span>
+        </a>
+    </li>  
 </ul>
 
 

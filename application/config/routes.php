@@ -52,3 +52,12 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 $route['default_controller'] = 'home';
 $route['404_override'] = '';
 $route['translate_uri_dashes'] = FALSE;
+
+$route['nha-hang'] = '/home.php/search';    
+$route['tat-ca'] = '/home/news/0'; 
+$route['tin-cap-nhat'] = '/home/news/31'; 
+$route['tin-cap-nhat/(:any)'] = '/home/news/31/$1'; 
+$route['su-kien'] = '/home/news/32'; 
+$route['khuyen-mai'] = '/home/news/33'; 
+$route['trai-nghiem'] = '/home/news/34'; 
+$route['new-details/(:any)'] = '/home/newsDetails/$1'; 
