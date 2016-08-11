@@ -31,6 +31,18 @@ class Restaurant extends CI_Controller {
 
     public function view($restaurantID=0){ 
         $restaurant = $this->restaurantModel->Details($restaurantID);
+        if ($restaurant == null)
+            return redirect(base_url().'home');
+        
+        $categories = $this->categoriesOfRestaurantModel->ListCateByResId($restaurantID);
+        $categoryOfResIDArr = array();
+        $desciptionCORArr = array(); 
+        foreach($categories as $cate){
+            array_push($categoryOfResIDArr, $cate->categoryOfResID);
+            array_push($desciptionCORArr, $cate->desciptionCOR);
+        }
+        $restaurant->desciptionCOR = implode(', ', $desciptionCORArr);
+        $categoryOfResIDStr = implode(', ', $categoryOfResIDArr);
         $count = 0;
         $data = array(
             'title' => 'Thông tin quán ăn', 
@@ -42,10 +54,10 @@ class Restaurant extends CI_Controller {
             'userModel' => array( 
             ),                                        
             'model' => array(
-                'restaurant' => $restaurant,    
+                'restaurant' => $restaurant,        
                 'restaurantBanners' => $this->restaurantBannerModel->FindImagePaged(0, 1000, $rows, $restaurant->restaurantID),
                 'foods' => $this->foodModel->Admin_FindBy($restaurantID, 0, 1000),
-                'relations' => $this->restaurantModel->FindTopRelation(0, 4, $count, $restaurant->categoryOfResID),
+                'relations' => $this->restaurantModel->FindTopRelation(0, 4, $count, $categoryOfResIDStr),
                 'relationCount' => $count
             )
         );                                                  

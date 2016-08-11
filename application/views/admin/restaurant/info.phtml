@@ -1,23 +1,25 @@
-<div class="form-group">
+
+<div class="form-group">  
     <div class="col-lg-6"> 
-        <label for="categoryOfResID">Loại hình ẩm thực</label> 
-        <select id="categoryOfResID" name="categoryOfResID" class="form-control">        
-          <option id="" value="" selected="selected">--chọn loại nhà hàng--</option>  
-          <?php foreach($categories as $item){?>
-             <option id="<?php echo $item->categoryOfResID; ?>" value="<?php echo $item->categoryOfResID; ?>" <?php if(isset($categoryOfResID) && $categoryOfResID == $item->categoryOfResID){ echo 'selected="selected"';} else {echo '';} ?> >
+        <label for="categoryOfResID">Loại</label> 
+        <select id="categoryOfResID" name="categoryOfResID"  data-placeholder="--chọn loại nhà hàng--" multiple class="chosen-select form-control">        
+           <?php foreach($categories as $item){?>
+             <option id="<?php echo $item->categoryOfResID; ?>" value="<?php echo $item->categoryOfResID; ?>" 
+                <?php if(isset($categoryOfResID) && in_array($item->categoryOfResID, $categoryOfResID)){ echo 'selected="selected"';} else {echo '';} ?> >
              <?php echo $item->nameCOR; ?>
              </option>
           <?php } ?>
         </select>
-    </div>   
+        <input type="hidden" name="categoryOfResIDs" id="categoryOfResIDs" value="<?php echo isset($categoryOfResIDs) ? $categoryOfResIDs : ''; ?>">
+    </div>
     <div class="col-lg-6">
         <input type="hidden" id="restaurantID" name="restaurantID" value="<?php echo isset($restaurantID) ? $restaurantID : '0'; ?>">
         <input type="hidden" id="userID" name="userID" value="<?php echo isset($userID) ? $userID : '0'; ?>">
-        <label for="memName">Tên nhà hàng</label>
+        <label for="memName">Tên</label>
         <input type="text" class="form-control" value="<?php echo isset($nameRe) ? $nameRe : ''; ?>" id="nameRe"  name="nameRe"> 
     </div> 
     <div class="col-lg-6">
-        <label for="userName">Điện thoại</label>
+        <label for="userName">Phone</label>
         <input type="text" class="form-control" id="phoneRe"  name="phoneRe"  value="<?php echo isset($phoneRe) ? $phoneRe : ''; ?>"> 
     </div> 
     <div class="col-lg-6"> 
@@ -34,15 +36,15 @@
         </select>
     </div>  
     <div class="col-lg-12"> 
-    <label for="favouriteFood">Món ăn đặc sắc</label>
+    <label for="favouriteFood">favouriteFood</label>
     <input type="text" class="form-control" id="favouriteFood"  name="favouriteFood"  value="<?php echo isset($favouriteFood) ? $favouriteFood : ''; ?>"> 
     </div>     
     <div class="col-lg-6"> 
-        <label for="spaceRes">Không gian nhà hàng</label>
+        <label for="spaceRes">spaceRes</label>
         <input type="text" class="form-control" id="spaceRes"  name="spaceRes"  value="<?php echo isset($spaceRes) ? $spaceRes : ''; ?>"> 
     </div>       
     <div class="col-lg-6"> 
-        <label for="carParkingRes">Chỗ để ô tô</label>
+        <label for="carParkingRes">carParkingRes</label>
         <input type="text" class="form-control" id="carParkingRes"  name="carParkingRes"  value="<?php echo isset($carParkingRes) ? $carParkingRes : ''; ?>"> 
     </div>  
     <div class="col-lg-4"> 
@@ -99,8 +101,12 @@
 <script type="">
     $('.datepicker').datetimepicker({locale: 'vi'});
     $('.time').datetimepicker({locale: 'vi',format: 'hh:mm'});
+    $(".chosen-select").chosen().change(function(evt){
+        var arr = $(".chosen-select").chosen().val();
+        $('#categoryOfResIDs').val(arr.join());
+    });
     $(document).ready(function(){
-        var ok = '<?php echo $ok;?>'
+        var ok = '<?php echo isset($ok) ? $ok : ''; ?>';
         if (ok == '1')
         {
             setTimeout(function(){

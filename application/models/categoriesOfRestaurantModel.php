@@ -2,6 +2,7 @@
 class CategoriesOfRestaurantModel extends CI_Model
 {
     private $table = 'categoriesofrestaurant';  
+    private $restaurantcategories = 'restaurantcategories';  
     function __construct()
     {
         parent::__construct();
@@ -22,6 +23,17 @@ class CategoriesOfRestaurantModel extends CI_Model
     function ListByStatus($status=1)
     {                                          
         $query = $this->db->get_where($this->table, array('statusCOR'=>$status));
+        return $query->result();
+    }
+    
+    function ListCateByResId($restaurantID=0)
+    {                                          
+        $sql = 'select distinct '.$this->table.'.* ';
+        $sql.= ' from '.$this->table;
+        $sql.= ' left join '.$this->restaurantcategories.' on '
+                .$this->table.'.categoryOfResID = '.$this->restaurantcategories.'.categoryOfResID ';
+        $sql.= ' where '.$this->restaurantcategories.'.restaurantID = '.$restaurantID;
+        $query = $this->db->query($sql);
         return $query->result();
     }
     

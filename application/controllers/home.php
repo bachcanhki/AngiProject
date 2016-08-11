@@ -392,12 +392,13 @@ class Home extends CI_Controller {
                 $model['ward'] = $this->addressModel->FindWardByProvinceId($districtID);
             }
             else {
+                $userPass = md5($userPass);
                 $addInfo = array(
                     'user' => array(
                         'userName' => $userName,
                         'userMail' => $userMail,
-                        'userPass' => md5($userPass),
-                        'userPassRe' => md5($userPassRe),
+                        'userPass' => $userPass,
+                        'userPassRe' => $userPass,
                         'userLevel' => $userLevel,
                         'userActived' => $userActived
                     ),
@@ -449,7 +450,6 @@ class Home extends CI_Controller {
          
         $data = array(
              'content' => 'site/user/user/signup.phtml',
-             'title'=> 'Đăng ký tài khoản',
              'user'=> $user,
              'level'=> $level,
              'model' => $model

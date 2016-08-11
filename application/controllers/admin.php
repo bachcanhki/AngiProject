@@ -234,12 +234,21 @@ class admin extends CI_Controller {
         
         $user = $this->session->userdata('user');  
                                 
-        $rows = 0;  
+        $count = 0;  
         $config = $this->getConfig();                                                  
-        $result = $this->restaurantModel->Admin_FindBy($offset, $config['per_page'], $rows);
-        
+        $result = $this->restaurantModel->Admin_FindBy($offset, $config['per_page'], $count);
+        if ($result != null){
+            foreach($result as $restaurant){
+                $categories = $this->categoriesOfRestaurantModel->ListCateByResId($restaurant->restaurantID);
+                $desciptionCORArr = array(); 
+                foreach($categories as $cate){                            
+                    array_push($desciptionCORArr, $cate->desciptionCOR);
+                }
+                $restaurant->categoryName = implode(', ', $desciptionCORArr);
+            }
+        }
         $config['base_url'] = base_url().'/admin/restaurant';
-        $config['total_rows'] = $rows;  
+        $config['total_rows'] = $count;  
         $this->pagination->initialize($config);
         $pagination = $this->pagination->create_links();
         
@@ -249,7 +258,7 @@ class admin extends CI_Controller {
                     'fullname' => $this->session->userdata('fullname'), 
                     'model' => array(      
                         'result' => $result,
-                        'rows' => $rows,
+                        'rows' => $count,
                         'pagination' => $pagination)
                     );
         $data['content'] = 'admin/restaurant/all.phtml';
@@ -302,8 +311,9 @@ class admin extends CI_Controller {
             $model['statusRes'] = strip_tags($this->input->post('statusRes'));
                 
             $model['address'] = strip_tags($this->input->post('address'));
-            
-            $model['categoryOfResID'] = strip_tags($this->input->post('categoryOfResID')); 
+                                                                                   
+            $model['categoryOfResIDs'] = $this->input->post('categoryOfResIDs');
+            $model['categoryOfResID'] = explode(',', $model['categoryOfResIDs']); 
         }
                       
         if ($submit){
@@ -316,6 +326,13 @@ class admin extends CI_Controller {
             }
             else
             {
+                $cates = array();
+                foreach($model['categoryOfResID'] as $cateId){
+                    array_push($cates, array(
+                                    'categoryOfResID' => $cateId, 
+                                    'restaurantID' => 0
+                                    ));
+                }
                 //Tao mang chua thong tin ve user
                 $dataAdd = array(
                     'restaurant' => array(
@@ -343,10 +360,7 @@ class admin extends CI_Controller {
                         'isDeactivate' => $model['isDeactivate'],
                         'statusRes' => $model['statusRes']
                         ),  
-                    'cate' => array(
-                        'categoryOfResID' => $model['categoryOfResID'], 
-                        'restaurantID' => 0
-                        ),
+                    'cate' => $cates,
                     'add' => array(
                         'address' => $model['address'],
                         'provinceID' => $model['provinceID'],
@@ -468,8 +482,14 @@ class admin extends CI_Controller {
             $model['userID'] = $restaurant->userID;
             $model['isDepositBo'] = $restaurant->isDepositBo;
             $model['isDeactivate'] = $restaurant->isDeactivate;
-            $model['statusRes'] = $restaurant->statusRes;                           
-            $model['categoryOfResID'] = $restaurant->categoryOfResID; 
+            $model['statusRes'] = $restaurant->statusRes;  
+                                               
+            $resCates = $this->restaurantModel->ListResCateByResId($id);
+            $model['categoryOfResID'] = array(); 
+            foreach($resCates as $resCate){
+                array_push($model['categoryOfResID'], $resCate->categoryOfResID);
+            }      
+            $model['categoryOfResIDs'] = implode(',', $model['categoryOfResID']);
             
             $data['model']  = $model;                                      
         }                                                                             
@@ -504,9 +524,10 @@ class admin extends CI_Controller {
             $model['isDepositBo'] = strip_tags($this->input->post('isDepositBo'));
             $model['isDeactivate'] = strip_tags($this->input->post('isDeactivate'));
             $model['statusRes'] = strip_tags($this->input->post('statusRes'));
-                                                         
-            $model['categoryOfResID'] = strip_tags($this->input->post('categoryOfResID')); 
-
+                                                                                          
+            $model['categoryOfResIDs'] = $this->input->post('categoryOfResIDs');
+            $model['categoryOfResID'] = explode(',', $model['categoryOfResIDs']); 
+            
             $data['model']  = $model;
             //kiem tra du lieu
             //kiem tra du lieu
@@ -514,7 +535,14 @@ class admin extends CI_Controller {
             $ok = $this->validateRestaurant($model, $error);
                
             if ($ok == 1)
-            {
+            {                                                      
+                $cates = array();
+                foreach($model['categoryOfResID'] as $cateId){
+                    array_push($cates, array(
+                                    'categoryOfResID' => $cateId, 
+                                    'restaurantID' => $model['restaurantID']
+                                    ));
+                }                          
                 //Tao mang chua thong tin ve user
                 $dataEdit = array(
                     'restaurant' => array(
@@ -542,10 +570,7 @@ class admin extends CI_Controller {
                         'isDeactivate' => $model['isDeactivate'],
                         'statusRes' => $model['statusRes']
                         ),  
-                    'cate' => array(
-                        'categoryOfResID' => $model['categoryOfResID'], 
-                        'restaurantID' => $model['restaurantID']
-                        ),
+                    'cate' => $cates,
                     'add' => array(
                         'address' => $model['address'],
                         'provinceID' => $model['provinceID'],
@@ -1163,7 +1188,7 @@ class admin extends CI_Controller {
     public function edit_category($id) {
         $this->check_id($id, 'admin/categories');                   
         $level = 0;                               
-        $user = $this->categoriesOfRestaurantModel->GetById($id);
+        $user = $this->categoriesOfRestaurantModel->Admin_GetById($id);
         if ($user == null)
             return redirect(base_url("admin/categories/")); 
                   
@@ -1232,13 +1257,6 @@ class admin extends CI_Controller {
         {                                                                                                        
             $this->load->view('admin/layout/layout.phtml', $data);
         }
-    }
-
-    public function delete_category($id)
-    {                                     
-        $this->check_id($id, 'admin/categories');
-        $this->categoriesOfRestaurantModel->Delete($id);
-        redirect(base_url('admin/categories'));
     }
 
 //    ================================================================================
