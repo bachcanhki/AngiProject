@@ -56,11 +56,12 @@
 .profile-sidebar>li.active, .profile-sidebar>li:hover, .profile-sidebar>li:hover>a{color: #C00}
 .profile-sidebar>li, .profile-sidebar>li>a{color: #5c5c5c}
 
-.edit-user{margin: 80px 0}
-.edit-user input[type="text"], .edit-user input[type="email"], .edit-user input[type="date"], .edit-user input[type="password"]{
+.edit-user{margin: 50px 0}
+.edit-user input[type="text"], .edit-user input[type="email"], .edit-user input[type="date"], .edit-user input[type="password"], .edit-user input[type="number"], .edit-user select{
     border-radius: 4px;
     width: 50%;
 }
+
 .edit-user input[type="submit"], .upload-banner input[type="submit"]{
     border-radius: 4px;
     background: #D02028;
@@ -69,6 +70,24 @@
 }
 .edit-user label{width: 25%}
 .edit-user li{margin-top: 25px}
+.edit-user span.edit-checkbox{
+    margin-right: 30px;
+    vert-align: top;
+}
+.R-time{
+    position: relative;
+    width: 24.3%;
+    display: inline-block;
+}
+.R-time>i{
+    position: absolute;
+    top: 8px;
+    font-size: 20px;
+    right: 8px;
+}
+.R-time>input[type="text"], .R-time>input[type="time"]{width: 100%}
+
+
 
 .upload-banner>a{
     display: block;
@@ -92,6 +111,22 @@
 .upload-banner>input{
     border-top: none;
     width: 100%;
+}
+
+.remove-img{
+    cursor: pointer;
+    position: absolute;
+    top: 5px;
+    right: 5px;
+    font-size: 25px;
+    display: block;
+    color: #d80909;
+    opacity: 0.3;
+    padding: 3px;
+    background: #cacaca;
+}
+.remove-img:hover{
+    opacity: 1;
 }
 
 .booking-img{
@@ -146,3 +181,5 @@
     background: #D02028;
     border-radius: 3px;
 }
+
+.nav-tabs>li{margin: 0}

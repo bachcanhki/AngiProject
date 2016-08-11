@@ -1,11 +1,6 @@
-<div class="panel panel-default">
-  <!-- Default panel contents -->
-  <div class="panel-heading">
-    <h3>Ảnh quán ăn</h3>
-  </div>
-  <div class="panel-body">
-    <ul class="item-content">
-        <li class="col-md-3 text-center">
+<h1>Banner</h1>
+    <ul class="item-content row">
+        <li class="col-md-6 text-center">
             <a style="cursor: pointer; display: block; position: relative" class="img-item">                                                                         
                 <img id="img-banner-upload" src="<?php echo base_url(); ?>upload/img_default.jpg" alt="Ảnh món ăn" style="width: 100%; height: 100%;" class="img-thumbnail" onclick="return bannerModule.openCkFinder();">
             </a> 
@@ -15,19 +10,18 @@
             </div>                                                                                                          
         </li>
     <?php foreach($items as $item){ ?>
-        <li class="col-md-3" >
+        <li class="col-md-6" >
             <a style="display: block; position: relative" class="img-item">
-                <img alt="Ảnh món ăn" style="width: 100%; height: 100%" class="img-thumbnail" src="<?php echo $item->imageUrl; ?>"> 
-                <i class="fa fa-remove" style="cursor: pointer; position: absolute; top: -5px; right: -5px; font-size: large; display: block;" onclick="return bannerModule.delete('<?php echo $item->restaurantImageId; ?>');"></i> 
+                <img alt="Ảnh món ăn" style="width: 100%;" class="img-thumbnail" src="<?php echo $item->imageUrl; ?>">
+                <i class="fa fa-remove remove-img" title="Delete" onclick="return bannerModule.delete('<?php echo $item->restaurantImageId; ?>');"></i>
             </a>                                                                                                            
     <?php } ?>
-    </ul>  
+    </ul>
     <div class="row">
         <div style="text-align: center">
             <?php echo $pagination; ?>
         </div>    
-    </div>   
-</div>
+    </div>
 
 <script type="text/javascript">
     window.bannerModule = window.bannerModule || {};    

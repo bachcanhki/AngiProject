@@ -26,7 +26,7 @@ class Restaurant extends CI_Controller {
             'categoryModels' => $this->categoriesOfRestaurantModel->ListByStatus(1),
             'model' => array()
         );           
-        $this->load->view('site/layout/layoutnoslider.phtml', $data);
+        $this->load->view('site/layout/layout.phtml', $data);
     }
 
     public function view($restaurantID=0){ 
@@ -54,14 +54,14 @@ class Restaurant extends CI_Controller {
             'userModel' => array( 
             ),                                        
             'model' => array(
-                'restaurant' => $restaurant,        
+                'restaurant' => $restaurant,    
                 'restaurantBanners' => $this->restaurantBannerModel->FindImagePaged(0, 1000, $rows, $restaurant->restaurantID),
                 'foods' => $this->foodModel->Admin_FindBy($restaurantID, 0, 1000),
                 'relations' => $this->restaurantModel->FindTopRelation(0, 4, $count, $categoryOfResIDStr),
                 'relationCount' => $count
             )
         );                                                  
-        $this->load->view('site/layout/layoutnoslider.phtml', $data);
+        $this->load->view('site/layout/layout.phtml', $data);
     }
        
     

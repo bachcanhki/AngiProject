@@ -53,7 +53,7 @@ $route['default_controller'] = 'home';
 $route['404_override'] = '';
 $route['translate_uri_dashes'] = FALSE;
 
-$route['nha-hang'] = '/home.php/search';    
+$route['nha-hang'] = '/home.php/search';
 $route['tat-ca'] = '/home/news/0'; 
 $route['tin-cap-nhat'] = '/home/news/31'; 
 $route['tin-cap-nhat/(:any)'] = '/home/news/31/$1'; 

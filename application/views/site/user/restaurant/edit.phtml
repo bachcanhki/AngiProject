@@ -1,10 +1,6 @@
-<form method="POST" action="" id="frmres">
-<div class="panel panel-default">
-  <!-- Default panel contents -->
-  <div class="panel-heading">                                                                            
-    <input name="submit" id="submit" class="btn btn-info" type="submit" value="Lưu" />
-  </div>
-  <div class="panel-body">
+<h1>Thông tin nhà hàng</h1>
+
+<form class="edit-user" method="POST" action="" id="frmres">
     <div class="bg-danger"><?php echo $error; ?></div>
      
         <ul class="nav nav-tabs">
@@ -25,8 +21,8 @@
             <?php $this->load->view('site/user/restaurant/address.phtml'); ?>
           </div>
           <div id="_res_desc" class="tab-pane fade in"> 
-            <div class="form-group">
-                <textarea id="descriptionRes" name="descriptionRes" class="form-control">
+            <div style="margin-top: 25px">
+                <textarea id="descriptionRes" name="descriptionRes">
                     <?php echo isset($descriptionRes) ? $descriptionRes : ''; ?>
                 </textarea>
             </div>
@@ -38,11 +34,10 @@
             ?>
           </div>
         </div> 
-        <div class="form-group col-lg-12"> 
-           <input name="submit" id="submit" class="btn btn-info" type="submit" value="Lưu" />
-        </div> 
-  </div> 
-</div>                                                                           
+        <li>
+            <label></label>
+           <input name="submit" id="submit" class="btn" type="submit" value="Lưu" />
+        </li>
 </form>
 <script type=""> 
     CKFinder.setupCKEditor(null, '/resource/ckfinder/' );

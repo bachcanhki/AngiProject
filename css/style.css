@@ -45,6 +45,27 @@ ul, li{
 /*===============================================header===============================================*/
 
 /******************navbar************************/
+/*#myModal{z-index: 1000}*/
+.logo{
+    display: block;
+    border: 1px solid #d02028;
+    position: absolute;
+    z-index: 1;
+    box-shadow: 1px 1px 5px 1px #000;
+    width: 105px;
+}
+.logo img{width: 100%}
+.navbar{
+    min-height: 0 !important;
+    margin: 0 !important;
+    border: none !important;
+    padding: 0;
+    width: -webkit-calc(100% - 122px);
+    width: calc(100% - 122px);
+    float: left;
+}
+
+
 .navbar{
     min-height: 0 !important;
     margin: 0 !important;
@@ -79,28 +100,31 @@ li.top-register:hover>a{
     border-radius: 6px;
     box-shadow: 0 5px 10px rgba(0,0,0,.2);
     text-align: center;
-    right: -66px;
+    right: 0;
     background: #fff !important;
+    z-index: 3 !important;
 }
-.hover-signin:before{
-    content: '';
+.hover-signin i{
+    font-size: 35px;
     position: absolute;
-    bottom: 89%;
-    left: 46%;
-    height: 17px;
-    width: 5%;
-    background-color: #fff;
-    transform: skew(0deg, -45deg);
+    top: -24px;
+    color: #fff;
+    right: 9px;
 }
-.hover-signin:after{
-    content: '';
-    position: absolute;
-    bottom: 89%;
-    right: 45%;
-    height: 16px;
-    width: 5%;
-    background-color: #fff;
-    transform: skew(0deg, 45deg);
+
+.user-link{
+    display: block;
+    margin-bottom: 10px;
+    border-bottom: 1px dotted;
+    text-align: left;
+    color: #bd052b;
+}
+.user-link>i{
+    font-size: medium;
+}
+
+.btn-info{
+    border: none;
 }
 .btn-info:hover {
     background-color: #bd052b;
@@ -137,7 +161,7 @@ li.top-register:hover>a{
 }
 
 .topbar li:hover>.hover-menu{
-    display: block;
+    display: block !important;
 }
 
 .hover-menu{
@@ -169,18 +193,21 @@ ul.hover-menu  li a:hover{
 
 /********************search**********************/
 .search{
-    margin: 50px 0 15px;
+    margin: 15px 0 20px;
+    position: relative;
+    z-index: 2;
 }
 .search input{
     height: 40px;
-    float: left;
-    border-right: none;
-    width: 90%;
+    width: 100%;
 }
 .search button{
     height: 40px;
     border-left: none;
     background: #fff;
+    position: absolute;
+    right: 0;
+    top: 0;
 }
 /******************het search*******************/
 
@@ -346,6 +373,7 @@ i.filled{
 
 /*=========================================category/search============================================*/
 
+.topdisplay-item{display: table; width: 100%}
 .item-cat .col-md-3{
     padding-right: 0;
 }

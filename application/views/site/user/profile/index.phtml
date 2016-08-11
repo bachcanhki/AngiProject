@@ -12,24 +12,20 @@
         </li>
         <li>
             <label>Ngày sinh:</label> 
-            <div  style="width:200px;display:inline-table;">
-                <div class='input-group date datepicker'>
-                    <input type="text" id="memBirthDay" style="width:100%;" name="memBirthDay"  value="<?php echo isset($memBirthDay) ? $memBirthDay : ''; ?>"> 
-                    <span class="input-group-addon">
-                        <span class="glyphicon glyphicon-calendar"></span>
-                    </span>
-                </div>                 
+            <div class='input-group date datepicker' style="width:25%;display:inline-table;">
+                <input type="text" id="memBirthDay" style="width:100%; border-radius: 4px 0 0 4px" name="memBirthDay"  value="<?php echo isset($memBirthDay) ? $memBirthDay : ''; ?>">
+                <span class="input-group-addon">
+                    <span class="glyphicon glyphicon-calendar"></span>
+                </span>
             </div>                 
         </li>
         <li>
-            <label for="memGender">Giới tính</label> 
-            <div  style="width:200px;display:inline-table;">
-                <select id="memGender" name="memGender" class="form-control">
-                  <option id="0" value="0" <?php if(isset($memGender) && $memGender == '0'){ echo 'selected="selected"';} else {echo '';} ?> >Nữ</option>
-                  <option id="1" value="1" <?php if(isset($memGender) && $memGender == '1'){ echo 'selected="selected"';} else {echo '';} ?> >Nam</option>
-                  <option id="1" value="2" <?php if(isset($memGender) && $memGender == '2'){ echo 'selected="selected"'; } else {echo '';} ?>>Khác</option>
-                </select>
-            </div>
+            <label for="memGender">Giới tính</label>
+            <select id="memGender" name="memGender" style="width: 25%">
+                <option id="0" value="0" <?php if(isset($memGender) && $memGender == '0'){ echo 'selected="selected"';} else {echo '';} ?> >Nữ</option>
+                <option id="1" value="1" <?php if(isset($memGender) && $memGender == '1'){ echo 'selected="selected"';} else {echo '';} ?> >Nam</option>
+                <option id="1" value="2" <?php if(isset($memGender) && $memGender == '2'){ echo 'selected="selected"'; } else {echo '';} ?>>Khác</option>
+            </select>
         </li>
         <li>
             <label></label>

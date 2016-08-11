@@ -18,6 +18,7 @@ class user_profile extends CI_Controller{
         $this->load->model('restaurantModel', '', TRUE);
         $this->load->model('imageModel', '', TRUE);
         $this->load->model('restaurantBannerModel', '', TRUE);
+        
         $user = $this->session->userdata('user');
         $level = $this->session->userdata('level');
         if(!isset($user) || $user == '')
@@ -55,6 +56,7 @@ class user_profile extends CI_Controller{
             'fullname' => $this->session->userdata('fullname'), 
             'level' => $this->session->userdata('level'), 
             'content' => 'site/user/profile/index.phtml',
+            
             'userModel' => array(
                 'userID' => $user-> userID,       
                 'memName' => $user-> memName,    
@@ -123,7 +125,7 @@ class user_profile extends CI_Controller{
         $user = $this->usersModel->GetUserByNamed($userName);
 
         $data = array(                                                 
-            'title' => 'Thông tin nhà hàng',  
+            'title' => 'Thông tin nhà hàng',
             'userModel' => array(
                 'userID' => $user-> userID,       
                 'memName' => $user-> memName,    
@@ -132,7 +134,7 @@ class user_profile extends CI_Controller{
             'content' => 'site/user/restaurant/edit.phtml',   
             'user' => $this->session->userdata('user'), 
             'fullname' => $this->session->userdata('fullname'), 
-            'level' => $this->session->userdata('level') 
+            'level' => $this->session->userdata('level')
             );      
         $model = array(
              'error' => '',                        
@@ -172,7 +174,7 @@ class user_profile extends CI_Controller{
             $model['statusRes'] = strip_tags($this->input->post('statusRes'));
                 
             $model['address'] = strip_tags($this->input->post('address'));
-                
+            
             $model['categoryOfResIDs'] = $this->input->post('categoryOfResIDs');
             $model['categoryOfResID'] = explode(',', $model['categoryOfResIDs']); 
         }
@@ -187,14 +189,13 @@ class user_profile extends CI_Controller{
             }
             else
             {
-                $cates = array();
+				$cates = array();
                 foreach($model['categoryOfResID'] as $cateId){
                     array_push($cates, array(
                                     'categoryOfResID' => $cateId, 
                                     'restaurantID' => 0
                                     ));
-                }
-                //Tao mang chua thong tin ve user
+                }                //Tao mang chua thong tin ve user
                 $dataAdd = array(
                     'restaurant' => array(
                         'restaurantID' => $model['restaurantID'], 
@@ -263,6 +264,7 @@ class user_profile extends CI_Controller{
         $restaurantID = $restaurant->restaurantID;         
         $data = array(                                                 
             'title' => 'Cập nhật nhà hàng',
+            
             'content' => 'site/user/restaurant/edit.phtml',   
             'user' => $this->session->userdata('user'), 
             'fullname' => $this->session->userdata('fullname'), 
@@ -315,8 +317,7 @@ class user_profile extends CI_Controller{
             foreach($resCates as $resCate){
                 array_push($model['categoryOfResID'], $resCate->categoryOfResID);
             }      
-            $model['categoryOfResIDs'] = implode(',', $model['categoryOfResID']);                
-        }                                                                             
+            $model['categoryOfResIDs'] = implode(',', $model['categoryOfResID']);         }                                                                             
         else {
             $model['provinceID'] = strip_tags($this->input->post('provinceID'));
             $model['districtID'] = strip_tags($this->input->post('districtID'));
@@ -346,21 +347,21 @@ class user_profile extends CI_Controller{
             $model['isDepositBo'] = strip_tags($this->input->post('isDepositBo'));
             $model['isDeactivate'] = strip_tags($this->input->post('isDeactivate'));
             $model['statusRes'] = strip_tags($this->input->post('statusRes'));
-                                                                                
+                                                                                   
             $model['categoryOfResIDs'] = $this->input->post('categoryOfResIDs');
-            $model['categoryOfResID'] = explode(',', $model['categoryOfResIDs']); 
-        }
+            $model['categoryOfResID'] = explode(',', $model['categoryOfResIDs']);         }
                       
         if ($submit){
-            //kiem tra du lieu                
+            //kiem tra du lieu
+            //kiem tra du lieu
             $error = '';
             $ok = $this->validateRestaurant($model, $error);
             if (!$ok)   {
                 $model['error'] = $error;                                                           
             }
             else
-            {                                                   
-                $cates = array();
+            {
+				$cates = array();
                 foreach($model['categoryOfResID'] as $cateId){
                     array_push($cates, array(
                                     'categoryOfResID' => $cateId, 
@@ -609,6 +610,7 @@ class user_profile extends CI_Controller{
             'fullname' => $this->session->userdata('fullname'), 
             'level' => $this->session->userdata('level'), 
             'content' => 'site/user/profile/changePassword.phtml',
+            
             'userModel' => array(
                 'userID' => $user-> userID,       
                 'memName' => $user-> memName,    
@@ -708,8 +710,7 @@ class user_profile extends CI_Controller{
         $restaurant = $this->restaurantModel->GetByUserId($user-> userID);
         if ($restaurant == null){
             return redirect(base_url()."user_profile/restaurant_add"); 
-        }
-        
+        }    
         $rows = 0;  
         $config = $this->getConfig(); 
         $items = $this->restaurantBannerModel->FindImagePaged($offset, $config['per_page'], $rows, $restaurant->restaurantID);
@@ -724,6 +725,7 @@ class user_profile extends CI_Controller{
             'fullname' => $this->session->userdata('fullname'), 
             'level' => $this->session->userdata('level'), 
             'content' => 'site/user/restaurant/banner.phtml',
+            
             'userModel' => array(
                 'userID' => $user-> userID,       
                 'memName' => $user-> memName,    
@@ -773,11 +775,16 @@ class user_profile extends CI_Controller{
         $userName = $this->session->userdata('user');
         $user = $this->usersModel->GetUserByNamed($userName);
         $restaurant = $this->restaurantModel->GetByUserId($user-> userID);
-        $data = array(
+        if ($restaurant == null){
+            return redirect(base_url()."user_profile/restaurant_add"); 
+        } 
+
+		$data = array(
             'title' => 'Danh sách đặt chỗ',
             'user' => $userName, 
             'fullname' => $this->session->userdata('fullname'), 
-            'level' => $this->session->userdata('level'), 
+            'level' => $this->session->userdata('level'),
+            
             'content' => 'site/user/restaurant/restaurant_manage_booking.phtml',
             'userModel' => array(
                 'userID' => $user-> userID,       
@@ -824,6 +831,7 @@ class user_profile extends CI_Controller{
             'fullname' => $this->session->userdata('fullname'), 
             'level' => $this->session->userdata('level'), 
             'content' => 'site/user/user/user_manage_booking.phtml',
+            
             'userModel' => array(
                 'userID' => $user-> userID,       
                 'memName' => $user-> memName,    
@@ -870,7 +878,8 @@ class user_profile extends CI_Controller{
                 'fullname' => $this->session->userdata('fullname'), 
                 'level' => $this->session->userdata('level'), 
                 'user' => array('user' => $this->session->userdata('user')),
-                'fullname' => $this->session->userdata('fullname'), 
+                'fullname' => $this->session->userdata('fullname'),
+                
                 'userModel' => array(
                     'userID' => $user-> userID,       
                     'memName' => $user-> memName,    
@@ -948,6 +957,7 @@ class user_profile extends CI_Controller{
                 'fullname' => $this->session->userdata('fullname'), 
                 'level' => $this->session->userdata('level'), 
                 'user' => array('user' => $this->session->userdata('user')),
+                
                 'fullname' => $this->session->userdata('fullname'), 
                 'userModel' => array(
                     'userID' => $user-> userID,       

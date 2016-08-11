@@ -7,7 +7,7 @@ class RestaurantModel extends CI_Model
     private $address = 'address';
     private $province = 'province';
     private $district = 'district';
-    private $ward = 'ward';                                  
+    private $ward = 'ward';
     private $restaurantcategories = 'restaurantcategories';
     private $categoriesofrestaurant = 'categoriesofrestaurant';
     private $food = 'food';
@@ -26,7 +26,7 @@ class RestaurantModel extends CI_Model
         $from = 'from '.$this->table;
         $from.= ' left join '.$this->memberships.' on '.$this->table.'.userID = '.$this->memberships.'.userID ';   
         $from.= ' left join '.$this->address.' on '.$this->table.'.addressID = '.$this->address.'.addressID ';   
-         
+        
         $select = 'select 1 ';
         //count
         $query = $this->db->query($select.$from);
@@ -34,8 +34,8 @@ class RestaurantModel extends CI_Model
         
         $select = 'select '.$this->table.'.*, ';
         $select.= $this->memberships.'.memName as userName, '; 
-        $select.= $this->address.'.address, ';    
-        $select.= '\'\' as categoryName ';    
+        $select.= $this->address.'.address, '; 
+        $select.= '\'\' as categoryName ';
         $where = ' order by '.$this->table.'.nameRe ';
         $where.= ' limit '.$limit.' offset '.$offset;
         
@@ -65,7 +65,7 @@ class RestaurantModel extends CI_Model
     function GetFullByUserId($userId = "")
     {
         $sql = 'select '.$this->table.'.*, ';
-        $sql.= $this->address.'.address,'.$this->address.'.provinceID,'.$this->address.'.districtID,'.$this->address.'.wardID ';
+        $sql.= $this->address.'.address,'.$this->address.'.provinceID,'.$this->address.'.districtID,'.$this->address.'.wardID, ';
         $sql.= 'from '.$this->table;                                                                         
         $sql.= ' left join '.$this->address.' on '.$this->address.'.addressID = '.$this->table.'.addressID';
         $sql.= ' where '.$this->table.'.userID = '.$userId.' ';
@@ -79,7 +79,7 @@ class RestaurantModel extends CI_Model
     function Admin_GetFullById($id = "")
     {
         $sql = 'select '.$this->table.'.*, ';
-        $sql.= $this->address.'.address,'.$this->address.'.provinceID,'.$this->address.'.districtID,'.$this->address.'.wardID ';
+        $sql.= $this->address.'.address,'.$this->address.'.provinceID,'.$this->address.'.districtID,'.$this->address.'.wardID, ';
         $sql.= 'from '.$this->table;                                                                         
         $sql.= ' left join '.$this->address.' on '.$this->address.'.addressID = '.$this->table.'.addressID';
         $sql.= ' where '.$this->table.'.restaurantID = '.$id.' ';
@@ -96,7 +96,7 @@ class RestaurantModel extends CI_Model
         $sql.= ' CONCAT('.$this->address.'.address, \' \', ';
         $sql.= $this->ward.'.nameWard, \' \', ';
         $sql.= $this->district.'.nameDis, \' \', ';  
-        $sql.= $this->province.'.namePro) as address, ';
+        $sql.= $this->province.'.namePro) as address, ';  
         $sql.= '\'\' as desciptionCOR ';
         $sql.= 'from '.$this->table;                                                                         
         $sql.= ' left join '.$this->address.' on '.$this->address.'.addressID = '.$this->table.'.addressID ';
@@ -120,12 +120,12 @@ class RestaurantModel extends CI_Model
     
     function Admin_GetResCateByResId($restaurantID)
     {
-        $query = $this->db->get_where($this->restaurantcategories, array('restaurantID'=>$restaurantID), 1);
+        $query = $this->db->get_where($this->restaurantcategories, array('restaurantID'=>$id), 1);
         $record = $query->row();
         return $record;
     }
     
-    function ListResCateByResId($restaurantID)
+	function ListResCateByResId($restaurantID)
     {
         $query = $this->db->get_where($this->restaurantcategories, array('restaurantID'=>$restaurantID)); 
         return $query->result();
@@ -169,7 +169,7 @@ class RestaurantModel extends CI_Model
                 $where .= ' and ('.$this->table.'.nameRe like \'%'.$keyword.'%\'';                               
                 $where .= ' or '.$this->table.'.descriptionRes like \'%'.$keyword.'%\'';    
                 $where .= ' ) ';  
-            }   
+            }    
         }
         if ($cat > 0){
             $where .= ' and ('.$this->restaurantcategories.'.categoryOfResID = '.$cat.') ';                               
@@ -181,7 +181,7 @@ class RestaurantModel extends CI_Model
         
         //count
         $ids = '0';
-        $query = $this->db->query($select.$from.$where); 
+        $query = $this->db->query($select.$from.$where);
         $count = $query->num_rows();
         if ($count > 0){              
             $resIds = array(0);
@@ -362,12 +362,11 @@ class RestaurantModel extends CI_Model
         $restaurantID = $this->db->insert_id();
         if($restaurantID > 0)
         {
-            //Neu insert thanh cong vao bang restaurantcategories 
+            //Neu insert thanh cong vao bang restaurantcategories             
             foreach($cates as $cate){
                 $cate['restaurantID'] =  $restaurantID;   
                 $this->db->insert($this->restaurantcategories, $cate);    
-            }                                                     
-        }                                         
+            }             }                                         
         if ($this->db->trans_status() == false)
         {
             $this->db->trans_rollback();
@@ -387,7 +386,7 @@ class RestaurantModel extends CI_Model
         $add = $data['add'];
             
         $this->db->trans_begin();
-        $this->db->update($this->address, $add, array('addressID'=>$restaurant['addressID']));
+        $this->db->update($this->address, $add, array('addressID'=>$restaurant['addressID']));   
         //xóa cac ban ghi cu di
         $this->db->delete($this->restaurantcategories, array('restaurantID'=>$id));   
         foreach($cates as $cate){       

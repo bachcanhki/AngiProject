@@ -58,7 +58,7 @@ class Home extends CI_Controller {
                 'resCountdownModel' => array(
                     'items' => $this->restaurantModel->FindCountDown(0, 8, $count),
                     'totalCount' => $count,
-                    'title' => 'Điêm đến ưu đãi',
+                    'title' => 'Điêm đến ưu đãi'',
                     'urlAllView' => base_url().'home/home_view_all/diem-den-uu-dai/2',
                 ),
                 'newsModel' => array(
@@ -87,9 +87,7 @@ class Home extends CI_Controller {
         }
         
         return $keySearch;
-    }
-    
-    public function search($cat=0, $district=0, $key='', $offset=0) { 
+    }    public function search($cat=0, $district=0, $key='', $offset=0) { 
         $keyword = urldecode($key);
         $isFullTextSeach = true;//tim kiếm toàn văn
         $keySearchDb = $keyword;
@@ -131,7 +129,7 @@ class Home extends CI_Controller {
         $data['pagination'] = $pagination;     
         $data['content'] = 'site/home/search/index.phtml';     
 
-        $this->load->view('site/layout/layoutnoslider.phtml', $data);  
+        $this->load->view('site/layout/layout.phtml', $data);
     }
     
     public function category($cat=0, $offset=0) { 
@@ -161,9 +159,9 @@ class Home extends CI_Controller {
         $data['pagination'] = $pagination;     
         $data['content'] = 'site/home/category/index.phtml';     
 
-        $this->load->view('site/layout/layoutnoslider.phtml', $data);  
+        $this->load->view('site/layout/layout.phtml', $data);
     }
-    
+             
     public function home_view_all($title='', $type=1, $offset=0) {     
         $type = intval($type);
         $user = $this->session->userdata('user');
@@ -195,7 +193,6 @@ class Home extends CI_Controller {
 
         $this->load->view('site/layout/layoutnoslider.phtml', $data);  
     }
-         
     public function news($cat=0, $offset=0) { 
         $user = $this->session->userdata('user');
         $level = $this->session->userdata('level');
@@ -222,7 +219,7 @@ class Home extends CI_Controller {
         $data['pagination'] = $pagination;     
         $data['content'] = 'site/news/index.phtml';     
 
-        $this->load->view('site/layout/layoutnoslider.phtml', $data);  
+        $this->load->view('site/layout/layout.phtml', $data);
     }
     
     public function newsDetails($newsId=0){ 
@@ -240,7 +237,7 @@ class Home extends CI_Controller {
                 'news' => $news
             )
         );                                                  
-        $this->load->view('site/layout/layoutnoslider.phtml', $data);
+        $this->load->view('site/layout/layout.phtml', $data);
     }
             
     /***********************Ham index liet ke giao dien trang home****************************/
@@ -251,7 +248,7 @@ class Home extends CI_Controller {
         $pass = $this->input->post('password');
         $msg = '';
         if($user == '') {
-            $msg = 'enter username\n';
+            $msg = 'Please enter username';
             $ok = 0;
         } 
         if($pass == '') {
@@ -270,12 +267,12 @@ class Home extends CI_Controller {
                         'user' => $query_login->userName,
                         'fullname' => $query_login->memName,
                         'level' => $query_login->userLevel,
-                        'isActived' => $query_login->userActived                                        
+                        'isActived' => $query_login->userActived
                 ); 
                 
-                if($dataSet['isActived'] == 0) {                                     
+                if($dataSet['isActived'] == 0) {
                     echo $this->returnError('Người dùng chưa kích hoạt');
-                }
+                }else
                 if($dataSet['level'] == 2 || $dataSet['level'] == 1 || $dataSet['level'] == 0) {
                     $this->session->set_userdata($dataSet);
                     echo $this->returnSuccess('Login success');
@@ -377,13 +374,13 @@ class Home extends CI_Controller {
             }
             if ($provinceID == '')
             {
-                $ok = 0;
-                $error .= 'Chưa chọn tỉnh/ thành phố<br />';
+//                $ok = 0;
+//                $error .= 'Chưa chọn tỉnh/ thành phố<br />';
             }
             if ($address == '')
             {
-                $ok = 0;
-                $error .= 'Chưa nhập địa chỉ<br />';
+//                $ok = 0;
+//                $error .= 'Chưa nhập địa chỉ<br />';
             }
             
             if ($ok == 0){
@@ -392,12 +389,12 @@ class Home extends CI_Controller {
                 $model['ward'] = $this->addressModel->FindWardByProvinceId($districtID);
             }
             else {
-                $userPass = md5($userPass);
+				$userPass = md5($userPass);
                 $addInfo = array(
                     'user' => array(
                         'userName' => $userName,
                         'userMail' => $userMail,
-                        'userPass' => $userPass,
+                        'userPass' => md5($userPass),
                         'userPassRe' => $userPass,
                         'userLevel' => $userLevel,
                         'userActived' => $userActived
@@ -437,7 +434,7 @@ class Home extends CI_Controller {
                              'error' => 'Đăng kí thành công'
                          )
                      );
-                    return $this->load->view('site/layout/layoutnoslider.phtml', $data);
+                    return $this->load->view('site/layout/layout.phtml', $data);
                 }
                 else{
                     $model['error'] = 'Có lỗi trong quá trình đăng kí'; 
@@ -455,7 +452,7 @@ class Home extends CI_Controller {
              'model' => $model
         );
         
-        $this->load->view('site/layout/layoutnoslider.phtml', $data);
+        $this->load->view('site/layout/layout.phtml', $data);
     }
       
     public function getDistrictByProvinceId($provinceId=0)

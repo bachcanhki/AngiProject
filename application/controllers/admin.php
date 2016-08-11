@@ -311,10 +311,10 @@ class admin extends CI_Controller {
             $model['statusRes'] = strip_tags($this->input->post('statusRes'));
                 
             $model['address'] = strip_tags($this->input->post('address'));
-                                                                                   
-            $model['categoryOfResIDs'] = $this->input->post('categoryOfResIDs');
+            
+            $$model['categoryOfResIDs'] = $this->input->post('categoryOfResIDs');
             $model['categoryOfResID'] = explode(',', $model['categoryOfResIDs']); 
-        }
+       }
                       
         if ($submit){
             //kiem tra du lieu
@@ -332,7 +332,7 @@ class admin extends CI_Controller {
                                     'categoryOfResID' => $cateId, 
                                     'restaurantID' => 0
                                     ));
-                }
+                }                
                 //Tao mang chua thong tin ve user
                 $dataAdd = array(
                     'restaurant' => array(
@@ -482,15 +482,15 @@ class admin extends CI_Controller {
             $model['userID'] = $restaurant->userID;
             $model['isDepositBo'] = $restaurant->isDepositBo;
             $model['isDeactivate'] = $restaurant->isDeactivate;
-            $model['statusRes'] = $restaurant->statusRes;  
-                                               
+            $model['statusRes'] = $restaurant->statusRes;                           
+                                              
             $resCates = $this->restaurantModel->ListResCateByResId($id);
             $model['categoryOfResID'] = array(); 
             foreach($resCates as $resCate){
                 array_push($model['categoryOfResID'], $resCate->categoryOfResID);
             }      
             $model['categoryOfResIDs'] = implode(',', $model['categoryOfResID']);
-            
+                        
             $data['model']  = $model;                                      
         }                                                                             
         else
@@ -524,7 +524,7 @@ class admin extends CI_Controller {
             $model['isDepositBo'] = strip_tags($this->input->post('isDepositBo'));
             $model['isDeactivate'] = strip_tags($this->input->post('isDeactivate'));
             $model['statusRes'] = strip_tags($this->input->post('statusRes'));
-                                                                                          
+                                                                                        
             $model['categoryOfResIDs'] = $this->input->post('categoryOfResIDs');
             $model['categoryOfResID'] = explode(',', $model['categoryOfResIDs']); 
             
@@ -535,14 +535,14 @@ class admin extends CI_Controller {
             $ok = $this->validateRestaurant($model, $error);
                
             if ($ok == 1)
-            {                                                      
-                $cates = array();
+            {
+                  $cates = array();
                 foreach($model['categoryOfResID'] as $cateId){
                     array_push($cates, array(
                                     'categoryOfResID' => $cateId, 
                                     'restaurantID' => $model['restaurantID']
                                     ));
-                }                          
+                }      
                 //Tao mang chua thong tin ve user
                 $dataEdit = array(
                     'restaurant' => array(
@@ -570,7 +570,7 @@ class admin extends CI_Controller {
                         'isDeactivate' => $model['isDeactivate'],
                         'statusRes' => $model['statusRes']
                         ),  
-                    'cate' => $cates,
+                    'cate' =>$cates,
                     'add' => array(
                         'address' => $model['address'],
                         'provinceID' => $model['provinceID'],

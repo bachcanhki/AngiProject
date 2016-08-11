@@ -1,5 +1,5 @@
 
-<div class="form-group">  
+<div class="form-group">
     <div class="col-lg-6"> 
         <label for="categoryOfResID">Loại</label> 
         <select id="categoryOfResID" name="categoryOfResID"  data-placeholder="--chọn loại nhà hàng--" multiple class="chosen-select form-control">        
@@ -10,8 +10,8 @@
              </option>
           <?php } ?>
         </select>
-        <input type="hidden" name="categoryOfResIDs" id="categoryOfResIDs" value="<?php echo isset($categoryOfResIDs) ? $categoryOfResIDs : ''; ?>">
-    </div>
+    	<input type="hidden" name="categoryOfResIDs" id="categoryOfResIDs" value="<?php echo isset($categoryOfResIDs) ? $categoryOfResIDs : ''; ?>">
+    </div>  
     <div class="col-lg-6">
         <input type="hidden" id="restaurantID" name="restaurantID" value="<?php echo isset($restaurantID) ? $restaurantID : '0'; ?>">
         <input type="hidden" id="userID" name="userID" value="<?php echo isset($userID) ? $userID : '0'; ?>">
@@ -101,11 +101,10 @@
 <script type="">
     $('.datepicker').datetimepicker({locale: 'vi'});
     $('.time').datetimepicker({locale: 'vi',format: 'hh:mm'});
-    $(".chosen-select").chosen().change(function(evt){
+	$(".chosen-select").chosen().change(function(evt){
         var arr = $(".chosen-select").chosen().val();
         $('#categoryOfResIDs').val(arr.join());
-    });
-    $(document).ready(function(){
+    });    $(document).ready(function(){
         var ok = '<?php echo isset($ok) ? $ok : ''; ?>';
         if (ok == '1')
         {

@@ -2,7 +2,7 @@
 class CategoriesOfRestaurantModel extends CI_Model
 {
     private $table = 'categoriesofrestaurant';  
-    private $restaurantcategories = 'restaurantcategories';  
+	private $restaurantcategories = 'restaurantcategories';  
     function __construct()
     {
         parent::__construct();
@@ -26,7 +26,7 @@ class CategoriesOfRestaurantModel extends CI_Model
         return $query->result();
     }
     
-    function ListCateByResId($restaurantID=0)
+	function ListCateByResId($restaurantID=0)
     {                                          
         $sql = 'select distinct '.$this->table.'.* ';
         $sql.= ' from '.$this->table;
@@ -36,7 +36,6 @@ class CategoriesOfRestaurantModel extends CI_Model
         $query = $this->db->query($sql);
         return $query->result();
     }
-    
     function Count_All()
     {
         return $this->db->count_all($this->table);

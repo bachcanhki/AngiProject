@@ -1,30 +1,30 @@
-<div class="form-group">   
-    <div class="col-lg-4"> 
+<ul>
+    <li>
         <label for="provinceID">Tỉnh/ Thành phố (*)</label> 
-        <select id="provinceID" name="provinceID" class="form-control">        
-          <option id="" value="" selected="selected">--chọn địa chỉ--</option>  
+        <select id="provinceID" name="provinceID">
+          <option id="" value="" selected="selected">--Chọn thành phố--</option>
           <?php foreach($province as $adr){?>
              <option id="<?php echo $adr->provinceID; ?>" 
              value="<?php echo $adr->provinceID; ?>" 
              <?php if(isset($provinceID) && $provinceID == $adr->provinceID.''){ echo 'selected="selected"';} else {echo '';} ?> ><?php echo $adr->namePro; ?></option>
           <?php } ?>
         </select>
-    </div>
-    <div class="col-lg-4"> 
+    </li>
+    <li>
         <label for="districtID">Quận/ Huyện</label> 
-        <select id="districtID" name="districtID" class="form-control">        
-          <option id="" value="" selected="selected">--chọn quận/ huyện--</option>  
+        <select id="districtID" name="districtID">
+          <option id="" value="" selected="selected">--Chọn quận/ huyện--</option>
           <?php foreach($district as $adr){?>
              <option id="<?php echo $adr->districtid; ?>" 
              value="<?php echo $adr->districtid; ?>" 
              <?php if(isset($districtID) && $districtID == $adr->districtid.''){ echo 'selected="selected"';} else {echo '';} ?> ><?php echo $adr->nameDis; ?></option>
           <?php } ?>
         </select>
-    </div>
-    <div class="col-lg-4"> 
+    </li>
+    <li>
         <label for="wardID">Xã/ Phường</label> 
-        <select id="wardID" name="wardID" class="form-control">        
-          <option id="" value="" selected="selected">--chọn xã/ phường--</option>  
+        <select id="wardID" name="wardID">
+          <option id="" value="" selected="selected">--Chọn xã/ phường--</option>
           <?php foreach($ward as $adr){?>
              <option latlng="<?php echo $adr->locationWard;?>" 
              id="<?php echo $adr->wardid; ?>" 
@@ -32,25 +32,22 @@
              <?php if(isset($wardID) && $wardID == $adr->wardid.''){ echo 'selected="selected"';} else {echo '';} ?> ><?php echo $adr->nameWard; ?></option>
           <?php } ?>
         </select>
-    </div>
-    <div class="col-lg-12"> 
+    </li>
+    <li>
         <label for="address">Địa chỉ (*)</label> 
         <input type="hidden" id="addressID"  name="addressID"  value="<?php echo isset($addressID) ? $addressID : ''; ?>" > 
-        <input type="text" class="form-control" id="address"  name="address"  value="<?php echo isset($address) ? $address : ''; ?>" placeholder="Địa chỉ"> 
-    </div>  
-    <div class="col-lg-4"> 
-        <label for="latitudeRe">latitudeRe</label>
-        <input type="text" class="form-control" id="latitudeRe"  name="latitudeRe"  value="<?php echo isset($latitudeRe) ? $latitudeRe : ''; ?>"> 
-    </div>
-    <div class="col-lg-4"> 
-        <label for="longitudeRe">longitudeRe</label>
-        <input type="text" class="form-control" id="longitudeRe"  name="longitudeRe"  value="<?php echo isset($longitudeRe) ? $longitudeRe : ''; ?>"> 
-    </div> 
-    <div class="col-lg-4"> 
+        <input type="text" id="address"  name="address"  value="<?php echo isset($address) ? $address : ''; ?>" placeholder="Địa chỉ">
+    </li>
+    <li>
+        <label>Bản đồ</label>
+        <input style="width: 24.3%" placeholder="Vĩ độ" type="text" id="latitudeRe"  name="latitudeRe"  value="<?php echo isset($latitudeRe) ? $latitudeRe : ''; ?>"> -
+        <input style="width: 24.3%" placeholder="Kinh độ" type="text" id="longitudeRe"  name="longitudeRe"  value="<?php echo isset($longitudeRe) ? $longitudeRe : ''; ?>">
+    </li>
+    <li>
         <label for="otherPoints">Địa chỉ khác</label>
-        <input type="text" class="form-control" id="otherPoints"  name="otherPoints"  value="<?php echo isset($otherPoints) ? $otherPoints : ''; ?>"> 
-</div>     
-</div>     
+        <input type="text" id="otherPoints"  name="otherPoints"  value="<?php echo isset($otherPoints) ? $otherPoints : ''; ?>">
+    </li>
+</ul>
 <script type="">
     window.restaurantModule = window.restaurantModule || {};
     $(document).ready(function(){
