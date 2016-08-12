@@ -192,7 +192,7 @@ class Home extends CI_Controller {
         $data['pagination'] = $pagination;     
         $data['content'] = 'site/home/category/index.phtml';     
 
-        $this->load->view('site/layout/layoutnoslider.phtml', $data);  
+        $this->load->view('site/layout/layout.phtml', $data);  
     }
     public function news($cat=0, $offset=0) { 
         $user = $this->session->userdata('user');
