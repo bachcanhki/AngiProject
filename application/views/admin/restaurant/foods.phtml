@@ -1,10 +1,6 @@
 <div class="panel panel-default">
   <!-- Default panel contents -->
-  <div class="panel-heading">
-    <a class="btn btn-default" href="#" role="button" data-toggle="modal" data-target="#food-edit">Thêm món ăn</a>
-  </div>
-  <div class="panel-body">
-    
+  
   <!-- Table -->
 <table class="table table-bordered">
     <thead>
@@ -39,8 +35,7 @@
             ?></td>
             <td class="text-center"><?php echo $item->statusFo == 1 ? 'Hoạt động' : 'Chưa kích hoạt'; ?></td>
             <td class="text-center">
-            <a class="btn btn-info" href="#" onclick='return foodModule.edit(<?php echo $item->foodID; ?>)'>Sửa</a>
-            <a class="btn btn-danger" onclick="return foodModule.delete('<?php echo $item->foodID; ?>', '<?php echo $item->nameFo; ?>');" href="#">Xóa</a>   
+            <a class="btn btn-info" href="#" onclick='return foodModule.edit(<?php echo $item->foodID; ?>)'>Xem</a>          
             </td>
         </tr>
         <?php } ?>
@@ -62,22 +57,22 @@
                     <div id="monan_alert"></div>
                 </div>
                 <div class="form-group">                  
-                    <img src="" id="imageIDSrc" alt="Ảnh món ăn" style="width: 80px; height: 80px;" class="img-thumbnail" onclick="return foodModule.openCkFinder();">
+                    <img src="" id="imageIDSrc" alt="Ảnh món ăn" style="width: 80px; height: 80px;" class="img-thumbnail">
                      <input type="hidden" class="form-control" id="imageID" name="imageID"> 
                      <input type="hidden" class="form-control" id="addressImage" name="addressImage"> 
                 </div>
                 <div class="form-group"> 
                     <label for="nameFo">Tên</label>               
                     <input type="hidden" id="foodID"  name="foodID"> 
-                    <input type="text" class="form-control" id="nameFo"  name="nameFo"> 
+                    <input readonly="readonly" type="text" class="form-control" id="nameFo"  name="nameFo"> 
                 </div>                
                 <div class="form-group"> 
                     <label for="priceFo">Giá</label>
-                    <input type="text" class="form-control" id="priceFo"  name="priceFo"> 
+                    <input readonly="readonly" type="text" class="form-control" id="priceFo"  name="priceFo"> 
                 </div>         
                 <div class="form-group"> 
                     <label for="$statusBo">Loại</label> 
-                    <select id="typeFo" name="typeFo" class="form-control">
+                    <select readonly="readonly"  id="typeFo" name="typeFo" class="form-control">
                       <option id="0" value="0" <?php if(isset($typeFo) && $typeFo == 0){ echo 'selected="selected"';} else {echo '';} ?> >Tráng miêng</option>
                       <option id="1" value="1" <?php if(isset($typeFo) && $typeFo == 1){ echo 'selected="selected"';} else {echo '';} ?> >Ăn nhanh</option>
                       <option id="1" value="2" <?php if(isset($typeFo) && $typeFo == 2){ echo 'selected="selected"'; } else {echo '';} ?>>Bữa chính</option>
@@ -85,18 +80,17 @@
                 </div>
                 <div class="form-group"> 
                     <label for="typeFo">Mô tả</label>
-                    <textarea type="text" class="form-control" id="desciptionFo"  name="desciptionFo"></textarea> 
+                    <textarea readonly="readonly" type="text" class="form-control" id="desciptionFo"  name="desciptionFo"></textarea> 
                 </div>
                 <div class="form-group">                                                                                                                                
                       <div class="checkbox">
                         <label>
-                          <input type="checkbox" name="statusFo" id="statusFo" <?php echo (isset($statusFo) && $statusFo == 1) ? 'checked': ''; ?>>Kích hoạt
+                          <input disabled="disabled" type="checkbox" name="statusFo" id="statusFo" <?php echo (isset($statusFo) && $statusFo == 1) ? 'checked': ''; ?>>Kích hoạt
                         </label>
                       </div>
                 </div>  
             </div>
             <div class="modal-footer"> 
-                <input name="submit" id="monan_submit" class="btn btn-primary" type="button" onclick="return foodModule.addoredit();" value="Cập nhật món ăn"/>
                 <button type="button" class="btn btn-default" data-dismiss="modal">Đóng</button>                
             </div> 
         </div>  

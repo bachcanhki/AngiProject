@@ -32,17 +32,16 @@
         </div> 
         <div class="form-group"> 
             <label for="commentBo">Ghi chú</label>
-            <textarea id="commentBo" name="commentBo" type="text" class="form-control" ><?php echo isset($commentBo) ? $commentBo : ''; ?></textarea>
+            <textarea disabled="disabled" id="commentBo" name="commentBo" type="text" class="form-control" ><?php echo isset($commentBo) ? $commentBo : ''; ?></textarea>
         </div>       
         <div class="form-group"> 
             <label for="$statusBo">Trạng thái</label> 
-            <select id="statusBo" name="statusBo" class="form-control">
+            <select disabled="disabled" id="statusBo" name="statusBo" class="form-control">
               <option id="0" value="0" <?php if(isset($statusBo) && $statusBo == 0){ echo 'selected="selected"';} else {echo '';} ?> >Mới đặt</option>
               <option id="1" value="1" <?php if(isset($statusBo) && $statusBo == 1){ echo 'selected="selected"';} else {echo '';} ?> >Đã xử lý</option>
               <option id="1" value="2" <?php if(isset($statusBo) && $statusBo == 2){ echo 'selected="selected"'; } else {echo '';} ?>>Hoàn thành</option>
             </select>
         </div>
-        <input name="submit" id="submit" class="btn btn-info" type="submit" value="Cập nhật trạng thái" />
         
     </form>
   </div> 

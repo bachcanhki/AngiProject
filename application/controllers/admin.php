@@ -13,7 +13,6 @@ class admin extends CI_Controller {
         $this->load->library('DateUtils');
         $this->load->model('usersModel', '', TRUE);
         $this->load->model('addressModel', '', TRUE);
-        $this->load->model('imageModel', '', TRUE);
         $this->load->model('categoriesOfRestaurantModel', '', TRUE);
         $this->load->model('bookingModel', '', TRUE);
         $this->load->model('foodModel', '', TRUE);
@@ -266,129 +265,6 @@ class admin extends CI_Controller {
         $this->load->view('admin/layout/layout.phtml', $data);  
     }
 
-    public function add_restaurant() {
-        $data = array(
-                'title' => 'Thêm nhà hàng',
-                'content' => 'admin/restaurant/edit.phtml',
-                'user' => array('user' => $this->session->userdata('user')),
-                'fullname' => $this->session->userdata('fullname'), 
-                );  
-        $model = array(
-             'error' => '',       
-             'province' => $this->addressModel->ListAllProvince(),
-             'categories' => $this->categoriesOfRestaurantModel->ListByStatus(1),    
-             'foods' => $this->foodModel->Admin_FindBy(0, 0, 1000)
-        );                      
-  
-        $submit = $this->input->post('submit');
-        if ($submit){
-            $model['provinceID'] = strip_tags($this->input->post('provinceID'));
-            $model['districtID'] = strip_tags($this->input->post('districtID'));
-            $model['wardID'] = strip_tags($this->input->post('wardID'));          
-            //Lay du lieu tu forn dong thoi gan bien du gia tri 
-            $model['restaurantID'] = strip_tags($this->input->post('restaurantID')); 
-            $model['nameRe'] = strip_tags($this->input->post('nameRe'));
-            $model['descriptionRes'] = strip_tags($this->input->post('descriptionRes'));
-            $model['phoneRe'] = strip_tags($this->input->post('phoneRe'));   
-            $model['favouriteFood'] = strip_tags($this->input->post('favouriteFood'));
-            $model['spaceRes'] = strip_tags($this->input->post('spaceRes'));
-            $model['carParkingRes'] = strip_tags($this->input->post('carParkingRes'));
-            $model['otherPoints'] = strip_tags($this->input->post('otherPoints'));
-            $model['openTimeRe'] = strip_tags($this->input->post('openTimeRe'));
-            $model['closeTimeRe'] = strip_tags($this->input->post('closeTimeRe'));
-            $model['latitudeRe'] = strip_tags($this->input->post('latitudeRe'));
-            $model['longitudeRe'] = strip_tags($this->input->post('longitudeRe'));
-            $model['rateRe'] = strip_tags($this->input->post('rateRe'));
-            $model['minPrice'] = strip_tags($this->input->post('minPrice'));
-            $model['maxPrice'] = strip_tags($this->input->post('maxPrice'));
-            $model['discount'] = strip_tags($this->input->post('discount'));
-            $model['quantityBooking'] = strip_tags($this->input->post('quantityBooking'));
-            $model['dateCreateRe'] = strip_tags($this->input->post('dateCreateRe'));
-            $model['addressID'] = strip_tags($this->input->post('addressID')); 
-            $model['userID'] = strip_tags($this->input->post('userID'));
-            $model['isDepositBo'] = strip_tags($this->input->post('isDepositBo'));
-            $model['isDeactivate'] = strip_tags($this->input->post('isDeactivate'));
-            $model['statusRes'] = strip_tags($this->input->post('statusRes'));
-                
-            $model['address'] = strip_tags($this->input->post('address'));
-                                                                                   
-            $model['categoryOfResIDs'] = $this->input->post('categoryOfResIDs');
-            $model['categoryOfResID'] = explode(',', $model['categoryOfResIDs']); 
-        }
-                      
-        if ($submit){
-            //kiem tra du lieu
-            //kiem tra du lieu
-            $error = '';
-            $ok = $this->validateRestaurant($model, $error);
-            if (!$ok)   {
-                $model['error'] = $error;                                                           
-            }
-            else
-            {
-                $cates = array();
-                foreach($model['categoryOfResID'] as $cateId){
-                    array_push($cates, array(
-                                    'categoryOfResID' => $cateId, 
-                                    'restaurantID' => 0
-                                    ));
-                }
-                //Tao mang chua thong tin ve user
-                $dataAdd = array(
-                    'restaurant' => array(
-                        'restaurantID' => $model['restaurantID'], 
-                        'nameRe' => $model['nameRe'],
-                        'descriptionRes' => $model['descriptionRes'],
-                        'phoneRe' => $model['phoneRe'],   
-                        'favouriteFood' => $model['favouriteFood'],
-                        'spaceRes' => $model['spaceRes'],
-                        'carParkingRes' => $model['carParkingRes'],
-                        'otherPoints' => $model['otherPoints'],
-                        'openTimeRe' => $model['openTimeRe'],
-                        'closeTimeRe' => $model['closeTimeRe'],
-                        'latitudeRe' => $model['latitudeRe'],
-                        'longitudeRe' => $model['longitudeRe'],
-                        'rateRe' => $model['rateRe'],
-                        'minPrice' => $model['minPrice'],
-                        'maxPrice' => $model['maxPrice'],
-                        'discount' => $model['discount'],
-                        'quantityBooking' => $model['quantityBooking'],
-                        'dateCreateRe' => $model['dateCreateRe'],
-                        'addressID' => $model['addressID'],
-                        'userID' => $model['userID'],
-                        'isDepositBo' => $model['isDepositBo'],
-                        'isDeactivate' => $model['isDeactivate'],
-                        'statusRes' => $model['statusRes']
-                        ),  
-                    'cate' => $cates,
-                    'add' => array(
-                        'address' => $model['address'],
-                        'provinceID' => $model['provinceID'],
-                        'districtID' => $model['districtID'],
-                        'wardID' => $model['wardID'],
-                        'statusAdd' => 1
-                    ));
-                if ($this->restaurantModel->Create($dataAdd))
-                {                         
-                    //Neu luu thanh cong  
-                    $model['error'] = $this->Error('Cập nhật thành công!'); 
-                    $model['ok']  = 1;
-                }
-                else
-                {
-                    //Nguoc lai neu khong luu duoc 
-                    $model['error'] = $this->Error('Không cập nhật được nhà hàng!'); 
-                    $model['district'] = $this->addressModel->FindDistrictByProvinceId($provinceID);
-                    $model['ward'] = $this->addressModel->FindWardByProvinceId($districtID); 
-                }  
-            }
-        }
-          
-        $data['model'] = $model;  
-                                                                                          
-        $this->load->view('admin/layout/layout.phtml', $data); 
-    }
-
     function validateRestaurant($data, & $error){
         $ok = 1;
         if($data['categoryOfResID'] == '')
@@ -482,15 +358,15 @@ class admin extends CI_Controller {
             $model['userID'] = $restaurant->userID;
             $model['isDepositBo'] = $restaurant->isDepositBo;
             $model['isDeactivate'] = $restaurant->isDeactivate;
-            $model['statusRes'] = $restaurant->statusRes;  
-                                               
+            $model['statusRes'] = $restaurant->statusRes;                           
+                                              
             $resCates = $this->restaurantModel->ListResCateByResId($id);
             $model['categoryOfResID'] = array(); 
             foreach($resCates as $resCate){
                 array_push($model['categoryOfResID'], $resCate->categoryOfResID);
             }      
             $model['categoryOfResIDs'] = implode(',', $model['categoryOfResID']);
-            
+                        
             $data['model']  = $model;                                      
         }                                                                             
         else
@@ -524,7 +400,7 @@ class admin extends CI_Controller {
             $model['isDepositBo'] = strip_tags($this->input->post('isDepositBo'));
             $model['isDeactivate'] = strip_tags($this->input->post('isDeactivate'));
             $model['statusRes'] = strip_tags($this->input->post('statusRes'));
-                                                                                          
+                                                                                        
             $model['categoryOfResIDs'] = $this->input->post('categoryOfResIDs');
             $model['categoryOfResID'] = explode(',', $model['categoryOfResIDs']); 
             
@@ -535,14 +411,14 @@ class admin extends CI_Controller {
             $ok = $this->validateRestaurant($model, $error);
                
             if ($ok == 1)
-            {                                                      
+            {
                 $cates = array();
                 foreach($model['categoryOfResID'] as $cateId){
                     array_push($cates, array(
                                     'categoryOfResID' => $cateId, 
                                     'restaurantID' => $model['restaurantID']
                                     ));
-                }                          
+                }      
                 //Tao mang chua thong tin ve user
                 $dataEdit = array(
                     'restaurant' => array(
@@ -570,7 +446,7 @@ class admin extends CI_Controller {
                         'isDeactivate' => $model['isDeactivate'],
                         'statusRes' => $model['statusRes']
                         ),  
-                    'cate' => $cates,
+                    'cate' =>$cates,
                     'add' => array(
                         'address' => $model['address'],
                         'provinceID' => $model['provinceID'],
@@ -606,64 +482,6 @@ class admin extends CI_Controller {
         redirect(base_url('admin/restaurant'));
     }
 
-    public function add_food() { 
-        //Lay du lieu tu forn dong thoi gan bien du gia tri 
-        $model = array();
-        $image = array();
-                                                                     
-        $model['nameFo'] = strip_tags($this->input->post('nameFo'));
-        $model['imageID'] = strip_tags($this->input->post('imageID'));      
-        $model['desciptionFo'] = strip_tags($this->input->post('desciptionFo'));
-        $model['priceFo'] = strip_tags($this->input->post('priceFo'));   
-        $model['typeFo'] = strip_tags($this->input->post('typeFo'));
-        $model['restaurantID'] = strip_tags($this->input->post('restaurantID'));
-        $model['statusFo'] = strip_tags($this->input->post('statusFo'));
-                                 
-        $image['addressImage'] = strip_tags($this->input->post('addressImage'));
-        //kiem tra du lieu
-        $error = '';
-        $ok = 1;
-        if ($model['nameFo'] == '') 
-        {
-            $error .= 'Chưa nhập tên <br />';
-            $ok = 0;
-        }
-        if ($model['desciptionFo'] == '') 
-        {
-            $error .= 'Chưa nhập mô tả <br />';
-            $ok = 0;
-        }
-        if ($model['priceFo'] == '') 
-        {
-            $error .= 'Chưa nhập giá <br />';
-            $ok = 0;
-        }
-        if ($model['typeFo'] == '') 
-        {
-            $error .= 'Chưa chọn loại <br />';
-            $ok = 0;
-        }
-        if ($ok == 1)
-        {   
-            if ($this->foodModel->Create($model, $image))
-            {
-                //Neu luu thanh cong
-                echo $this->returnSuccess('Thêm món ăn thành công');
-                return;
-            }
-            else
-            {
-                //Nguoc lai neu khong luu duoc                                     
-                echo $this->returnError('Không thêm được món ăn');  
-                return;
-            }
-        }
-        else{
-            echo $this->returnError($error);
-            return;
-        }
-    }
-
     public function info_food($id) {
         $food = $this->foodModel->Admin_GetDetail($id);
         $image = $this->imageModel->Admin_GetById($food->imageID);
@@ -672,78 +490,6 @@ class admin extends CI_Controller {
         else
             $food->imageIDSrc = '';
         echo $this->returnSuccess(json_encode($food));
-    }
-      
-    public function delete_food($id) {
-        $food = $this->foodModel->Delete($id);
-        echo $this->returnSuccess('Xóa thành công');
-    }
-      
-    public function edit_food($id) {
-        $model = array();                                            
-        $image = array();       
-                                             
-        $model['nameFo'] = strip_tags($this->input->post('nameFo'));
-        $model['imageID'] = strip_tags($this->input->post('imageID'));
-        $model['desciptionFo'] = strip_tags($this->input->post('desciptionFo'));
-        $model['priceFo'] = strip_tags($this->input->post('priceFo'));   
-        $model['typeFo'] = strip_tags($this->input->post('typeFo'));
-        $model['restaurantID'] = strip_tags($this->input->post('restaurantID'));
-        $model['statusFo'] = strip_tags($this->input->post('statusFo')); 
-                                 
-        $image['addressImage'] = strip_tags($this->input->post('addressImage'));
-        if ($image['addressImage'] == ''){
-            $image = null;  //khong thực hiện update
-        }
-        //kiem tra du lieu
-        $error = '';
-        $ok = 1;
-        if ($model['nameFo'] == '') 
-        {
-            $error .= 'Chưa nhập tên <br />';
-            $ok = 0;
-        }
-        if ($model['desciptionFo'] == '') 
-        {
-            $error .= 'Chưa nhập mô tả <br />';
-            $ok = 0;
-        }
-        if ($model['priceFo'] == '') 
-        {
-            $error .= 'Chưa nhập giá <br />';
-            $ok = 0;
-        }
-        if ($model['typeFo'] == '') 
-        {
-            $error .= 'Chưa chọn loại <br />';
-            $ok = 0;
-        }         
-        if ($ok == 1)
-        {   
-            if ($this->foodModel->Update($id, $model, $image))
-            {
-                //Neu luu thanh cong
-                echo $this->returnSuccess('Cập nhật món ăn thành công');
-                return;
-            }
-            else
-            {
-                //Nguoc lai neu khong luu duoc                                     
-                echo $this->returnError('Không cập nhật được món ăn');  
-                return;
-            }
-        }
-        else{
-            echo $this->returnError($error);
-            return;
-        }
-    }
-       
-    public function addoredit_food($id=0) {               
-        if (isset($id) && $id > 0)
-            $this->edit_food($id);
-        else
-            $this->add_food();
     }
                     
     public function returnError($msg){
@@ -801,135 +547,6 @@ class admin extends CI_Controller {
                     );
         $data['content'] = 'admin/eater/all.phtml';   
         $this->load->view('admin/layout/layout.phtml', $data);  
-    }
-
-    public function add_eater($level=0) { 
-        $model = array(
-            'error' => '',
-            'level' => $level,  
-            'userLevel' => $level,
-            'province' => $this->addressModel->ListAllProvince(),
-        );  
-        if($this->input->post('submit'))
-        {       
-            //Lay du lieu tu forn dong thoi gan bien du gia tri 
-            $model['provinceID'] = $provinceID = $this->input->post('provinceID');
-            $model['districtID'] = $districtID = $this->input->post('districtID');
-            $model['wardID'] = $wardID = $this->input->post('wardID'); 
-            
-            $model['userLevel'] = $userLevel = strip_tags($this->input->post('userLevel')); 
-            $model['userName'] = $userName = strip_tags($this->input->post('userName'));
-            $model['userMail'] = $userMail = strip_tags($this->input->post('userMail'));
-            $model['userActived'] = $userActived = strip_tags($this->input->post('userActived'));
-            $userPass = strip_tags($this->input->post('userPass'));
-            $userPassRe = strip_tags($this->input->post('userPassRe'));
-            
-            $model['memName'] = $memName = strip_tags($this->input->post('memName'));
-            $model['memBirthDay'] = $memBirthDay = strip_tags($this->input->post('memBirthDay'));
-            $model['memGender'] = $memGender = strip_tags($this->input->post('memGender'));
-            $model['addressID'] = $addressID = strip_tags($this->input->post('addressID'));
-            $model['address'] = $address = strip_tags($this->input->post('address'));
-            $model['imageID'] = $imageID = strip_tags($this->input->post('imageID'));
-            
-            $data['model'] = $model;   
-            //kiem tra du lieu
-            $error = '';
-            $ok = 1;
-            if($userLevel == '')
-            {
-                $error .= $this->Error('Chưa chọn cấp cho user');
-                $ok = 0;
-            }
-            if($userName == '')
-            {
-                $error .= $this->Error('Chưa có tên đăng nhập');
-                $ok = 0;
-            }  
-            else{
-                $userExisted = $this->usersModel->CheckNameOrEmailExisted($userName);
-                if ($userExisted){
-                   $ok = 0;
-                   $error .= $this->Error('Tên đăng nhập đã tồn tại');; 
-                }
-            }
-            if($userPass == '')
-            {
-                $error .= $this->Error('Chưa có mật khẩu');
-                $ok = 0;
-            }
-            if($userPass != $userPassRe)
-            {
-                $error .= $this->Error('Mật khẩu nhập kiểm tra không khớp');
-                $ok = 0;
-            }
-            if ($userMail == '')
-            {
-                $ok = 0;
-                $error .= $this->Error('Chưa nhập email');
-            }
-            else{
-                $userExisted = $this->usersModel->CheckNameOrEmailExisted($userMail);
-                if ($userExisted){
-                   $ok = 0;
-                   $error .= $this->Error('Email đã tồn tại'); 
-                }
-            }
-            if($memName == '')
-            {
-                $error .= $this->Error('Chưa nhập tên');
-                $ok = 0;
-            } 
-            if ($ok == 0){
-                $model['error'] = $error; 
-                $model['district'] = $this->addressModel->FindDistrictByProvinceId($provinceID);
-                $model['ward'] = $this->addressModel->FindWardByProvinceId($districtID);
-            }
-            else
-            {
-                $addInfo = array(
-                    'user' => array(
-                        'userName' => $userName,
-                        'userMail' => $userMail,
-                        'userPass' => md5($userPass),
-                        'userPassRe' => md5($userPass),
-                        'userActived' => $userActived
-                    ),
-                    'mem' => array(
-                        'memName'=> $memName,
-                        'memBirthDay' => $memBirthDay,
-                        'memGender'=> $memGender
-                    ),
-                    'add' => array(
-                        'address' => $address,
-                        'provinceID' => $provinceID,
-                        'districtID' => $districtID,
-                        'wardID' => $wardID,
-                        'statusAdd' => 1
-                    )
-                );                       
-                if ($this->usersModel->Create($addInfo))
-                {
-                    //Neu luu thanh cong
-                    redirect(base_url('admin/eater/'.$level));
-                }
-                else
-                {
-                    $model['error'] = 'Có lỗi trong quá trình tạo user'; 
-                    $model['district'] = $this->addressModel->FindDistrictByProvinceId($provinceID);
-                    $model['ward'] = $this->addressModel->FindWardByProvinceId($districtID); 
-                }
-            }            
-        }
-        
-        $data = array(
-                'title' => 'Thêm thực khách',
-                'content' => 'admin/eater/edit.phtml',
-                'user' => array('user' => $this->session->userdata('user')),
-                'fullname' => $this->session->userdata('fullname'), 
-                'model' => $model
-                ); 
-        
-        $this->load->view('admin/layout/layout.phtml', $data); 
     }
 
     public function edit_eater($id) {
@@ -1084,7 +701,7 @@ class admin extends CI_Controller {
         }   
         
         $data = array(
-                'title' => 'Cập nhật thực khách',
+                'title' => 'Cập nhật tài khoản',
                 'content' => 'admin/eater/edit.phtml',
                 'user' => array('user' => $this->session->userdata('user')),
                 'fullname' => $this->session->userdata('fullname'), 
@@ -1288,7 +905,7 @@ class admin extends CI_Controller {
         $this->load->view('admin/layout/layout.phtml', $data);  
     }
 
-    public function edit_booking($id) {
+    public function show_booking($id) {
         $this->check_id($id, 'admin/booking');                   
         $level = 0;                               
         $user = $this->bookingModel->Admin_GetDetail($id);
@@ -1297,7 +914,7 @@ class admin extends CI_Controller {
                   
         $data = array(                                                 
                 'title' => 'Chi tiết đặt chỗ',
-                'content' => 'admin/booking/edit.phtml',
+                'content' => 'admin/booking/show.phtml',
                 'user' => array('user' => $this->session->userdata('user')),
                 'fullname' => $this->session->userdata('fullname'), 
                 );      

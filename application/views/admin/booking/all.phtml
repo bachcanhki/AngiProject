@@ -41,8 +41,7 @@
                 }
             ?></td>
             <td class="text-center">
-            <a class="btn btn-info" href="<?php echo base_url()?>admin/edit_booking/<?php echo $item->bookingID; ?>">Xem</a>
-            <a class="btn btn-danger" onclick="return bookingModule.delete('<?php echo $item->bookingID; ?>');" href="<?php echo base_url()?>admin/delete_booking/<?php echo $item->bookingID; ?>">Xóa</a>   
+            <a class="btn btn-info" href="<?php echo base_url()?>admin/show_booking/<?php echo $item->bookingID; ?>">Xem</a>
             </td>
         </tr>
         <?php } ?>
