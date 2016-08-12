@@ -349,12 +349,13 @@ i.filled{
     border-right: 1px solid #8d8d8d;
 }
 
-.news-title{
-    white-space: nowrap;
-    font-weight: bold;
-}
 .news-title a{
     color: #000;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: block;
+    width: 100%;
 }
 .news-title a:hover{
     color: #d02028;

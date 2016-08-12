@@ -22,7 +22,7 @@
         ?>
         <li class="col-md-4">
             <a style="display: block; position: relative" class="img-item" href="<?php echo $this->uriutils->BuildViewNewsUrl($item->newsID); ?>">
-                <img style="max-height: 223px;" src="<?php echo $item->imageNews != '' ? $item->imageNews : 'http://cdn.pasgo.vn/anh-tin-tuc-resize/400/pasgo-nang-cap-va-cau-chuyen-de-men-phieu-luu-ky-54.jpg'; ?>">
+                <img src="<?php echo $item->imageNews != '' ? $item->imageNews : 'http://cdn.pasgo.vn/anh-tin-tuc-resize/400/pasgo-nang-cap-va-cau-chuyen-de-men-phieu-luu-ky-54.jpg'; ?>">
             </a>
 
             <div style="text-align: center">
@@ -34,3 +34,22 @@
     }
     ?>
 </ul>
+
+<script>
+$(document).ready(function(){
+
+    function newsTitle() {
+        if(window.matchMedia('(max-width: 768px)').matches){
+            $(".news-title>a").width($(window).width()-30);
+        }
+        if(window.matchMedia('(min-width: 768px)').matches){
+            $(".news-title>a").css("width", "100%");
+        }
+    }
+    // Execute on load
+    newsTitle();
+    // Bind event listener
+    $(window).resize(newsTitle);
+
+});
+</script>
