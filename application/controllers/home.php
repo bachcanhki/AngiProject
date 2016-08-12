@@ -383,7 +383,8 @@ class Home extends CI_Controller {
 //                $ok = 0;
 //                $error .= 'Chưa nhập địa chỉ<br />';
             }
-            
+            if($memBirthDay == '') $memBirthDay=date("d/m/Y");
+
             if ($ok == 0){
                 $model['error'] = $error; 
                 $model['district'] = $this->addressModel->FindDistrictByProvinceId($provinceID);
