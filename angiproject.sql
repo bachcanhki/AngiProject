@@ -1,20 +1,7 @@
--- phpMyAdmin SQL Dump
--- version 4.1.14
--- http://www.phpmyadmin.net
---
--- Host: 127.0.0.1
--- Generation Time: Aug 05, 2016 at 07:56 PM
--- Server version: 5.6.17
--- PHP Version: 5.5.12
-
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
 
 
-/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
-/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
-/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
-/*!40101 SET NAMES utf8 */;
 
 --
 -- Database: `angiproject`
@@ -37,9 +24,9 @@ CREATE TABLE IF NOT EXISTS `address` (
   `wardID` varchar(5) COLLATE utf8_unicode_ci NOT NULL DEFAULT '00001',
   `statusAdd` int(11) DEFAULT '0',
   PRIMARY KEY (`addressID`),
-  KEY `provinceID` (`provinceID`),
-  KEY `districtID` (`districtID`),
-  KEY `wardID` (`wardID`)
+  FOREIGN KEY (`provinceID`) REFERENCES province(`provinceID`),
+  FOREIGN KEY (`districtID`) REFERENCES district(`districtID`),
+  FOREIGN KEY (`wardID`) REFERENCES ward(`wardID`)
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=32 ;
 
 --
@@ -88,8 +75,8 @@ CREATE TABLE IF NOT EXISTS `booking` (
   `isDeactivate` int(11) DEFAULT '0',
   `statusBo` int(11) DEFAULT '0',
   PRIMARY KEY (`bookingID`),
-  KEY `restaurantID` (`restaurantID`),
-  KEY `userID` (`userID`)
+  FOREIGN KEY (`restaurantID`) REFERENCES restaurants(`restaurantID`),
+  FOREIGN KEY (`userID`) REFERENCES users (`userID`)
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=10 ;
 
 --
@@ -139,8 +126,8 @@ CREATE TABLE IF NOT EXISTS `comments` (
   `userID` int(11) NOT NULL,
   `statusCom` int(11) DEFAULT '0',
   PRIMARY KEY (`comID`),
-  KEY `restaurantID` (`restaurantID`),
-  KEY `userID` (`userID`)
+  FOREIGN KEY (`restaurantID`) REFERENCES restaurants(`restaurantID`),
+  FOREIGN KEY (`userID`) REFERENCES users(`userID`)
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=8 ;
 
 -- --------------------------------------------------------
@@ -157,7 +144,7 @@ CREATE TABLE IF NOT EXISTS `district` (
   `locationDis` varchar(30) COLLATE utf8_unicode_ci NOT NULL,
   `provinceID` varchar(5) COLLATE utf8_unicode_ci NOT NULL,
   PRIMARY KEY (`districtid`),
-  KEY `provinceID` (`provinceID`)
+  FOREIGN KEY (`provinceID`) REFERENCES province(`provinceID`)
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
@@ -1172,8 +1159,8 @@ DROP TABLE IF EXISTS `restaurantcategories`;
 CREATE TABLE IF NOT EXISTS `restaurantcategories` (
   `restaurantID` int(11) NOT NULL,
   `categoryOfResID` int(11) NOT NULL,
-  KEY `restaurantID` (`restaurantID`),
-  KEY `categoryOfResID` (`categoryOfResID`)
+  FOREIGN KEY (`restaurantID`) REFERENCES restaurants(`restaurantID`),
+  FOREIGN KEY (`categoryOfResID`) REFERENCES categoryOfRestaurant(`categoryOfResID`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
@@ -1265,8 +1252,8 @@ CREATE TABLE IF NOT EXISTS `restaurants` (
   `isDeactivate` bit(1) DEFAULT b'0',
   `statusRes` bit(1) DEFAULT b'0',
   PRIMARY KEY (`restaurantID`),
-  KEY `addressID` (`addressID`),
-  KEY `userID` (`userID`),
+  FOREIGN KEY (`addressID`) REFERENCES address(`addressID`),
+  FOREIGN KEY (`userID`) REFERENCES users(`userID`),
   FULLTEXT KEY `fulltextsearch` (`nameRe`,`descriptionRes`)
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=21 ;
 
@@ -1337,7 +1324,7 @@ CREATE TABLE IF NOT EXISTS `ward` (
   `locationWard` varchar(30) COLLATE utf8_unicode_ci NOT NULL,
   `districtID` varchar(5) COLLATE utf8_unicode_ci NOT NULL,
   PRIMARY KEY (`wardid`),
-  KEY `districtID` (`districtID`)
+  FOREIGN KEY (`districtID`) REFERENCES district(`districtID`)
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
@@ -12469,7 +12456,3 @@ INSERT INTO `ward` (`wardid`, `nameWard`, `typeWard`, `locationWard`, `districtI
 ('32244', 'Rạch Gốc', 'Thị Trấn', '', '973'),
 ('32245', 'Tân Ân', 'Xã', '8 38 45N, 105 03 22E', '973'),
 ('32248', 'Đất Mũi', 'Xã', '8 36 41N, 104 47 12E', '973');
-
-/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
-/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
-/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
