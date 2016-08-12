@@ -1,4 +1,4 @@
-<div class="container">
+<div class="container" style="margin-top: 50px">
     <div class="row">
     <div class="panel panel-default">
       <!-- Default panel contents -->
@@ -28,9 +28,10 @@
                 <div class="col-lg-6"> 
                     <label for="userPass">Mật khẩu(Re) (*)</label>
                     <input type="password" class="form-control" id="userPassRe" name="userPassRe" placeholder="Mật khẩu kiểm tra"> 
-                </div> 
+                </div>
+
                 <div class="col-lg-4"> 
-                    <label for="provinceID">Tỉnh/ Thành phố (*)</label> 
+                    <label for="provinceID">Tỉnh/ Thành phố</label>
                     <select id="provinceID" name="provinceID" class="form-control">        
                       <option id="" value="" selected="selected">--chọn địa chỉ--</option>  
                       <?php foreach($province as $adr){?>
@@ -57,7 +58,7 @@
                     </select>
                 </div>
                 <div class="col-lg-12"> 
-                    <label for="address">Địa chỉ (*)</label> 
+                    <label for="address">Địa chỉ</label>
                     <input type="hidden" id="addressID"  name="addressID"  value="<?php echo isset($addressID) ? $addressID : ''; ?>" > 
                     <input type="text" class="form-control" id="address"  name="address"  value="<?php echo isset($address) ? $address : ''; ?>" placeholder="Địa chỉ"> 
                 </div>
@@ -79,7 +80,7 @@
                     </select>
                 </div>  
                 <div class="col-lg-4"> 
-                    <label for="userLevel">Loại</label> 
+                    <label for="userLevel">Loại tài khoản (*)</label>
                     <select id="userLevel" name="userLevel" class="form-control">
                       <option id="0" value="0" <?php if(isset($userLevel) && $userLevel == '0'){ echo 'selected="selected"';} else {echo '';} ?> >Thực khách</option>
                       <option id="1" value="1" <?php if(isset($userLevel) && $userLevel == '1'){ echo 'selected="selected"'; } else {echo '';} ?>>Nhà hàng</option>
@@ -87,7 +88,7 @@
                 </div>  
             </div>  
             <div class="col-lg-12 btn-group">
-                <input name="submit" id="submit" class="btn btn-info" type="submit" value="Gửi" />  
+                <input name="submit" id="submit" class="btn" type="submit" value="Đăng ký" style="color: #fff" />
             </div>
         </form>
       </div> 

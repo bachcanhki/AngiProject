@@ -6,8 +6,8 @@ function sticky_relocate() {
     var div_top = $('.stick-point').offset() ? $('.stick-point').offset().top : 0;
     if (window_top > div_top) {
         $('.restaurant-place').addClass('stick');
-        $('.stick-point').height($('.restaurant-place').outerHeight());
         $('.restaurant-place').width($('.restaurant-rate').width());
+        $('.stick-point').height($('.restaurant-place').outerHeight());
     } else {
         $('.restaurant-place').removeClass('stick');
         $('.stick-point').height(0);

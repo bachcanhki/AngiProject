@@ -30,7 +30,10 @@
 <script type="text/javascript">
     window.bookingModule = window.bookingModule || {};
     
-    $(document).ready(function(){   
+    $(document).ready(function(){
+        $(window).resize(function(){
+            $('.restaurant-place').width($('.restaurant-rate').width());
+        });
     })
       
     bookingModule.sendBooking = bookingModule.sendBooking || function(){

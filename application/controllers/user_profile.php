@@ -76,7 +76,7 @@ class user_profile extends CI_Controller{
             $model['memName'] = $memName = strip_tags($this->input->post('memName'));
             $model['userMail'] = $userMail = strip_tags($this->input->post('userMail'));
             $model['memGender'] = strip_tags($this->input->post('memGender'));
-            $model['memBirthDay'] = strip_tags($this->input->post('memBirthDay'));   
+            $model['memBirthDay'] = $memBirthDay = strip_tags($this->input->post('memBirthDay'));
             
             $ok = true;
             $error='';
@@ -88,7 +88,11 @@ class user_profile extends CI_Controller{
             {
                 $ok = false;
                 $error .= $this->Error('Chưa nhập email');
-            }  
+            }
+            if($memBirthDay ==''){
+                $ok = false;
+                $error .= $this->Error('Chưa nhập ngày sinh');
+            }
             
             if (!$ok){
                 $model['error'] = $error;

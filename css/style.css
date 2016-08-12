@@ -227,6 +227,13 @@ ul.hover-menu  li a:hover{
     border-bottom: 3px solid #c40808;
     padding-bottom: 10px;
 }
+.title-row h3 a{
+    color: #555;
+}
+.title-row h3 a:hover{
+    color: #c40808;
+}
+
 .title-row a.small-tit{
     float: right;
     margin-top: 30px;
@@ -442,6 +449,12 @@ a.social-logo{
     margin-top: 8px;
     display: inline-block;
 }
+
+/*signup*/
+.form-group>div{
+    margin-bottom: 10px;
+}
+
 
 
 .fb-comments, .fb-comments * {width: 100% !important;}

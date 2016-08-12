@@ -12,6 +12,7 @@ class Users extends CI_Controller
         $this->load->model('usersModel', '', TRUE);
         $this->load->model('addressModel', '', TRUE);
         $this->load->model('imageModel', '', TRUE);
+        $this->load->model('categoriesOfRestaurantModel', '', TRUE);
         $user = $this->session->userdata('user');
         $level = $this->session->userdata('level');
         if(!isset($user) || $user == '' || !isset($level) || $level != 2)
