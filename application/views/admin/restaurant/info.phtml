@@ -104,7 +104,8 @@
 	$(".chosen-select").chosen().change(function(evt){
         var arr = $(".chosen-select").chosen().val();
         $('#categoryOfResIDs').val(arr.join());
-    });    $(document).ready(function(){
+    });    
+    $(document).ready(function(){
         var ok = '<?php echo isset($ok) ? $ok : ''; ?>';
         if (ok == '1')
         {

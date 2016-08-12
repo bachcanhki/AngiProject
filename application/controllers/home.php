@@ -87,7 +87,8 @@ class Home extends CI_Controller {
         }
         
         return $keySearch;
-    }    public function search($cat=0, $district=0, $key='', $offset=0) { 
+    }    
+	public function search($cat=0, $district=0, $key='', $offset=0) { 
         $keyword = urldecode($key);
         $isFullTextSeach = true;//tim kiếm toàn văn
         $keySearchDb = $keyword;
@@ -328,7 +329,7 @@ class Home extends CI_Controller {
             $ok = 1;
             $error = '';
             $userActived = 0;
-            if ($userLevel == 1)//nhà hàng thì tự động active để nhà hàng vào chỉnh sửa thông tin
+            if ($userLevel == 1 || $userLevel == 0)//nhà hàng thì tự động active để nhà hàng vào chỉnh sửa thông tin
                 $userActived = 1;
                 
             if ($memName == '')
@@ -394,7 +395,7 @@ class Home extends CI_Controller {
                     'user' => array(
                         'userName' => $userName,
                         'userMail' => $userMail,
-                        'userPass' => md5($userPass),
+                        'userPass' => $userPass,
                         'userPassRe' => $userPass,
                         'userLevel' => $userLevel,
                         'userActived' => $userActived
@@ -417,6 +418,7 @@ class Home extends CI_Controller {
                     if ($userLevel == 1)//nhà hàng thì tự động login và về trang sửa thông tin nhà hàng và chờ duyệt
                     {
                          $dataSet = array(
+                            'title' => 'Đăng ký tài khoản',
                             'user' => $userName,
                             'fullname' => $memName,
                             'level' => $userLevel,

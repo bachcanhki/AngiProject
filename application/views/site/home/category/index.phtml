@@ -1,24 +1,3 @@
-<div style="background: #f7f6f4">
-    <div class="container">
-        <div class="row">
-            <div class="col-md-9">
-                <form class="search">
-                    <input type="text" id="keyword" name="keyword" placeholder="Buffet, Lẩu & Nướng, Hải sản...">
-                    <button id="btnSearch"><i class="fa fa-search" aria-hidden="true"></i></button>
-                    <script type="text/javascript">
-                           $(document).ready(function(){
-                                $('#btnSearch').click(function(){   
-                                    var url = '<?php echo base_url('home/search');?>' + '/0/0/' + encodeURIComponent($('#keyword').val());
-                                    location.href = url;
-                                    return false;
-                                })
-                           });
-                    </script>
-                </form>
-            </div>
-        </div>
-    </div>
-</div>
 
 <div class="container">
     <div class="row"> 

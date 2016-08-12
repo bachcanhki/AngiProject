@@ -36,6 +36,7 @@ class CategoriesOfRestaurantModel extends CI_Model
         $query = $this->db->query($sql);
         return $query->result();
     }
+	
     function Count_All()
     {
         return $this->db->count_all($this->table);

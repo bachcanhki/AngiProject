@@ -1,7 +1,7 @@
 <?php               
 class RestaurantBannerModel extends CI_Model
 {
-    private $table = 'restaurantImage';  
+    private $table = 'restaurantimage';  
     function __construct()
     {
         parent::__construct();

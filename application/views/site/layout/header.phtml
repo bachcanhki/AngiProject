@@ -62,19 +62,15 @@
                     <?php }?>
 
                     <li>
-                        <a href="">Ẩm thực</a>
-                        <?php if (isset($categoryModels)) {?>
-                        <span class="cross-down">
-                            <span class="bar4"></span>
-                            <span class="bar5"></span>
-                        </span>
-                        <ul class="hover-menu">
+                        <a href="">Ẩm thực</a>  
+                        <ul class="hover-menu">                  
+                            <?php if (isset($categoryModels)) {?>
                             <?php foreach ($categoryModels as $item) {?>
-                            <li><a href="<?php echo base_url().'home/category/'.$item->categoryOfResID ;?>"><?php echo $item->nameCOR;?></a></li>
+                            <li><a href="<?php echo base_url().'home/category/'.$item->categoryOfResID ;?>"><?php echo $item->nameCOR;?></a></li> 
+                            <?php } ?> 
                             <?php } ?>
                         </ul>
-                        <?php } ?>
-                    </li>   
+                    </li>    
                     <li>
                         <a href="">Tin tức</a>
                         <span class="cross-down">

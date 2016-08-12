@@ -240,11 +240,11 @@ class admin extends CI_Controller {
         if ($result != null){
             foreach($result as $restaurant){
                 $categories = $this->categoriesOfRestaurantModel->ListCateByResId($restaurant->restaurantID);
-                $desciptionCORArr = array(); 
+                $nameCORArr = array(); 
                 foreach($categories as $cate){                            
-                    array_push($desciptionCORArr, $cate->desciptionCOR);
+                    array_push($nameCORArr, $cate->nameCOR);
                 }
-                $restaurant->categoryName = implode(', ', $desciptionCORArr);
+                $restaurant->categoryName = implode(', ', $nameCORArr);
             }
         }
         $config['base_url'] = base_url().'/admin/restaurant';
@@ -312,7 +312,7 @@ class admin extends CI_Controller {
                 
             $model['address'] = strip_tags($this->input->post('address'));
             
-            $$model['categoryOfResIDs'] = $this->input->post('categoryOfResIDs');
+            $model['categoryOfResIDs'] = $this->input->post('categoryOfResIDs');
             $model['categoryOfResID'] = explode(',', $model['categoryOfResIDs']); 
        }
                       
@@ -1188,7 +1188,7 @@ class admin extends CI_Controller {
     public function edit_category($id) {
         $this->check_id($id, 'admin/categories');                   
         $level = 0;                               
-        $user = $this->categoriesOfRestaurantModel->Admin_GetById($id);
+        $user = $this->categoriesOfRestaurantModel->GetById($id);
         if ($user == null)
             return redirect(base_url("admin/categories/")); 
                   
