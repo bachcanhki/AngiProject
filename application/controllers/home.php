@@ -375,21 +375,17 @@ class Home extends CI_Controller {
             }
             if ($provinceID == '')
             {
-                $ok = 0;
-                $error .= 'Chưa chọn tỉnh/ thành phố<br />';
+//                $ok = 0;
+//                $error .= 'Chưa chọn tỉnh/ thành phố<br />';
             }
             if ($address == '')
             {
-                $ok = 0;
-                $error .= 'Chưa nhập địa chỉ<br />';
+//                $ok = 0;
+//                $error .= 'Chưa nhập địa chỉ<br />';
             }
-			
-			if ($memBirthDay == '')
-            {
-                $ok = 0;
-                $error .= 'Chưa nhập ngày sinh<br />';
-            }
-            
+
+            if($memBirthDay == '') $memBirthDay=date("d/m/Y");
+
             if ($ok == 0){
                 $model['error'] = $error; 
                 $model['district'] = $this->addressModel->FindDistrictByProvinceId($provinceID);
