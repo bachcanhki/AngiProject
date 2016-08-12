@@ -351,12 +351,11 @@ i.filled{
 
 .news-title a{
     color: #000;
-    white-space: nowrap;
+	white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
     display: block;
-    width: 100%;
-}
+    width: 100%;}
 .news-title a:hover{
     color: #d02028;
 }

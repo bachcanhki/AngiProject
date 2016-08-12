@@ -57,10 +57,19 @@
 .profile-sidebar>li, .profile-sidebar>li>a{color: #5c5c5c}
 
 .edit-user{margin: 50px 0}
-.edit-user input[type="text"], .edit-user input[type="email"], .edit-user input[type="date"], .edit-user input[type="password"], .edit-user input[type="number"], .edit-user select{
+.edit-user input[type="text"], .edit-user input[type="email"], .edit-user input[type="date"], .edit-user input[type="password"], .edit-user input[type="number"]{
     border-radius: 4px;
     width: 50%;
 }
+.edit-user select{
+    border-radius: 4px;
+    width: 25%;
+}
+.edit-user select#provinceID, .edit-user select#districtID, .edit-user select#wardID{
+    border-radius: 4px;
+    width: 50%;
+}
+
 
 .edit-user input[type="submit"], .upload-banner input[type="submit"]{
     border-radius: 4px;
@@ -76,7 +85,7 @@
 }
 .R-time{
     position: relative;
-    width: 24.3%;
+    width: 25%;
     display: inline-block;
 }
 .R-time>i{

@@ -2,7 +2,7 @@
 <ul class="form-group">
     <li> 
         <label for="categoryOfResID">Danh mục nhà hàng</label>
-        <select id="categoryOfResID" name="categoryOfResID"  data-placeholder="--Chọn loại nhà hàng--" multiple class="chosen-select form-control">        
+        <select id="categoryOfResID" name="categoryOfResID"  data-placeholder="--Chọn loại nhà hàng--" multiple class = "chosen-select">        
            <?php foreach($categories as $item){?>
              <option id="<?php echo $item->categoryOfResID; ?>" value="<?php echo $item->categoryOfResID; ?>" 
                 <?php if(isset($categoryOfResID) && in_array($item->categoryOfResID, $categoryOfResID)){ echo 'selected="selected"';} else {echo '';} ?> >
@@ -48,20 +48,11 @@
             <i class="fa fa-clock-o" aria-hidden="true"></i>
         </div>
     </li>
-<!--    <div class="col-lg-4">-->
-<!--        <label for="closeTimeRe">Giờ đóng cửa</label>-->
-<!--        <div class='R-time' style="position: relative">-->
-<!--            <input type="text" class="form-control" id="closeTimeRe"  name="closeTimeRe"  value="--><?php //echo isset($closeTimeRe) ? $closeTimeRe : ''; ?><!--">-->
-<!--            <span class="input-group-addon">-->
-<!--                <span class="glyphicon glyphicon-calendar"></span>-->
-<!--            </span>-->
-<!--        </div>-->
-<!--    </div>-->
 
 
     <li>
         <label for="rateRe">rateRe</label>
-        <select disabled="disabled" id="rateRe" name="rateRe">
+        <select disabled="disabled" id="rateRe" name="rateRe" style="with: 25%">
             <option id="0" value="0" <?php if(isset($rateRe) && $rateRe == 0){ echo 'selected="selected"';} else {echo '';} ?> >0 *</option>
             <option id="1" value="1" <?php if(isset($rateRe) && $rateRe == 1){ echo 'selected="selected"';} else {echo '';} ?> >1 *</option>
             <option id="2" value="2" <?php if(isset($rateRe) && $rateRe == 2){ echo 'selected="selected"'; } else {echo '';} ?>>2 *</option>
