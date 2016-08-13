@@ -88,7 +88,7 @@ class admin extends CI_Controller {
             $model['imageNewsTemp'] = $this->input->post('imageNewsTemp');
             $model['imageNews'] = strip_tags($this->input->post('imageNews')); 
             $model['typeNews'] = strip_tags($this->input->post('typeNews')); 
-            $model['statusNews'] = strip_tags($this->input->post('statusNews')); 
+            $model['statusNews'] = $this->input->post('statusNews'); 
         }
                       
         if ($submit){

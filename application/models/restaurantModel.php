@@ -323,7 +323,7 @@ class RestaurantModel extends CI_Model
     
     function FindCountDown($offset=0, $limit=20, &$count){
         $from = 'from '.$this->table;                     
-        $where = ' where '.$this->table.'.discount > 0 ';
+        $where = ' where '.$this->table.'.discount > 0 and '.$this->table.'.statusRes = 1 ';
         
         $select = 'select 1 ';
         //count

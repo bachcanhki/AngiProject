@@ -18,7 +18,7 @@
             <select id="typeNews" name="typeNews" class="form-control">
               <option value="31" <?php if(isset($typeNews) && $typeNews == 31){ echo 'selected="selected"';} else {echo '';} ?> >Tin cập nhật</option>
               <option value="32" <?php if(isset($typeNews) && $typeNews == 32){ echo 'selected="selected"';} else {echo '';} ?> >Sự kiện</option>
-              <option value="33" <?php if(isset($typeNews) && $typeNews == 331){ echo 'selected="selected"';} else {echo '';} ?> >Khuyến mãi</option>
+              <option value="33" <?php if(isset($typeNews) && $typeNews == 33){ echo 'selected="selected"';} else {echo '';} ?> >Khuyến mãi</option>
               <option value="34" <?php if(isset($typeNews) && $typeNews == 34){ echo 'selected="selected"';} else {echo '';} ?> >Trải nghiệm</option>
                </select>
         </div>
@@ -33,8 +33,8 @@
         <div class="form-group"> 
             <label for="$statusBo">Trạng thái</label> 
             <select id="statusNews" name="statusNews" class="form-control">
-              <option id="0" value="0" <?php if(isset($statusNews) && $statusNews == 0){ echo 'selected="selected"';} else {echo '';} ?> >Chưa kích hoạt</option>
-              <option id="1" value="1" <?php if(isset($statusNews) && $statusNews == 1){ echo 'selected="selected"';} else {echo '';} ?> >Kích hoạt</option>
+              <option id="0" value="0" <?php if($statusNews == 0){ echo 'selected="selected"';} ?> >Chưa kích hoạt</option>
+              <option id="1" value="1" <?php if($statusNews == 1){ echo 'selected="selected"';} ?> >Kích hoạt</option>
                </select>
         </div>   
         <input name="submit" id="submit" class="btn btn-info" type="submit" value="Cập nhật" />

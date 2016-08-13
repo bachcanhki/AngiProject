@@ -19,7 +19,7 @@
             <input placeholder="Giờ" id='timeBooking' class="textbox-n" type="text" onfocus="(this.type='time')" onblur="(this.type='text')" id="date">
             <i class="fa fa-clock-o" aria-hidden="true"></i>
         </p>
-		<?php if ($user == ''){ ?>
+		    <?php if ($user == ''){ ?>
             <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal">Đăng nhập để đặt chỗ</button>
         <?php } else { ?>
             <button onclick="return bookingModule.sendBooking();">đặt chỗ ngay</button>

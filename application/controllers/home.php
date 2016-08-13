@@ -59,7 +59,7 @@ class Home extends CI_Controller {
                 'resCountdownModel' => array(
                     'items' => $this->restaurantModel->FindCountDown(0, 8, $count),
                     'totalCount' => $count,
-                    'title' => 'Điêm đến ưu đãi',
+                    'title' => 'Điểm đến ưu đãi',
                     'urlAllView' => base_url().'home/home_view_all/diem-den-uu-dai/2',
                 ),
                 'newsModel' => array(
