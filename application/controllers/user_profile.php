@@ -321,6 +321,8 @@ class user_profile extends CI_Controller{
             $model['provinceID'] = strip_tags($this->input->post('provinceID'));
             $model['districtID'] = strip_tags($this->input->post('districtID'));
             $model['wardID'] = strip_tags($this->input->post('wardID'));          
+
+            
             //Lay du lieu tu forn dong thoi gan bien du gia tri 
             $model['restaurantID'] = strip_tags($this->input->post('restaurantID')); 
             $model['nameRe'] = strip_tags($this->input->post('nameRe'));
@@ -593,7 +595,7 @@ class user_profile extends CI_Controller{
             $error .= $this->Error('Chưa chọn giờ đóng cửa');
             $ok = false;
         }    
-        if($data['address'] == '' && $data['otherPoints'] == '')    
+        if($data['address'] == '')    
         {
             $error .= $this->Error('Hãy chọn địa chỉ');
             $ok = false;

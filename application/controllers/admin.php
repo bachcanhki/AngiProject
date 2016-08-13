@@ -367,7 +367,8 @@ class admin extends CI_Controller {
             }      
             $model['categoryOfResIDs'] = implode(',', $model['categoryOfResID']);
                         
-            $data['model']  = $model;                                      
+            $data['model']  = $model;       
+
         }                                                                             
         else
         {
@@ -412,6 +413,7 @@ class admin extends CI_Controller {
                
             if ($ok == 1)
             {
+
                 $cates = array();
                 foreach($model['categoryOfResID'] as $cateId){
                     array_push($cates, array(
@@ -419,6 +421,8 @@ class admin extends CI_Controller {
                                     'restaurantID' => $model['restaurantID']
                                     ));
                 }      
+
+                $model['carParkingRes'] = $model['carParkingRes'] == 'Có' ? 1:0;
                 //Tao mang chua thong tin ve user
                 $dataEdit = array(
                     'restaurant' => array(

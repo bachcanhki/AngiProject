@@ -1,8 +1,8 @@
 <div class="form-group">   
     <div class="col-lg-4">
-        <label for="provinceID">Tỉnh/Thành phố (*)</label> 
+        <label for="provinceID">Tỉnh/Thành phố</label> 
         <select id="provinceID" name="provinceID" class="form-control">        
-          <option id="" value="" selected="selected">--chọn địa chỉ--</option>  
+          <option id="" value="" selected="selected">--Chọn địa chỉ--</option>  
           <?php foreach($province as $adr){?>
              <option id="<?php echo $adr->provinceID; ?>" 
              value="<?php echo $adr->provinceID; ?>" 
@@ -13,7 +13,7 @@
     <div class="col-lg-4"> 
         <label for="districtID">Quận/Huyện</label> 
         <select id="districtID" name="districtID" class="form-control">        
-          <option id="" value="" selected="selected">--chọn quận/ huyện--</option>  
+          <option id="" value="" selected="selected">--Chọn quận/ huyện--</option>  
           <?php foreach($district as $adr){?>
              <option id="<?php echo $adr->districtid; ?>" 
              value="<?php echo $adr->districtid; ?>" 
@@ -24,7 +24,7 @@
     <div class="col-lg-4"> 
         <label for="wardID">Xã/Phường</label> 
         <select id="wardID" name="wardID" class="form-control">        
-          <option id="" value="" selected="selected">--chọn xã/ phường--</option>  
+          <option id="" value="" selected="selected">--Chọn xã/ phường--</option>  
           <?php foreach($ward as $adr){?>
              <option latlng="<?php echo $adr->locationWard;?>" 
              id="<?php echo $adr->wardid; ?>" 
@@ -36,20 +36,17 @@
     <div class="col-lg-12"> 
         <label for="address">Địa chỉ</label> 
         <input type="hidden" id="addressID"  name="addressID"  value="<?php echo isset($addressID) ? $addressID : ''; ?>" > 
-        <input type="text" class="form-control" id="address"  name="address"  value="<?php echo isset($address) ? $address : ''; ?>" placeholder="Địa chỉ"> 
+        <input readonly="readonly" type="text" class="form-control" id="address"  name="address"  value="<?php echo isset($address) ? $address : ''; ?>" placeholder="Địa chỉ"> 
     </div>  
     <div class="col-lg-4"> 
-        <label for="latitudeRe">latitudeRe</label>
-        <input type="text" class="form-control" id="latitudeRe"  name="latitudeRe"  value="<?php echo isset($latitudeRe) ? $latitudeRe : ''; ?>"> 
+        <label for="latitudeRe">Vĩ độ</label>
+        <input readonly="readonly" type="text" class="form-control" id="latitudeRe"  name="latitudeRe"  value="<?php echo isset($latitudeRe) ? $latitudeRe : ''; ?>"> 
     </div>
     <div class="col-lg-4"> 
-        <label for="longitudeRe">longitudeRe</label>
-        <input type="text" class="form-control" id="longitudeRe"  name="longitudeRe"  value="<?php echo isset($longitudeRe) ? $longitudeRe : ''; ?>"> 
+        <label for="longitudeRe">Kinh độ</label>
+        <input readonly="readonly" type="text" class="form-control" id="longitudeRe"  name="longitudeRe"  value="<?php echo isset($longitudeRe) ? $longitudeRe : ''; ?>"> 
     </div> 
-    <div class="col-lg-4"> 
-        <label for="otherPoints">Địa chỉ khác</label>
-        <input type="text" class="form-control" id="otherPoints"  name="otherPoints"  value="<?php echo isset($otherPoints) ? $otherPoints : ''; ?>"> 
-</div>     
+     
 </div>     
 <script type="">
     window.restaurantModule = window.restaurantModule || {};

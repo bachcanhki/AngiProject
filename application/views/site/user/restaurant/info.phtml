@@ -15,24 +15,31 @@
     <li>
         <input type="hidden" id="restaurantID" name="restaurantID" value="<?php echo isset($restaurantID) ? $restaurantID : '0'; ?>">
         <input type="hidden" id="userID" name="userID" value="<?php echo isset($userID) ? $userID : '0'; ?>">
-        <label for="memName">Tên nhà hàng</label>
+        <label for="memName">Tên nhà hàng(*)</label>
         <input type="text" value="<?php echo isset($nameRe) ? $nameRe : ''; ?>" id="nameRe"  name="nameRe">
     </li>
     <li>
-        <label for="userName">Điện thoại</label>
+        <label for="userName">Điện thoại(*)</label>
         <input type="text" id="phoneRe"  name="phoneRe"  value="<?php echo isset($phoneRe) ? $phoneRe : ''; ?>">
     </li>
     <li>
-    <label for="favouriteFood">Món ăn nổi bật</label>
+    <label for="favouriteFood">Món ăn nổi bật(*)</label>
     <input type="text" id="favouriteFood"  name="favouriteFood"  value="<?php echo isset($favouriteFood) ? $favouriteFood : ''; ?>">
     </li>
     <li>
-        <label for="spaceRes">Không gian nhà hàng</label>
+        <label for="spaceRes">Không gian nhà hàng(*)</label>
         <input type="text" id="spaceRes"  name="spaceRes"  value="<?php echo isset($spaceRes) ? $spaceRes : ''; ?>">
     </li>
     <li>
         <label for="carParkingRes">Chỗ đỗ xe</label>
-        <input type="text" id="carParkingRes"  name="carParkingRes"  value="<?php echo isset($carParkingRes) ? $carParkingRes : ''; ?>">
+        <select id="carParkingRes" name="carParkingRes" style="with: 25%">
+            <option id="0" value="0" <?php if(isset($carParkingRes) && $carParkingRes == 0){ echo 'selected="selected"';} else {echo '';} ?> >Không</option>
+            <option id="1" value="1" <?php if(isset($carParkingRes) && $carParkingRes == 1){ echo 'selected="selected"';} else {echo '';} ?> >Có</option>
+        </select>
+    </li>
+    <li>
+        <label for="otherPoints">Điểm đặc trưng khác</label>
+        <input type="text" id="otherPoints"  name="otherPoints"  value="<?php echo isset($otherPoints) ? $otherPoints : ''; ?>">
     </li>
     <li>
         <label for="openTimeRe">Giờ mở cửa</label>
@@ -51,26 +58,21 @@
 
 
     <li>
-        <label for="rateRe">rateRe</label>
-        <select disabled="disabled" id="rateRe" name="rateRe" style="with: 25%">
-            <option id="0" value="0" <?php if(isset($rateRe) && $rateRe == 0){ echo 'selected="selected"';} else {echo '';} ?> >0 *</option>
-            <option id="1" value="1" <?php if(isset($rateRe) && $rateRe == 1){ echo 'selected="selected"';} else {echo '';} ?> >1 *</option>
-            <option id="2" value="2" <?php if(isset($rateRe) && $rateRe == 2){ echo 'selected="selected"'; } else {echo '';} ?>>2 *</option>
-            <option id="3" value="3" <?php if(isset($rateRe) && $rateRe == 3){ echo 'selected="selected"'; } else {echo '';} ?>>3 *</option>
-            <option id="4" value="4" <?php if(isset($rateRe) && $rateRe == 4){ echo 'selected="selected"'; } else {echo '';} ?>>4 *</option>
-            <option id="5" value="5" <?php if(isset($rateRe) && $rateRe == 5){ echo 'selected="selected"'; } else {echo '';} ?>>5 *</option>
-        </select>
+        <label for="rateRe">Đánh giá nhà hàng</label>
+        <input readonly="readonly" type="text" id="rateRe"  name="rateRe"  value="<?php echo isset($rateRe) ? $rateRe : ''; ?>"> 
     </li>
     <li>
         <label></label>
-        <span class="edit-checkbox">
-            <input type="checkbox" name="isDepositBo" id="isDepositBo" <?php echo (isset($isDepositBo) && $isDepositBo) ? 'checked': ''; ?>> Cọc tiền trước
-        </span>
-        <span class="edit-checkbox">
-            <input type="checkbox" namename="isDeactivate" id="isDeactivate" <?php echo (isset($isDeactivate) && $isDeactivate) ? 'checked': ''; ?>> Dừng hoạt động
-        </span>
+        
         <span class="edit-checkbox">
             <input type="checkbox" disabled="disabled" namename="statusRes" id="statusRes" <?php echo (isset($statusRes) && $statusRes) ? 'checked': ''; ?>> Trạng thái
+        </span>
+
+        <span style="display: none" class="edit-checkbox">
+            <input type="checkbox" name="isDepositBo" id="isDepositBo" <?php echo (isset($isDepositBo) && $isDepositBo) ? 'checked': ''; ?>> Cọc tiền trước
+        </span>
+        <span style="display: none" class="edit-checkbox">
+            <input type="checkbox" namename="isDeactivate" id="isDeactivate" <?php echo (isset($isDeactivate) && $isDeactivate) ? 'checked': ''; ?>> Dừng hoạt động
         </span>
 </ul>
 <script type="">

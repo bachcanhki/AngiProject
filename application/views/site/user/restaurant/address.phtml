@@ -1,6 +1,6 @@
 <ul>
     <li>
-        <label for="provinceID">Tỉnh/ Thành phố (*)</label> 
+        <label for="provinceID">Tỉnh/Thành phố (*)</label> 
         <select id="provinceID" name="provinceID">
           <option id="" value="" selected="selected">--Chọn thành phố--</option>
           <?php foreach($province as $adr){?>
@@ -11,7 +11,7 @@
         </select>
     </li>
     <li>
-        <label for="districtID">Quận/ Huyện</label> 
+        <label for="districtID">Quận/Huyện</label> 
         <select id="districtID" name="districtID">
           <option id="" value="" selected="selected">--Chọn quận/ huyện--</option>
           <?php foreach($district as $adr){?>
@@ -22,7 +22,7 @@
         </select>
     </li>
     <li>
-        <label for="wardID">Xã/ Phường</label> 
+        <label for="wardID">Xã/Phường</label> 
         <select id="wardID" name="wardID">
           <option id="" value="" selected="selected">--Chọn xã/ phường--</option>
           <?php foreach($ward as $adr){?>
@@ -34,7 +34,7 @@
         </select>
     </li>
     <li>
-        <label for="address">Địa chỉ (*)</label> 
+        <label for="address">Địa chỉ(*)</label> 
         <input type="hidden" id="addressID"  name="addressID"  value="<?php echo isset($addressID) ? $addressID : ''; ?>" > 
         <input type="text" id="address"  name="address"  value="<?php echo isset($address) ? $address : ''; ?>" placeholder="Địa chỉ">
     </li>
@@ -42,10 +42,6 @@
         <label>Bản đồ</label>
         <input style="width: 24.3%" placeholder="Vĩ độ" type="text" id="latitudeRe"  name="latitudeRe"  value="<?php echo isset($latitudeRe) ? $latitudeRe : ''; ?>"> -
         <input style="width: 24.3%" placeholder="Kinh độ" type="text" id="longitudeRe"  name="longitudeRe"  value="<?php echo isset($longitudeRe) ? $longitudeRe : ''; ?>">
-    </li>
-    <li>
-        <label for="otherPoints">Địa chỉ khác</label>
-        <input type="text" id="otherPoints"  name="otherPoints"  value="<?php echo isset($otherPoints) ? $otherPoints : ''; ?>">
     </li>
 </ul>
 <script type="">

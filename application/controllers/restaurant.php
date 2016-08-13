@@ -36,12 +36,12 @@ class Restaurant extends CI_Controller {
         
         $categories = $this->categoriesOfRestaurantModel->ListCateByResId($restaurantID);
         $categoryOfResIDArr = array();
-        $desciptionCORArr = array(); 
+        $nameCORArr = array(); 
         foreach($categories as $cate){
             array_push($categoryOfResIDArr, $cate->categoryOfResID);
-            array_push($desciptionCORArr, $cate->desciptionCOR);
+            array_push($nameCORArr, $cate->nameCOR);
         }
-        $restaurant->desciptionCOR = implode(', ', $desciptionCORArr);
+        $restaurant->nameCOR = implode(', ', $nameCORArr);
         $categoryOfResIDStr = implode(', ', $categoryOfResIDArr);
         $count = 0;
         $data = array(

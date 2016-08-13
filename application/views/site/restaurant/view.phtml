@@ -81,7 +81,7 @@
                                 <h3 style="font-weight: bold; color: #cc0000">ĐIỂM ĐẶC TRUNG - <?php echo $restaurant->nameRe; ?></h3>
                                 <p>
                                     <strong>Loại hình ẩm thực: </strong>
-                                    <?php echo $restaurant->desciptionCOR; ?>
+                                    <?php echo $restaurant->nameCOR; ?>
                                 </p>
 
                                 <p>
@@ -90,26 +90,29 @@
                                 </p>
 
                                 <p>
-                                    <strong>Giá trung bình/người (*): </strong>
+                                    <strong>Giá trung bình/người: </strong>
                                     <?php echo $restaurant->minPrice.' - '.$restaurant->maxPrice; ?> VNĐ
                                 </p>
 
                                 <p>
-                                    <strong>Giờ mở của (*): </strong>
+                                    <strong>Giờ mở cửa: </strong>
                                     <?php echo $restaurant->openTimeRe.' đến '.$restaurant->closeTimeRe; ?>
                                 </p>
 
                                 <p>
-                                    <strong>Không gian:</strong><br/>
-
-                                        - Phong cách đồng quê lãng mạn, độc đáo<br/>
-
-                                        - Sức chứa <?php echo $restaurant->quantityBooking; ?> khách
+                                    <strong>Không gian nhà hàng: </strong>
+                                    <?php echo $restaurant->spaceRes; ?>
                                 </p>
 
                                 <p>
-                                    <strong>Chỗ để ô tô: </strong><?php echo $restaurant->isDepositBo ? 'Có' : 'Không'; ?>
+                                    <strong>Chỗ để ô tô: </strong><?php echo $restaurant->carParkingRes ? 'Có' : 'Không'; ?>
                                 </p>   
+
+                                <p>
+                                    <strong>Điểm đặc trưng khác: </strong>
+                                    <?php if($restaurant->otherPoints == '') echo 'Không'; else echo $restaurant->otherPoints;?>
+                                </p>  
+
                             </div>
 
                             <div class="read-more">

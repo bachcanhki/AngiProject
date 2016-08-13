@@ -24,7 +24,7 @@
     </div> 
     <div class="col-lg-6"> 
         <label for="userID">Người dùng</label> 
-        <select disabled="true" id="userID" name="userID" class="form-control">        
+        <select disabled="disabled" id="userID" name="userID" class="form-control">        
           <option id="" value="" selected="selected">--Người dùng--</option>  
           <?php foreach($users as $item){?>
              <option id="<?php echo $item->userID; ?>" 
@@ -44,9 +44,13 @@
         <input readonly="readonly" type="text" class="form-control" id="spaceRes"  name="spaceRes"  value="<?php echo isset($spaceRes) ? $spaceRes : ''; ?>"> 
     </div>       
     <div class="col-lg-6"> 
-        <label for="carParkingRes">Chỗ để ô tô</label>
-        <input readonly="readonly" type="text" class="form-control" id="carParkingRes"  name="carParkingRes"  value="<?php echo isset($carParkingRes) ? $carParkingRes : ''; ?>"> 
+        <label for="carParkingRes">Chỗ đỗ xe</label>
+        <input readonly="readonly" type="text" class="form-control" id="carParkingRes"  name="carParkingRes"  value="<?php echo isset($carParkingRes) && $carParkingRes == 1 ? 'Có' : 'Không'; ?>"> 
     </div>  
+    <div class="col-lg-12"> 
+        <label for="otherPoints">Điểm đặc trưng khác</label>
+        <input readonly="readonly" type="text" class="form-control" id="otherPoints"  name="otherPoints"  value="<?php echo isset($otherPoints) ? $otherPoints : ''; ?>"> 
+    </div>    
     <div class="col-lg-4"> 
         <label for="openTimeRe">Giờ mở của</label>
         <div class=' input-group date time'>
@@ -76,27 +80,28 @@
             <option id="5" value="5" <?php if(isset($rateRe) && $rateRe == 5){ echo 'selected="selected"'; } else {echo '';} ?>>5 *</option>
         </select>
     </div>  
-    <div class="col-lg-4">                                                                                                                                
+    <div class="col-lg-4">      
+        <div class="checkbox">
+            <label>
+              <input type="checkbox" name="statusRes" id="statusRes" <?php echo (isset($statusRes) && $statusRes) ? 'checked': ''; ?>>Kích hoạt
+            </label>
+        </div>
+    </div>
+    <div  style="display: none"  class="col-lg-4">                                                                                                                                
           <div class="checkbox">
             <label>
               <input type="checkbox" name="isDepositBo" id="isDepositBo" <?php echo (isset($isDepositBo) && $isDepositBo) ? 'checked': ''; ?>>isDepositBo
             </label>
           </div>
     </div>
-    <div class="col-lg-4">                                                                                                                                
+    <div style="display: none"  class="col-lg-4">                                                                                                                                
           <div class="checkbox">
             <label>
               <input type="checkbox" name="isDeactivate" id="isDeactivate" <?php echo (isset($isDeactivate) && $isDeactivate) ? 'checked': ''; ?>>Dừng hoạt động
             </label>
           </div>
     </div>
-    <div class="col-lg-4">                                                                                                                                
-          <div class="checkbox">
-            <label>
-              <input type="checkbox" name="statusRes" id="statusRes" <?php echo (isset($statusRes) && $statusRes) ? 'checked': ''; ?>>Kích hoạt
-            </label>
-          </div>
-    </div>
+    
 </div>  
 <script type="">
     $('.datepicker').datetimepicker({locale: 'vi'});

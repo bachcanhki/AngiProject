@@ -1230,7 +1230,7 @@ DROP TABLE IF EXISTS `restaurants`;
 CREATE TABLE IF NOT EXISTS `restaurants` (
   `restaurantID` int(11) NOT NULL AUTO_INCREMENT,
   `nameRe` varchar(300) CHARACTER SET utf8 DEFAULT NULL,
-  `descriptionRes` varchar(1000) CHARACTER SET utf8 DEFAULT NULL,
+  `descriptionRes` longtext CHARACTER SET utf8 DEFAULT NULL,
   `phoneRe` varchar(15) CHARACTER SET utf8 DEFAULT NULL,
   `favouriteFood` varchar(300) CHARACTER SET utf8 DEFAULT NULL,
   `spaceRes` varchar(300) CHARACTER SET utf8 DEFAULT NULL,

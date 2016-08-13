@@ -23,12 +23,9 @@
           </div>
           <div id="_res_desc" class="tab-pane fade in"> 
             <div class="col-lg-12"> 
-                <!-- <textarea re id="descriptionRes" name="descriptionRes" class="form-control">
+                <textarea readonly="readonly" re id="descriptionRes" name="descriptionRes" class="form-control">
                     <?php echo isset($descriptionRes) ? $descriptionRes : ''; ?>
-                </textarea> -->
-                <p>
-                  <?php echo isset($descriptionRes) ? $descriptionRes : ''; ?>
-                
+                </textarea>
             </div>
           </div>
           <div id="_res_food" class="tab-pane fade in">
@@ -41,7 +38,7 @@
   </div> 
 </div>                                                                           
 </form>
-<!-- <script type=""> 
+<script type=""> 
     CKFinder.setupCKEditor(null, '/resource/ckfinder/' );
     CKEDITOR.replace("descriptionRes");
-</script> -->
+</script>
