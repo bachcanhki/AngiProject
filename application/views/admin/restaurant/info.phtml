@@ -87,21 +87,34 @@
             </label>
         </div>
     </div>
-    <div  style="display: none"  class="col-lg-4">                                                                                                                                
+    <div  style="display: none"  class="col-lg-4">
           <div class="checkbox">
             <label>
               <input type="checkbox" name="isDepositBo" id="isDepositBo" <?php echo (isset($isDepositBo) && $isDepositBo) ? 'checked': ''; ?>>isDepositBo
             </label>
           </div>
     </div>
-    <div style="display: none"  class="col-lg-4">                                                                                                                                
+    <div style="display: none"  class="col-lg-4">
           <div class="checkbox">
             <label>
               <input type="checkbox" name="isDeactivate" id="isDeactivate" <?php echo (isset($isDeactivate) && $isDeactivate) ? 'checked': ''; ?>>Dừng hoạt động
             </label>
           </div>
     </div>
-    
+    <div style="display: none"  class="col-lg-4">
+          <div class="minPrice">
+            <label for="minPrice">Giá tiền (thấp - cao: vnđ)</label>
+            <input style="width: 24.3%" type="number" id="minPrice"  name="minPrice"  value="<?php echo isset($minPrice) ? $minPrice : ''; ?>"> -
+            <input style="width: 24.3%" type="number" id="maxPrice"  name="maxPrice"  value="<?php echo isset($maxPrice) ? $maxPrice : ''; ?>">
+          </div>
+    </div>
+    <div style="display: none"  class="col-lg-4">
+          <div class="minPrice">
+            <label for="discount">Giảm giá (%)</label>
+            <input type="number" id="discount"  name="discount"  value="<?php echo isset($discount) ? $discount : ''; ?>">
+          </div>
+    </div>
+
 </div>  
 <script type="">
     $('.datepicker').datetimepicker({locale: 'vi'});

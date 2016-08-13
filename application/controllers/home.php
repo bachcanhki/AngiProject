@@ -43,6 +43,7 @@ class Home extends CI_Controller {
         $user = $this->session->userdata('user');
         $level = $this->session->userdata('level');
         $count = 0;
+        
         $data = array(
             'user' => $this->session->userdata('user'),
             'fullname' => $this->session->userdata('fullname'), 

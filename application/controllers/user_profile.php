@@ -396,7 +396,8 @@ class user_profile extends CI_Controller{
                         'quantityBooking' => $model['quantityBooking'],
                         'dateCreateRe' => $model['dateCreateRe'],
                         'addressID' => $model['addressID'],
-                        'userID' => $model['userID']
+                        'userID' => $model['userID'],
+                        'statusRes' => $model['statusRes']
                         ),  
                     'cate' => $cates,
                     'add' => array(
@@ -418,6 +419,7 @@ class user_profile extends CI_Controller{
                     //Nguoc lai neu khong luu duoc 
                     $model['error'] = $this->Error('Không cập nhật được nhà hàng!'); 
                 }  
+                
             }
         }
         

@@ -379,7 +379,7 @@ class admin extends CI_Controller {
             //Lay du lieu tu forn dong thoi gan bien du gia tri 
             $model['restaurantID'] = strip_tags($this->input->post('restaurantID')); 
             $model['nameRe'] = strip_tags($this->input->post('nameRe'));
-            $model['descriptionRes'] = strip_tags($this->input->post('descriptionRes'));
+            $model['descriptionRes'] = $this->input->post('descriptionRes');
             $model['phoneRe'] = strip_tags($this->input->post('phoneRe'));   
             $model['favouriteFood'] = strip_tags($this->input->post('favouriteFood'));
             $model['spaceRes'] = strip_tags($this->input->post('spaceRes'));
@@ -540,7 +540,7 @@ class admin extends CI_Controller {
         $pagination = $this->pagination->create_links();
         
         $data = array(
-                    'title' => 'Danh sách thực khách',  
+                    'title' => 'Danh sách tài khoản',  
                     'user' => $this->session->userdata('user'),
                     'fullname' => $this->session->userdata('fullname'), 
                     'model' => array(

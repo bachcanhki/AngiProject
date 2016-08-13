@@ -1,7 +1,7 @@
 
 <ul class="form-group">
     <li> 
-        <label for="categoryOfResID">Danh mục nhà hàng</label>
+        <label for="categoryOfResID">Danh mục nhà hàng (*)</label>
         <select id="categoryOfResID" name="categoryOfResID"  data-placeholder="--Chọn loại nhà hàng--" multiple class = "chosen-select">        
            <?php foreach($categories as $item){?>
              <option id="<?php echo $item->categoryOfResID; ?>" value="<?php echo $item->categoryOfResID; ?>" 
@@ -62,17 +62,20 @@
         <input readonly="readonly" type="text" id="rateRe"  name="rateRe"  value="<?php echo isset($rateRe) ? $rateRe : ''; ?>"> 
     </li>
     <li>
-        <label></label>
-        
+        <label>Trạng thái</label>
         <span class="edit-checkbox">
-            <input type="checkbox" disabled="disabled" namename="statusRes" id="statusRes" <?php echo (isset($statusRes) && $statusRes) ? 'checked': ''; ?>> Trạng thái
+            <?php if(isset($statusRes) && $statusRes) echo '<font color="green">Hoạt động</font>'; else echo '<font color="red">Chưa kích hoạt</font>';?>
+        </span>
+        
+        <span style="display: none" class="edit-checkbox">
+            <input type="checkbox" name="statusRes" id="statusRes" <?php echo (isset($statusRes) && $statusRes) ? 'checked': ''; ?>> Trạng thái
         </span>
 
         <span style="display: none" class="edit-checkbox">
             <input type="checkbox" name="isDepositBo" id="isDepositBo" <?php echo (isset($isDepositBo) && $isDepositBo) ? 'checked': ''; ?>> Cọc tiền trước
         </span>
         <span style="display: none" class="edit-checkbox">
-            <input type="checkbox" namename="isDeactivate" id="isDeactivate" <?php echo (isset($isDeactivate) && $isDeactivate) ? 'checked': ''; ?>> Dừng hoạt động
+            <input type="checkbox" name="isDeactivate" id="isDeactivate" <?php echo (isset($isDeactivate) && $isDeactivate) ? 'checked': ''; ?>> Dừng hoạt động
         </span>
 </ul>
 <script type="">

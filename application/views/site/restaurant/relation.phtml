@@ -33,7 +33,7 @@
             </a>
 
             <div class="category-itemdetail" style="border: 1px solid #e0e0e0; text-align: center">
-                <p class="sale-content">Giảm <strong>20%</strong></p>
+                <p class="sale-content">Giảm <strong><?php echo $item->discount; ?>%</strong></p>
                 <p class="quick-description"><?php echo $this->xulychuoi->GetTitleNew( $item->descriptionRes); ?></p>
                 <a href="<?php echo $this->uriutils->BuildViewResUrl($item->restaurantID); ?>">
                     <button class="place">Đặt chỗ ngay</button>

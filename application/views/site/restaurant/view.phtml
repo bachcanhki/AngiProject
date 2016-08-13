@@ -142,7 +142,7 @@
                             </div>
                             <script type='text/javascript'>
                                 function init_map(){
-                                    var myOptions = {zoom:13,center:new google.maps.LatLng(<?php echo $restaurant->latitudeRe; ?>,<?php echo $restaurant->longitudeRe; ?>),mapTypeId: google.maps.MapTypeId.ROADMAP};
+                                    var myOptions = {zoom:17,center:new google.maps.LatLng(<?php echo $restaurant->latitudeRe; ?>,<?php echo $restaurant->longitudeRe; ?>),mapTypeId: google.maps.MapTypeId.ROADMAP};
                                     map = new google.maps.Map(document.getElementById('gmap_canvas'), myOptions);
                                     marker = new google.maps.Marker({map: map,position: new google.maps.LatLng(<?php echo $restaurant->latitudeRe; ?>,<?php echo $restaurant->longitudeRe; ?>)});
                                     infowindow = new google.maps.InfoWindow({content:'<strong><?php echo $restaurant->nameRe; ?></strong><br><?php echo $restaurant->address; ?><br>'});

@@ -93,9 +93,9 @@ class RestaurantModel extends CI_Model
     function Details($resId = 0)
     {
         $sql = 'select '.$this->table.'.*, ';
-        $sql.= ' CONCAT('.$this->address.'.address, \' \', ';
-        $sql.= $this->ward.'.nameWard, \' \', ';
-        $sql.= $this->district.'.nameDis, \' \', ';  
+        $sql.= ' CONCAT('.$this->address.'.address, \', \', ';
+        $sql.= $this->ward.'.nameWard, \', \', ';
+        $sql.= $this->district.'.nameDis, \', \', ';  
         $sql.= $this->province.'.namePro) as address, ';
         $sql.= '\'\' as nameCOR ';
         $sql.= 'from '.$this->table;                                                                         
@@ -195,9 +195,9 @@ class RestaurantModel extends CI_Model
         
         $select = 'select '.$this->table.'.restaurantID, '.$this->table.'.nameRe, '.$this->table.'.descriptionRes, '
                     .$this->table.'.rateRe, '.$this->table.'.discount, ';   
-        $select.= ' CONCAT('.$this->address.'.address, \' \', ';
-        $select.= $this->ward.'.nameWard, \' \', ';
-        $select.= $this->district.'.nameDis, \' \', ';    
+        $select.= ' CONCAT('.$this->address.'.address, \', \', ';
+        $select.= $this->ward.'.nameWard, \', \', ';
+        $select.= $this->district.'.nameDis, \', \', ';    
         $select.= $this->province.'.namePro) as address, ';                             
         $select.= $this->restaurantImage.'.imageUrl ';                                
         $from.= ' left join '.$this->province.' on '.$this->province.'.provinceID = '.$this->address.'.provinceID ';
@@ -237,9 +237,9 @@ class RestaurantModel extends CI_Model
         
         $select = 'select '.$this->table.'.restaurantID, '.$this->table.'.nameRe, '.$this->table.'.descriptionRes, '
                     .$this->table.'.rateRe, '.$this->table.'.discount, ';   
-        $select.= ' CONCAT('.$this->address.'.address, \' \', ';
-        $select.= $this->ward.'.nameWard, \' \', ';
-        $select.= $this->district.'.nameDis, \' \', ';  
+        $select.= ' CONCAT('.$this->address.'.address, \', \', ';
+        $select.= $this->ward.'.nameWard, \', \', ';
+        $select.= $this->district.'.nameDis, \', \', ';  
         $select.= $this->province.'.namePro) as address, ';                             
         $select.= $this->restaurantImage.'.imageUrl ';                             
         $from.= ' left join '.$this->province.' on '.$this->province.'.provinceID = '.$this->address.'.provinceID ';
@@ -264,9 +264,9 @@ class RestaurantModel extends CI_Model
         
         $select = 'select '.$this->table.'.restaurantID, '.$this->table.'.nameRe, '.$this->table.'.descriptionRes, '
                     .$this->table.'.rateRe, '.$this->table.'.discount, ';   
-        $select.= ' CONCAT('.$this->address.'.address, \' \', ';
-        $select.= $this->ward.'.nameWard, \' \', ';
-        $select.= $this->district.'.nameDis, \' \', ';     
+        $select.= ' CONCAT('.$this->address.'.address, \', \', ';
+        $select.= $this->ward.'.nameWard, \', \', ';
+        $select.= $this->district.'.nameDis, \', \', ';     
         $select.= $this->province.'.namePro) as address, ';                             
         $select.= $this->restaurantImage.'.imageUrl ';     
         $from.= ' left join '.$this->address.' on '.$this->address.'.addressID = '.$this->table.'.addressID';
@@ -296,9 +296,9 @@ class RestaurantModel extends CI_Model
         
         $select = 'select '.$this->table.'.restaurantID, '.$this->table.'.nameRe, '.$this->table.'.descriptionRes, '
                     .$this->table.'.rateRe, '.$this->table.'.discount, ';   
-        $select.= ' CONCAT('.$this->address.'.address, \' \', ';
-        $select.= $this->ward.'.nameWard, \' \', ';
-        $select.= $this->district.'.nameDis, \' \', ';      
+        $select.= ' CONCAT('.$this->address.'.address, \', \', ';
+        $select.= $this->ward.'.nameWard, \', \', ';
+        $select.= $this->district.'.nameDis, \', \', ';      
         $select.= $this->province.'.namePro) as address, ';                             
         $select.= $this->restaurantImage.'.imageUrl ';   
         $from.= ' left join '.$this->address.' on '.$this->address.'.addressID = '.$this->table.'.addressID';
@@ -325,9 +325,9 @@ class RestaurantModel extends CI_Model
         
         $select = 'select '.$this->table.'.restaurantID, '.$this->table.'.nameRe, '.$this->table.'.descriptionRes, '
                     .$this->table.'.rateRe, '.$this->table.'.discount, ';   
-        $select.= ' CONCAT('.$this->address.'.address, \' \', ';
-        $select.= $this->ward.'.nameWard, \' \', ';
-        $select.= $this->district.'.nameDis, \' \', ';     
+        $select.= ' CONCAT('.$this->address.'.address, \', \', ';
+        $select.= $this->ward.'.nameWard, \', \', ';
+        $select.= $this->district.'.nameDis, \', \', ';     
         $select.= $this->province.'.namePro) as address, ';                             
         $select.= $this->restaurantImage.'.imageUrl ';     
         $from.= ' left join '.$this->address.' on '.$this->address.'.addressID = '.$this->table.'.addressID';
