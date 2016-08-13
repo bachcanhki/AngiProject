@@ -5,6 +5,9 @@ class UsersModel extends CI_Model
     private $memberships = 'memberships';
     private $address = 'address';
     private $images = 'images';
+    private $province = 'province';
+    private $district = 'district';
+    private $ward = 'ward';
     function __construct()
     {
         parent::__construct();
@@ -215,11 +218,21 @@ class UsersModel extends CI_Model
     {
         $sql = 'select '.$this->table.'.*, ';
         $sql.= $this->memberships.'.addressID,'.$this->memberships.'.imageID,'.$this->memberships.'.memGender,'.$this->memberships.'.memBirthDay, memName, ';
-        $sql.= $this->address.'.address ';
-        $sql.= 'from '.$this->table;
-        $sql.= ' left join '.$this->memberships.' on '.$this->table.'.userID = '.$this->memberships.'.userID';
-        $sql.= ' left join '.$this->address.' on '.$this->address.'.addressID = '.$this->memberships.'.addressID';
-        $sql.= ' left join '.$this->images.' on '.$this->images.'.imageID = '.$this->memberships.'.imageID';
+
+        $sql.= ' CONCAT('.$this->address.'.address, \', \', ';
+        $sql.= $this->ward.'.nameWard, \', \', ';
+        $sql.= $this->district.'.nameDis, \', \', ';  
+        $sql.= $this->province.'.namePro) as address ';
+
+        $sql.= ' from '.$this->table;
+        $sql.= ' left join '.$this->memberships.' on '.$this->table.'.userID = '.$this->memberships.'.userID ';
+        $sql.= ' left join '.$this->address.' on '.$this->address.'.addressID = '.$this->memberships.'.addressID ';
+         
+        $sql.= ' left join '.$this->province.' on '.$this->province.'.provinceID = '.$this->address.'.provinceID ';
+        $sql.= ' left join '.$this->district.' on '.$this->district.'.districtid = '.$this->address.'.districtID ';
+        $sql.= ' left join '.$this->ward.' on '.$this->ward.'.wardid = '.$this->address.'.wardID ';
+        
+        $sql.= ' left join '.$this->images.' on '.$this->images.'.imageID = '.$this->memberships.'.imageID ';
         $sql.= ' where '.$this->table.'.userLevel = \''.$level.'\'';
         $sql.= ' limit '.$limit.' offset '.$offset;
         $query = $this->db->query($sql);
