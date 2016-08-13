@@ -26,17 +26,24 @@ class RestaurantModel extends CI_Model
         $from = 'from '.$this->table;
         $from.= ' left join '.$this->memberships.' on '.$this->table.'.userID = '.$this->memberships.'.userID ';   
         $from.= ' left join '.$this->address.' on '.$this->table.'.addressID = '.$this->address.'.addressID ';   
-         
+        $from.= ' left join '.$this->province.' on '.$this->province.'.provinceID = '.$this->address.'.provinceID ';
+        $from.= ' left join '.$this->district.' on '.$this->district.'.districtid = '.$this->address.'.districtID ';
+        $from.= ' left join '.$this->ward.' on '.$this->ward.'.wardid = '.$this->address.'.wardID ';
         $select = 'select 1 ';
         //count
         $query = $this->db->query($select.$from);
         $count = $query->num_rows();
         
         $select = 'select '.$this->table.'.*, ';
+
         $select.= $this->memberships.'.memName as userName, '; 
-        $select.= $this->address.'.address, ';    
+        $select.= ' CONCAT('.$this->address.'.address, \', \', ';
+        $select.= $this->ward.'.nameWard, \', \', ';
+        $select.= $this->district.'.nameDis, \', \', ';  
+        $select.= $this->province.'.namePro) as address, ';
+           
         $select.= '\'\' as categoryName ';    
-        $where = ' order by '.$this->table.'.nameRe ';
+        $where = ' order by '.$this->table.'.userID desc ';
         $where.= ' limit '.$limit.' offset '.$offset;
         
         $query = $this->db->query($select.$from.$where);
