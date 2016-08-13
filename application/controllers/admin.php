@@ -252,7 +252,7 @@ class admin extends CI_Controller {
         $pagination = $this->pagination->create_links();
         
         $data = array(
-                    'title' => 'Danh sách tin tức',
+                    'title' => 'Danh sách nhà hàng',
                     'user' => array('user' => $user),
                     'fullname' => $this->session->userdata('fullname'), 
                     'model' => array(      

@@ -45,6 +45,7 @@ class Restaurant extends CI_Controller {
         $categoryOfResIDStr = implode(', ', $categoryOfResIDArr);
         $count = 0;
         $data = array(
+            'userID' => $this->session->userdata('userID'),
             'title' => 'Thông tin quán ăn', 
             'user' => $this->session->userdata('user'), 
             'fullname' => $this->session->userdata('fullname'), 

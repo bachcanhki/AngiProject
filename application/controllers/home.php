@@ -266,6 +266,7 @@ class Home extends CI_Controller {
 
             if($flag) {                           
                 $dataSet = array(
+                        'userID' => $query_login->userID,
                         'user' => $query_login->userName,
                         'fullname' => $query_login->memName,
                         'level' => $query_login->userLevel,
