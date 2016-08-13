@@ -424,7 +424,7 @@ class Home extends CI_Controller {
                             'user' => $userName,
                             'fullname' => $memName,
                             'level' => $userLevel,
-                            'isActived' => $userActived
+                            'isActived' => $userActived,
                          );
                          $this->session->set_userdata($dataSet);
                          redirect(base_url('user_profile/index'));
@@ -453,7 +453,8 @@ class Home extends CI_Controller {
              'content' => 'site/user/user/signup.phtml',
              'user'=> $user,
              'level'=> $level,
-             'model' => $model
+             'model' => $model,
+            'categoryModels' => $this->categoriesOfRestaurantModel->ListByStatus(1),
         );
         
         $this->load->view('site/layout/layout.phtml', $data);

@@ -138,6 +138,7 @@
     .search{
         margin-top: 70px;
     }
+    .stick-point{display: none}
 }
 
 @media screen and (min-width: 768px) {
@@ -149,5 +150,6 @@
     .navbar{width: 100%}
     #home-list-resp{display: block}
     .hidden-nav{display: block !important;}
-    .top-register, .search{display: none}
+    .right-title, .main-banner, .top-register, .search{display: none}
+
 }
