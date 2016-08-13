@@ -14,7 +14,7 @@
             </div>
             <ul class="item-content">
             <?php foreach($items as $item){ ?>
-                <li class="col-md-3">
+                <li class="col-md-3 col-sm-6">
                     <a style="display: block; position: relative" class="img-item" href="<?php echo $this->uriutils->BuildViewResUrl($item->restaurantID); ?>">
                         <img src="<?php echo $item->imageUrl != '' ? $item->imageUrl : 'http://cdn.pasgo.vn/anh-diem-den/nha-hang-ao-quan-ngo-19-dong-tac-avatarjpg-5138.jpg'; ?>">
                         <div class="item-infor">

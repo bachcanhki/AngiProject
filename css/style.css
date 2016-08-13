@@ -126,7 +126,7 @@ li.top-register:hover>a{
 .btn-info{
     border: none;
 }
-.btn-info:hover {
+.btn-info:hover, .btn-info:active, .btn-info:focus, .btn-info:active:focus {
     background-color: #bd052b;
     border: none;
 }
