@@ -21,9 +21,11 @@
         </p>
 		<?php if ($user == ''){ ?>
             <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal">Đăng nhập để đặt chỗ</button>
-        <?php } else{ ?>
+        <?php } else { ?>
             <button onclick="return bookingModule.sendBooking();">đặt chỗ ngay</button>
-        <?php } ?>        <p>(Hoàn toàn không mất phí)</p>
+        <?php } ?>      
+
+        <p>(Hoàn toàn không mất phí)</p>
 
         <span>Hoặc</span>
         <span>Gọi đến: <strong style="color: #d02028; font-size: 18px"><?php echo $restaurant->phoneRe; ?></strong> để đặt chỗ.</span>

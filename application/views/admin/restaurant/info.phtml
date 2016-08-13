@@ -70,7 +70,7 @@
         </div>
     </div>      
     <div class="col-lg-4"> 
-        <label for="rateRe">rateRe</label>
+        <label for="rateRe">Đánh giá nhà hàng</label>
         <select id="rateRe" name="rateRe" class="form-control">
             <option id="0" value="0" <?php if(isset($rateRe) && $rateRe == 0){ echo 'selected="selected"';} else {echo '';} ?> >0 *</option>
             <option id="1" value="1" <?php if(isset($rateRe) && $rateRe == 1){ echo 'selected="selected"';} else {echo '';} ?> >1 *</option>
@@ -118,7 +118,7 @@
 </div>  
 <script type="">
     $('.datepicker').datetimepicker({locale: 'vi'});
-    $('.time').datetimepicker({locale: 'vi',format: 'hh:mm'});
+    $('.time').datetimepicker({locale: 'vi',format: 'HH:mm'});
 	$(".chosen-select").chosen().change(function(evt){
         var arr = $(".chosen-select").chosen().val();
         $('#categoryOfResIDs').val(arr.join());
