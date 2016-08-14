@@ -1,7 +1,12 @@
-<h1>Thông tin nhà hàng</h1>
+<h1 class="user-tit">Thông tin nhà hàng</h1>
 
 <form class="edit-user" method="POST" action="" id="frmres">
-    <div class="bg-danger"><?php echo $error; ?></div>
+
+    <?php if($error!='' && $error!=null){?>
+        <div class="bg-danger"><?php echo $error; ?></div>
+    <?php }else if($success!='' && $success!=null){?>
+        <div class="bg-success"><?php echo $success; ?></div>
+    <?php }?>
      
         <ul class="nav nav-tabs">
           <li class="active"><a data-toggle="tab" href="#_res_info">Thông tin chung</a></li>
@@ -34,9 +39,9 @@
             ?>
           </div>
         </div> 
-        <li>
-            <label></label>
-           <input name="submit" id="submit" class="btn" type="submit" value="Lưu" />
+        <li class="row">
+            <label class="col-md-3 col-sm-3 col-xs-3"></label>
+           <input class="col-md-9 col-sm-9 col-xs-9" name="submit" id="submit" class="btn" type="submit" value="Lưu" />
         </li>
 </form>
 <script type=""> 

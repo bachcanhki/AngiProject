@@ -36,21 +36,3 @@
     }
     ?>
 </ul>
-<script>
-$(document).ready(function(){
-
-    function newsTitle() {
-        if(window.matchMedia('(max-width: 768px)').matches){
-            $(".news-title>a").width($(window).width()-30);
-        }
-        if(window.matchMedia('(min-width: 768px)').matches){
-            $(".news-title>a").css("width", "100%");
-        }
-    }
-    // Execute on load
-    newsTitle();
-    // Bind event listener
-    $(window).resize(newsTitle);
-
-});
-</script>

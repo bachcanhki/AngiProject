@@ -8,7 +8,7 @@ a{
 a:hover, a:active{
     text-decoration: none;
 }
-
+img{width: 100%}
 input[type="text"], input[type="email"], input[type="password"], input[type="search"], input[type="telephone"], input[type="tel"], input[type="number"], input[type="time"], input[type="submit"], input[type="date"], textarea, button, select {
     border: 1px solid #cccccc;
     padding: 6px 30px;
@@ -103,6 +103,7 @@ li.top-register:hover>a{
     right: 0;
     background: #fff !important;
     z-index: 3 !important;
+    min-width: 150px;
 }
 .hover-signin i{
     font-size: 35px;
@@ -121,6 +122,8 @@ li.top-register:hover>a{
 }
 .user-link>i{
     font-size: medium;
+    position: initial;
+    color: inherit;
 }
 
 .btn-info{

@@ -95,7 +95,7 @@
                     <li class="top-register">
                         <?php if ($user == ''){
                          ?>
-                        <a href="">Đăng nhập <i class="fa fa-caret-down" aria-hidden="true"></i></a>
+                        <a href="javascript:;">Đăng nhập <i class="fa fa-caret-down" aria-hidden="true"></i></a>
                         <div class="hover-menu hover-signin">
                             <i class="fa fa-caret-up" aria-hidden="true"></i>
                             <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal">Đăng nhập</button>
@@ -111,15 +111,15 @@
                             <i class="fa fa-caret-up" aria-hidden="true"></i>
                             
                             <?php if($level == 0){//người dùng thực khách ?>
-                                <a class="user-link" href="<?php echo base_url(); ?>user_profile">Thông tin cá nhân</a>
-                                <a class="user-link" href="<?php echo base_url(); ?>user_profile/user_manage_booking">Lịch sử đặt chỗ</a>
+                                <a class="user-link" href="<?php echo base_url(); ?>user_profile"><i class="fa fa-caret-right" aria-hidden="true"></i> Thông tin cá nhân</a>
+                                <a class="user-link" href="<?php echo base_url(); ?>user_profile/user_manage_booking"><i class="fa fa-caret-right" aria-hidden="true"></i> Lịch sử đặt chỗ</a>
                             <?php } else  if($level == 1){//người dùng nhà hàng ?>
-                                <a class="user-link" href="<?php echo base_url(); ?>user_profile">Quản lý nhà hàng</a>
-                                <a class="user-link" href="<?php echo base_url(); ?>user_profile/restaurant_manage_booking">Quản lý đặt chỗ</a>
+                                <a class="user-link" href="<?php echo base_url(); ?>user_profile/restaurant_edit"><i class="fa fa-caret-right" aria-hidden="true"></i> Quản lý nhà hàng</a>
+                                <a class="user-link" href="<?php echo base_url(); ?>user_profile/restaurant_manage_booking"><i class="fa fa-caret-right" aria-hidden="true"></i> Quản lý đặt chỗ</a>
                             <?php }  else  if($level == 2){//admin ?>
-                                <a class="user-link" href="<?php echo base_url(); ?>admin"></i>Quản trị</a>
+                                <a class="user-link" href="<?php echo base_url(); ?>admin"><i class="fa fa-caret-right" aria-hidden="true"></i> Quản trị</a>
                             <?php } ?>
-                            <a class="user-link" href="<?php echo base_url(); ?>home/logout">Đăng xuất</a>
+                            <a class="user-link" href="<?php echo base_url(); ?>home/logout"><i class="fa fa-caret-right" aria-hidden="true"></i> Đăng xuất</a>
                         </div>    
                         <?php } ?>
                         <!-- Modal -->
