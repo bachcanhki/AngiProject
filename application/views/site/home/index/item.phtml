@@ -17,7 +17,7 @@
 <?php foreach($items as $item){ ?>
     <li class="col-md-3 col-sm-6">
         <a style="display: block; position: relative" class="img-item" href="<?php echo $this->uriutils->BuildViewResUrl($item->restaurantID); ?>">
-            <img src="<?php echo $item->imageUrl != '' ? $item->imageUrl : 'http://cdn.pasgo.vn/anh-diem-den/nha-hang-ao-quan-ngo-19-dong-tac-avatarjpg-5138.jpg'; ?>">
+            <img src="<?php echo $item->imageUrl != '' ? $item->imageUrl : base_url().'img/no-image.jpg'; ?>">
             <div class="item-infor">
                 <label class="item-name"><?php echo $item->nameRe; ?></label>
                 <span class="rate-star">

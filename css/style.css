@@ -261,6 +261,7 @@ hr.underTit{
 .item-content li{margin: 10px 0}
 .img-item img{
     width: 100%;
+    border: 1px solid #eee;
 }
 
 .item-infor{
