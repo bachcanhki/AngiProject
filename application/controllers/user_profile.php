@@ -52,8 +52,8 @@ class user_profile extends CI_Controller{
         $data = array(
             'title' => 'Thông tin người dùng', 
             'user' => $userName, 
-            'fullname' => $this->session->userdata('fullname'),
-            'categoryModels' => $this->categoriesOfRestaurantModel->ListByStatus(1),
+            'fullname' => $this->session->userdata('fullname'), 
+			'categoryModels' => $this->categoriesOfRestaurantModel->ListByStatus(1),
             'level' => $this->session->userdata('level'), 
             'content' => 'site/user/profile/index.phtml',
             'userModel' => array(
@@ -65,13 +65,13 @@ class user_profile extends CI_Controller{
             )
         );     
         $model = array( 
-                'error' => '',
-                'success' => '',
+                'error' => '',   
+				'success' => '',
                 'userID' => $user-> userID,       
                 'memName' => $user-> memName,
                 'userMail' => $user-> userMail,
                 'memGender' => $user-> memGender,
-                'memBirthDay' => $this->dateutils->FormatVnDatetimeFromDb($user->memBirthDay),
+                'memBirthDay' => $this->dateutils->FormatVnDatetimeFromDb($user->memBirthDay)
         );
         
         if ($this->input->post('submit')){
@@ -139,14 +139,14 @@ class user_profile extends CI_Controller{
             'user' => $this->session->userdata('user'), 
             'fullname' => $this->session->userdata('fullname'), 
             'level' => $this->session->userdata('level'),
-            'categoryModels' => $this->categoriesOfRestaurantModel->ListByStatus(1),
-            );      
+			'categoryModels' => $this->categoriesOfRestaurantModel->ListByStatus(1)
+      	);      
         $model = array(
-             'error' => '',
-            'success' => '',
-             'province' => $this->addressModel->ListAllProvince(),
-             'categories' => $this->categoriesOfRestaurantModel->ListByStatus(1),    
-             'foods' => $this->foodModel->Admin_FindBy(0, 0, 1000)
+            'error' => '',                        
+			'success' => '',
+            'province' => $this->addressModel->ListAllProvince(),
+            'categories' => $this->categoriesOfRestaurantModel->ListByStatus(1),    
+            'foods' => $this->foodModel->Admin_FindBy(0, 0, 1000)
         );
         
         $submit = $this->input->post('submit');
@@ -240,13 +240,13 @@ class user_profile extends CI_Controller{
                 if ($this->restaurantModel->Create($dataAdd))
                 {                         
                     //Neu luu thanh cong  
-                    $model['success'] = $this->Success('Cập nhật thành công!');
+                    $model['success'] = $this->Success('Cập nhật thành công!'); 
                     $model['ok']  = 1;
                 }
                 else
                 {
                     //Nguoc lai neu khong luu duoc 
-                    $model['error'] = $this->Error('Không cập nhật được nhà hàng!');
+                    $model['error'] = $this->Error('Không cập nhật được nhà hàng!'); 
                     $model['district'] = $this->addressModel->FindDistrictByProvinceId($provinceID);
                     $model['ward'] = $this->addressModel->FindWardByProvinceId($districtID); 
                 }  
@@ -274,20 +274,20 @@ class user_profile extends CI_Controller{
             'content' => 'site/user/restaurant/edit.phtml',   
             'user' => $this->session->userdata('user'), 
             'fullname' => $this->session->userdata('fullname'), 
-            'level' => $this->session->userdata('level'),
-            'categoryModels' => $this->categoriesOfRestaurantModel->ListByStatus(1),
+            'level' => $this->session->userdata('level'), 
+			'categoryModels' => $this->categoriesOfRestaurantModel->ListByStatus(1),
             'userModel' => array(
                 'userID' => $user-> userID,       
                 'memName' => $user-> memName,    
                 'addressImage' => $user-> addressImage, 
-            ), 
+            )
         );      
         $model = array(
-             'error' => '',
-            'success' => '',
-             'province' => $this->addressModel->ListAllProvince(),
-             'categories' => $this->categoriesOfRestaurantModel->ListByStatus(1),    
-             'foods' => $this->foodModel->Admin_FindBy($restaurantID, 0, 1000)
+            'error' => '',                        
+			'success' => '',            
+			'province' => $this->addressModel->ListAllProvince(),
+            'categories' => $this->categoriesOfRestaurantModel->ListByStatus(1),    
+            'foods' => $this->foodModel->Admin_FindBy($restaurantID, 0, 1000)
         );
         
         $submit = $this->input->post('submit');
@@ -418,7 +418,7 @@ class user_profile extends CI_Controller{
                 if ($this->restaurantModel->Update($restaurantID, $dataEdit))
                 {    
                     //Neu luu thanh cong      
-                    $model['success'] = $this->Success('Cập nhật thành công!');
+                    $model['success'] = $this->Success('Cập nhật thành công!');    
                 }
                 else
                 {
@@ -621,8 +621,8 @@ class user_profile extends CI_Controller{
         $data = array(
             'user' => $userName, 
             'fullname' => $this->session->userdata('fullname'), 
-            'level' => $this->session->userdata('level'),
-            'categoryModels' => $this->categoriesOfRestaurantModel->ListByStatus(1),
+            'level' => $this->session->userdata('level'), 
+			'categoryModels' => $this->categoriesOfRestaurantModel->ListByStatus(1),
             'content' => 'site/user/profile/changePassword.phtml',
             'userModel' => array(
                 'userID' => $user-> userID,       
@@ -633,7 +633,7 @@ class user_profile extends CI_Controller{
         ); 
         $model = array( 
                 'error' => '',
-            'success' => '',
+				'success' => ''
         );
         if ($this->input->post('submit')){
             $model['passwordOld'] = $userPassOld = strip_tags($this->input->post('passwordOld'));
@@ -740,7 +740,7 @@ class user_profile extends CI_Controller{
             'fullname' => $this->session->userdata('fullname'), 
             'level' => $this->session->userdata('level'), 
             'content' => 'site/user/restaurant/banner.phtml',
-            'categoryModels' => $this->categoriesOfRestaurantModel->ListByStatus(1),
+			'categoryModels' => $this->categoriesOfRestaurantModel->ListByStatus(1),
             'userModel' => array(
                 'userID' => $user-> userID,       
                 'memName' => $user-> memName,    
@@ -799,7 +799,7 @@ class user_profile extends CI_Controller{
             'fullname' => $this->session->userdata('fullname'), 
             'level' => $this->session->userdata('level'), 
             'content' => 'site/user/restaurant/restaurant_manage_booking.phtml',
-            'categoryModels' => $this->categoriesOfRestaurantModel->ListByStatus(1),
+			'categoryModels' => $this->categoriesOfRestaurantModel->ListByStatus(1),
             'userModel' => array(
                 'userID' => $user-> userID,       
                 'memName' => $user-> memName,    
@@ -845,7 +845,7 @@ class user_profile extends CI_Controller{
             'fullname' => $this->session->userdata('fullname'), 
             'level' => $this->session->userdata('level'), 
             'content' => 'site/user/user/user_manage_booking.phtml',
-            'categoryModels' => $this->categoriesOfRestaurantModel->ListByStatus(1),
+			'categoryModels' => $this->categoriesOfRestaurantModel->ListByStatus(1),
             'userModel' => array(
                 'userID' => $user-> userID,       
                 'memName' => $user-> memName,    
@@ -892,7 +892,7 @@ class user_profile extends CI_Controller{
                 'fullname' => $this->session->userdata('fullname'), 
                 'level' => $this->session->userdata('level'), 
                 'user' => array('user' => $this->session->userdata('user')),
-                'categoryModels' => $this->categoriesOfRestaurantModel->ListByStatus(1),
+				'categoryModels' => $this->categoriesOfRestaurantModel->ListByStatus(1),
                 'fullname' => $this->session->userdata('fullname'), 
                 'userModel' => array(
                     'userID' => $user-> userID,       
@@ -901,8 +901,8 @@ class user_profile extends CI_Controller{
                 ), 
                 );      
         $model = array(
-             'error' => '',
-            'success' => '',
+            'error' => '',         
+			'success' => ''
         );
               
         //Lay du lieu tu forn dong thoi gan bien du gia tri 
@@ -937,7 +937,7 @@ class user_profile extends CI_Controller{
                 if ($this->bookingModel->Update($id, $dataEdit))
                 {
                     //Neu luu thanh cong                   
-                    $model['success'] = $this->Success('Cập nhật thành công!');
+                    $model['success'] = $this->Success('Cập nhật thành công!'); 
                 }
                 else
                 {
@@ -969,8 +969,8 @@ class user_profile extends CI_Controller{
         $data = array(                                                 
                 'title' => 'Chi tiết đặt chỗ',
                 'content' => 'site/user/user/info_booking.phtml',
-                'fullname' => $this->session->userdata('fullname'),
-                'categoryModels' => $this->categoriesOfRestaurantModel->ListByStatus(1),
+                'fullname' => $this->session->userdata('fullname'), 
+				'categoryModels' => $this->categoriesOfRestaurantModel->ListByStatus(1),
                 'level' => $this->session->userdata('level'), 
                 'user' => array('user' => $this->session->userdata('user')),
                 'fullname' => $this->session->userdata('fullname'), 
@@ -981,8 +981,8 @@ class user_profile extends CI_Controller{
                 ), 
                 );      
         $model = array(
-             'error' => '',
-            'success' => '',
+            'error' => '',         
+			'success' => ''
         );
               
         //Lay du lieu tu forn dong thoi gan bien du gia tri 
@@ -1017,7 +1017,7 @@ class user_profile extends CI_Controller{
                 if ($this->bookingModel->Update($id, $dataEdit))
                 {
                     //Neu luu thanh cong                   
-                    $model['success'] = $this->Success('Cập nhật thành công!');
+                    $model['success'] = $this->Success('Cập nhật thành công!'); 
                 }
                 else
                 {
@@ -1047,9 +1047,9 @@ class user_profile extends CI_Controller{
     public function Error($value)
     {
         return '<font color=red>- '.$value.'.</font>';
-    }
+    }  
 
-    public function Success($value){
+	public function Success($value){
         return '<font color=green> '.$value.'!</font>';
     }
                 

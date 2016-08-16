@@ -88,8 +88,7 @@ class Home extends CI_Controller {
         }
         
         return $keySearch;
-    }
-
+    }    
 	public function search($cat=0, $district=0, $key='', $offset=0) { 
         $keyword = urldecode($key);
         $isFullTextSeach = true;//tim kiếm toàn văn
@@ -105,7 +104,7 @@ class Home extends CI_Controller {
         $districts = array();
         $config = $this->getConfig();
         $data = array(
-            'title'=> 'Tìm kiếm'.$keyword,
+            'title'=> 'Tìm kiếm '.$keyword,
             'user' => $this->session->userdata('user'),
             'fullname' => $this->session->userdata('fullname'), 
             'level' => $this->session->userdata('level'),
@@ -196,7 +195,6 @@ class Home extends CI_Controller {
 
         $this->load->view('site/layout/layout.phtml', $data);  
     }
-
     public function news($cat=0, $offset=0) { 
         $user = $this->session->userdata('user');
         $level = $this->session->userdata('level');

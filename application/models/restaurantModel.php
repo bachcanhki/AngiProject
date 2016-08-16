@@ -169,14 +169,13 @@ class RestaurantModel extends CI_Model
         $where = ' where '.$this->table.'.statusRes = 1 ';
         if ($keyword != ''){
             if ($fullTextSearch){
-                $where .= ' and MATCH(nameRe, descriptionRes) ';
-                $where .= ' AGAINST (\''.$keyword.'\' IN BOOLEAN MODE) ';        
-            }
-            else{
-                $where .= ' and ('.$this->table.'.nameRe like \'%'.$keyword.'%\'';                               
+                $where .= ' and (MATCH(nameRe, descriptionRes) ';
+                $where .= ' AGAINST (\''.$keyword.'\' IN BOOLEAN MODE) ';     
+                $where .= ' or '.$this->table.'.nameRe like \'%'.$keyword.'%\'';                               
                 $where .= ' or '.$this->table.'.descriptionRes like \'%'.$keyword.'%\'';    
-                $where .= ' ) ';  
-            }   
+                $where .= ' ) ';     
+            }
+            
         }
         if ($cat > 0){
             $where .= ' and ('.$this->restaurantcategories.'.categoryOfResID = '.$cat.') ';                               
@@ -185,17 +184,19 @@ class RestaurantModel extends CI_Model
             $where .= ' and ('.$this->address.'.districtID = '.$district.') ';                               
         }
         $select = 'select '.$this->table.'.restaurantID ';
-        
+        $group = ' group by '.$this->table.'.restaurantID ';
+
         //count
         $ids = '0';
-        $query = $this->db->query($select.$from.$where); 
+        $query = $this->db->query($select.$from.$where.$group); 
         $count = $query->num_rows();
         if ($count > 0){              
-            $resIds = array(0);
+            $resIds = array();
             foreach($query->result() as $row){
                 array_push($resIds, $row->restaurantID);
             }
-            $ids = implode(',', $resIds);
+    
+            $ids = implode(',', $resIds);       
             $categories = $this->ListAllCatByResId($ids);
             $districts = $this->ListAllDistByResId($ids);
         }
@@ -213,8 +214,8 @@ class RestaurantModel extends CI_Model
         $from.= ' left join '.$this->restaurantImage.' on '.$this->restaurantImage.'.restaurantId = '.$this->table.'.restaurantID and '.$this->restaurantImage.'.imageMain = 1 ';
         $where = ' where '.$this->table.'.restaurantID in ('.$ids.')';
         $order = ' order by '.$this->table.'.rateRe desc ';
-        $paging = ' limit '.$limit.' offset '.$offset;  
-        $query = $this->db->query($select.$from.$where.$order.$paging);
+        $paging = ' limit '.$limit.' offset '.$offset; 
+        $query = $this->db->query($select.$from.$where.$group.$order.$paging);
         return $query->result();
     }
     
@@ -229,10 +230,11 @@ class RestaurantModel extends CI_Model
             $where .= ' and ('.$this->restaurantcategories.'.categoryOfResID = '.$cat.') ';                               
         } 
         $select = 'select '.$this->table.'.restaurantID ';
-        
+        $group = ' group by '.$this->table.'.restaurantID ';
+
         //count
         $ids = '0';
-        $query = $this->db->query($select.$from.$where);
+        $query = $this->db->query($select.$from.$where.$group);
         $count = $query->num_rows();
         if ($count > 0){              
             $resIds = array(0);
@@ -256,7 +258,7 @@ class RestaurantModel extends CI_Model
         $where = ' where '.$this->table.'.restaurantID in ('.$ids.')';
         $order = ' order by '.$this->table.'.rateRe desc ';
         $paging = ' limit '.$limit.' offset '.$offset;  
-        $query = $this->db->query($select.$from.$where.$order.$paging);
+        $query = $this->db->query($select.$from.$where.$group.$order.$paging);
         return $query->result();
     }
     

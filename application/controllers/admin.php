@@ -617,12 +617,12 @@ class admin extends CI_Controller {
 			$isPassChanged = false;
             if($userLevel == '')
             {
-                $error .= $this->Error('Chưa chọn cấp cho user');
+                $error .= $this->Error('');
                 $ok = 0;
             }
             if($userName == '')
             {
-                $error .= $this->Error('Chưa có tên đăng nhập');
+                $error .= $this->Error('');
                 $ok = 0;
             }  
             else{
