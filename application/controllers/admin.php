@@ -57,7 +57,7 @@ class admin extends CI_Controller {
         $pagination = $this->pagination->create_links();
         
         $data = array(
-                    'title' => 'Danh sách nhà hàng',
+                    'title' => 'Danh sách tin tức',
                     'user' => array('user' => $user),
                     'fullname' => $this->session->userdata('fullname'), 
                     'model' => array(      
@@ -88,7 +88,7 @@ class admin extends CI_Controller {
             $model['imageNewsTemp'] = $this->input->post('imageNewsTemp');
             $model['imageNews'] = strip_tags($this->input->post('imageNews')); 
             $model['typeNews'] = strip_tags($this->input->post('typeNews')); 
-            $model['statusNews'] = $this->input->post('statusNews'); 
+            $model['statusNews'] = strip_tags($this->input->post('statusNews')); 
         }
                       
         if ($submit){
@@ -172,7 +172,6 @@ class admin extends CI_Controller {
             $model['imageNewsTemp'] = strip_tags($this->input->post('imageNewsTemp')); 
             $model['typeNews'] = strip_tags($this->input->post('typeNews')); 
             $model['statusNews'] = strip_tags($this->input->post('statusNews')); 
-            
             $data['model']  = $model;
             //kiem tra du lieu
             //kiem tra du lieu
@@ -482,6 +481,8 @@ class admin extends CI_Controller {
     public function delete_restaurant($id)
     {                                     
         $this->check_id($id, 'admin/restaurant');
+        $restaurant = $this->restaurantModel->Admin_GetFullById($id);
+        $this->usersModel->Delete($restaurant->userID);
         $this->restaurantModel->Delete($id);
         redirect(base_url('admin/restaurant'));
     }
@@ -703,7 +704,7 @@ class admin extends CI_Controller {
                 }
             }          
         }   
-        
+       
         $data = array(
                 'title' => 'Cập nhật tài khoản',
                 'content' => 'admin/eater/edit.phtml',
@@ -718,6 +719,8 @@ class admin extends CI_Controller {
     public function delete_eater($id, $level)
     {                         
         $this->check_id($id, 'admin');
+        $restaurant = $this->usersModel->GetRestaurantByUserId($id);        
+        $this->restaurantModel->Delete($restaurant->restaurantId);
         $this->usersModel->Delete($id);
         redirect(base_url('admin/eater/'.$level));
     }

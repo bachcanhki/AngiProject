@@ -8,6 +8,7 @@ class UsersModel extends CI_Model
     private $province = 'province';
     private $district = 'district';
     private $ward = 'ward';
+    private $restaurants = 'restaurants';
     function __construct()
     {
         parent::__construct();
@@ -234,6 +235,7 @@ class UsersModel extends CI_Model
         
         $sql.= ' left join '.$this->images.' on '.$this->images.'.imageID = '.$this->memberships.'.imageID ';
         $sql.= ' where '.$this->table.'.userLevel = \''.$level.'\'';
+        $sql.= ' order by '.$this->table.'.userID desc ';
         $sql.= ' limit '.$limit.' offset '.$offset;
         $query = $this->db->query($sql);
         //print_r($query->result());exit();
@@ -252,6 +254,20 @@ class UsersModel extends CI_Model
             $this->db->limit(1);
         }        
         return $this->db->get();
+    }
+
+    function GetRestaurantByUserId($userId = "")
+    {
+        $sql = 'select '.$this->table.'.*, ';
+        $sql.= $this->restaurants.'.restaurantId ';
+        $sql.= ' from '.$this->table;                                                                         
+        $sql.= ' left join '.$this->restaurants.' on '.$this->restaurants.'.userID = '.$this->table.'.userID ';
+        $sql.= ' where '.$this->table.'.userID = '.$userId.' ';
+        $sql.= ' limit 1';
+        $query = $this->db->query($sql);
+        if ($query->num_rows() > 0)
+            return $query->row();
+        return null;
     }
 }
 

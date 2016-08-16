@@ -66,6 +66,9 @@
         <span class="edit-checkbox">
             <?php if(isset($statusRes) && $statusRes) echo '<font color="green">Hoạt động</font>'; else echo '<font color="red">Chưa kích hoạt</font>';?>
         </span>
+        <span style="display: none" class="edit-checkbox">
+            <input type="checkbox" name="statusRes" id="statusRes" <?php echo (isset($statusRes) && $statusRes) ? 'checked': ''; ?>> Trạng thái
+        </span>
 </ul>
 <script type="">
     $('.datepicker').datetimepicker({locale: 'vi'});

@@ -299,8 +299,10 @@ class RestaurantModel extends CI_Model
             $where .= ' and '.$this->restaurantcategories.'.categoryOfResID in ('.$cateIds.') ';
         
         $select = 'select 1 ';
+        $group = ' group by '.$this->table.'.restaurantID ';
+
         //count
-        $query = $this->db->query($select.$from.$where);
+        $query = $this->db->query($select.$from.$where.$group);
         $count = $query->num_rows();
         
         $select = 'select '.$this->table.'.restaurantID, '.$this->table.'.nameRe, '.$this->table.'.descriptionRes, '
@@ -319,7 +321,7 @@ class RestaurantModel extends CI_Model
         $order = ' order by '.$this->table.'.rateRe desc ';
         $paging = ' limit '.$limit.' offset '.$offset;
         
-        $query = $this->db->query($select.$from.$where.$order.$paging);
+        $query = $this->db->query($select.$from.$where.$group.$order.$paging);
         return $query->result();
     }
     
