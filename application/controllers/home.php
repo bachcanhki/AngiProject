@@ -74,29 +74,29 @@ class Home extends CI_Controller {
         $this->load->view('site/layout/layout.phtml', $data);
     }
 
-    function prepareFullTextSearch($keyword=''){
-        if (strlen($keyword) == 0)
-            return '';
-        $keySearch = '';
-        $arr = explode(" ", $keyword);
-        foreach($arr as $k){
-            if (strlen($k) == 0)
-                continue;
-            if ($k[0] != '+')
-                $k = '+'.$k;
-            $keySearch .= $k.' ';
-        }
+    // function prepareFullTextSearch($keyword=''){
+    //     if (strlen($keyword) == 0)
+    //         return '';
+    //     $keySearch = '';
+    //     $arr = explode(" ", $keyword);
+    //     foreach($arr as $k){
+    //         if (strlen($k) == 0)
+    //             continue;
+    //         if ($k[0] != '+')
+    //             $k = '+'.$k;
+    //         $keySearch .= $k.' ';
+    //     }
         
-        return $keySearch;
-    }    
+    //     return $keySearch;
+    // }    
 	public function search($cat=0, $district=0, $key='', $offset=0) { 
         $keyword = urldecode($key);
         $isFullTextSeach = true;//tim kiếm toàn văn
         $keySearchDb = $keyword;
-        if ($isFullTextSeach){
+        //if ($isFullTextSeach){
            //$keySearchDb = $this->prepareFullTextSearch($keyword); 
            //print_r($keySearchDb);
-        }
+        //}
         $user = $this->session->userdata('user');
         $level = $this->session->userdata('level');
         $count = 0;
@@ -250,11 +250,11 @@ class Home extends CI_Controller {
         $pass = $this->input->post('password');
         $msg = '';
         if($user == '') {
-            $msg = 'Please enter username';
+            $msg = 'Chưa nhập tên đăng nhập/email.';
             $ok = 0;
         } 
         if($pass == '') {
-            $msg = 'Please enter password';
+            $msg = 'Chưa nhập mật khẩu';
             $ok = 0;
         }
           

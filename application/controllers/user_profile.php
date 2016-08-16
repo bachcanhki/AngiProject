@@ -775,13 +775,13 @@ class user_profile extends CI_Controller{
         if ($this->restaurantBannerModel->Create($model))
         {
             //Neu luu thanh cong
-            echo $this->returnSuccess('Thêm món ăn thành công');
+            echo $this->returnSuccess('Thêm banner thành công');
             return;
         }
         else
         {
             //Nguoc lai neu khong luu duoc                                     
-            echo $this->returnError('Không thêm được món ăn');  
+            echo $this->returnError('Không thêm được banner');  
             return;
         }
     }

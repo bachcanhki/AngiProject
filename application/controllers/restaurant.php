@@ -18,16 +18,16 @@ class Restaurant extends CI_Controller {
         $this->load->model('restaurantBannerModel', '', TRUE);         
     }
 
-    public function index() {
-        $data = array(
-            'user' => $this->session->userdata('user'),
-            'level' => $this->session->userdata('level'),
-            'content' => 'site/restaurant/index.phtml',
-            'categoryModels' => $this->categoriesOfRestaurantModel->ListByStatus(1),
-            'model' => array()
-        );           
-        $this->load->view('site/layout/layout.phtml', $data);
-    }
+    // public function index() {
+    //     $data = array(
+    //         'user' => $this->session->userdata('user'),
+    //         'level' => $this->session->userdata('level'),
+    //         'content' => 'site/restaurant/index.phtml',
+    //         'categoryModels' => $this->categoriesOfRestaurantModel->ListByStatus(1),
+    //         'model' => array()
+    //     );           
+    //     $this->load->view('site/layout/layout.phtml', $data);
+    // }
 
     public function view($restaurantID=0){ 
         $restaurant = $this->restaurantModel->Details($restaurantID);
