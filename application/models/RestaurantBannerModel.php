@@ -52,7 +52,7 @@ class RestaurantBannerModel extends CI_Model
         $restaurantImageId = $this->db->insert_id();                  
         if ($info['imageMain'] == 1 || $info['imageMain'] == 'on' || $info['imageMain'] == true){
             //thực hiện đổi các ảnh khác sang ảnh thường
-            $this->db->update($this->table, array('imageMain'=> false), 'restaurantImageId != '.$restaurantImageId);
+            $this->db->update($this->table, array('imageMain'=> false), 'restaurantId = '.$info['restaurantId'].' and restaurantImageId != '.$restaurantImageId);
         }                                    
         if ($this->db->trans_status() == false)
         {
