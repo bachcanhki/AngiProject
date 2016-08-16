@@ -139,7 +139,7 @@
         margin-top: 70px;
     }
     .stick-point{display: none}
-    .chosen-container{width: 75% !important;}
+	.chosen-container{width: 75% !important;}
 }
 
 @media screen and (min-width: 768px) {
@@ -152,4 +152,5 @@
     #home-list-resp{display: block}
     .hidden-nav{display: block !important;}
     .right-title, .main-banner, .top-register, .search{display: none}
+
 }

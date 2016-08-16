@@ -103,7 +103,7 @@ li.top-register:hover>a{
     right: 0;
     background: #fff !important;
     z-index: 3 !important;
-    min-width: 150px;
+	min-width: 150px;
 }
 .hover-signin i{
     font-size: 35px;
@@ -122,7 +122,7 @@ li.top-register:hover>a{
 }
 .user-link>i{
     font-size: medium;
-    position: initial;
+	position: initial;
     color: inherit;
 }
 
@@ -261,7 +261,7 @@ hr.underTit{
 .item-content li{margin: 10px 0}
 .img-item img{
     width: 100%;
-    border: 1px solid #eee;
+	border: 1px solid #eee;
 }
 
 .item-infor{

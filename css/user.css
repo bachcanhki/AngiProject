@@ -73,7 +73,6 @@
     color: #fff;
     width: initial;
 }
-
 .R-time{padding: 0;}
 .R-time>i{
     position: absolute;
@@ -81,7 +80,9 @@
     font-size: 20px;
     right: 8px;
 }
-.R-time>input[type="text"], .R-time>input[type="time"]{width: 100%;}
+.R-time>input[type="text"], .R-time>input[type="time"]{
+    width: 100%;
+}
 
 
 
