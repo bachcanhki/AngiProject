@@ -162,22 +162,6 @@ INSERT INTO `categoriesofrestaurant` (`categoryOfResID`, `nameCOR`, `desciptionC
 
 -- --------------------------------------------------------
 
---
--- Table structure for table `comments`
---
-
-DROP TABLE IF EXISTS `comments`;
-CREATE TABLE IF NOT EXISTS `comments` (
-  `comID` int(11) NOT NULL AUTO_INCREMENT,
-  `textCom` varchar(3000) CHARACTER SET utf8 DEFAULT NULL,
-  `dateCreateCom` date DEFAULT NULL,
-  `restaurantID` int(11) NOT NULL,
-  `userID` int(11) NOT NULL,
-  `statusCom` int(11) DEFAULT '0',
-  PRIMARY KEY (`comID`),
-  KEY `restaurantID` (`restaurantID`),
-  KEY `userID` (`userID`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=8 ;
 
 -- --------------------------------------------------------
 
@@ -930,33 +914,9 @@ INSERT INTO `food` (`foodID`, `nameFo`, `desciptionFo`, `priceFo`, `typeFo`, `im
 (11, 'Tôm hùm', 'Tôm hùm loại to', 2000000, 2, 0, 9, b'1'),
 (12, 'Cá rô', 'Món ăn nhanh', 150000, 1, 0, 9, b'1'),
 (13, 'Rong biển', 'Canh rong biển', 200000, 0, 0, 9, b'1'),
-(15, 'Cá chiên', 'Cá chiên ròn', 150000, 2, 10, 10, b'1'),
-(16, 'te', '2222', 222, 0, 11, 0, b'1'),
-(17, 'ssssss', 'sssssssss', 222, 0, 12, 0, b'1'),
-(18, 'ssssss', 'sssssssss', 222, 0, 13, 0, b'1'),
-(19, 'test', '222', 222, 0, 14, 0, b'1'),
-(23, 'Lẩu combo', 'Combo lẩu', 99500, 2, 30, 21, b'1');
+(15, 'Cá chiên', 'Cá chiên ròn', 150000, 2, 10, 10, b'1');
 
 -- --------------------------------------------------------
-
---
--- Table structure for table `history`
---
-
-DROP TABLE IF EXISTS `history`;
-CREATE TABLE IF NOT EXISTS `history` (
-  `historyID` int(11) NOT NULL AUTO_INCREMENT,
-  `dateCreateBo` datetime DEFAULT NULL,
-  `isDeactivate` int(11) DEFAULT NULL,
-  `bookingID` int(11) NOT NULL,
-  `restaurantID` int(11) NOT NULL,
-  `userID` int(11) NOT NULL,
-  `statusHis` int(11) DEFAULT '0',
-  PRIMARY KEY (`historyID`),
-  KEY `bookingID` (`bookingID`),
-  KEY `restaurantID` (`restaurantID`),
-  KEY `userID` (`userID`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=8 ;
 
 -- --------------------------------------------------------
 
@@ -1199,22 +1159,6 @@ INSERT INTO `province` (`provinceID`, `namePro`, `typePro`) VALUES
 ('96', 'Cà Mau', 'Tỉnh');
 
 -- --------------------------------------------------------
-
---
--- Table structure for table `rate`
---
-
-DROP TABLE IF EXISTS `rate`;
-CREATE TABLE IF NOT EXISTS `rate` (
-  `rateID` int(11) NOT NULL AUTO_INCREMENT,
-  `rateValue` int(11) DEFAULT NULL,
-  `restaurantID` int(11) NOT NULL,
-  `userID` int(11) NOT NULL,
-  `statusRate` int(11) DEFAULT '0',
-  PRIMARY KEY (`rateID`),
-  KEY `restaurantID` (`restaurantID`),
-  KEY `userID` (`userID`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=8 ;
 
 -- --------------------------------------------------------
 

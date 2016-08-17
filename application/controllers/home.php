@@ -93,10 +93,10 @@ class Home extends CI_Controller {
         $keyword = urldecode($key);
         $isFullTextSeach = true;//tim kiếm toàn văn
         $keySearchDb = $keyword;
-        //if ($isFullTextSeach){
+        if ($isFullTextSeach){
            //$keySearchDb = $this->prepareFullTextSearch($keyword); 
            //print_r($keySearchDb);
-        //}
+        }
         $user = $this->session->userdata('user');
         $level = $this->session->userdata('level');
         $count = 0;
