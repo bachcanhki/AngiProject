@@ -1032,7 +1032,7 @@ CREATE TABLE IF NOT EXISTS `news` (
   `contentNews` varchar(10000) CHARACTER SET utf8 DEFAULT NULL,
   `imageNews` varchar(300) CHARACTER SET utf8 DEFAULT NULL,
   `typeNews` int(11) DEFAULT NULL,
-  `statusNews` bit(1) DEFAULT b'0',
+  `statusNews` int(11) DEFAULT '0',
   PRIMARY KEY (`newsID`)
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=42 ;
 
