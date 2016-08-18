@@ -1036,6 +1036,11 @@ class user_profile extends CI_Controller{
         $this->load->view('site/layout/layoutprofile.phtml', $data); 
     }
 
+    public function delete_booking($id){
+        $this->bookingModel->Delete($id);
+        redirect(base_url("user_profile/restaurant_manage_booking"));
+    }
+
     public function check_id($id, $uri)
     {
         if(is_numeric($id) == FALSE)
