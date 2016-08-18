@@ -748,7 +748,7 @@ class admin extends CI_Controller {
 
     public function add_category() {
         $data = array(
-                'title' => 'Thêm thực khách',
+                'title' => 'Thêm danh mục',
                 'content' => 'admin/category/edit.phtml',
                 'user' => array('user' => $this->session->userdata('user')),
                 'fullname' => $this->session->userdata('fullname'), 
@@ -793,7 +793,7 @@ class admin extends CI_Controller {
                 {
                     //Nguoc lai neu khong luu duoc
                       
-                    $data['model']['error'] = $this->Error('Không tạo được user!');                                      
+                    $data['model']['error'] = $this->Error('Không tạo được danh mục!');                                      
                     $this->load->view('admin/layout/layout.phtml', $data);  
                 }
             } 
@@ -883,6 +883,13 @@ class admin extends CI_Controller {
         }
     }
 
+    public function delete_category($id)
+    {                         
+        $this->check_id($id, 'admin/categories');
+        $this->categoriesOfRestaurantModel->Delete($id);
+        redirect(base_url('admin/categories'));
+    }
+
 //    ================================================================================
 
     public function booking($offset=0) { 
@@ -940,48 +947,49 @@ class admin extends CI_Controller {
         $model['statusBo'] = $user->statusBo;  
         
         $data['model']  = $model;
-        if($this->input->post('submit'))
-        {                           
-            //Lay du lieu tu forn dong thoi gan bien du gia tri                                 
-            $model['statusBo'] = $statusBo = strip_tags($this->input->post('statusBo'));                
-            $model['commentBo'] = $commentBo = strip_tags($this->input->post('commentBo')); 
+        // if($this->input->post('submit'))
+        // {                           
+        //     //Lay du lieu tu forn dong thoi gan bien du gia tri                                 
+        //     $model['statusBo'] = $statusBo = strip_tags($this->input->post('statusBo'));                
+        //     $model['commentBo'] = $commentBo = strip_tags($this->input->post('commentBo')); 
             
-            $data['model']  = $model;
-            //kiem tra du lieu
-            //kiem tra du lieu
-            $error = '';
-            $ok = 1;   
-            if ($ok == 1)
-            {
-                //Tao mang chua thong tin ve user
-                $dataEdit = array(
-                                'statusBo'     =>  $statusBo,
-                                'commentBo'     =>  $commentBo
-                                );       
-                if ($this->bookingModel->Update($id, $dataEdit))
-                {
-                    //Neu luu thanh cong                   
-                    $data['model']['error'] = $this->Error('Cập nhật thành công!');                                      
-                    $this->load->view('admin/layout/layout.phtml', $data);
-                }
-                else
-                {
-                    //Nguoc lai neu khong luu duoc
+        //     $data['model']  = $model;
+        //     //kiem tra du lieu
+        //     //kiem tra du lieu
+        //     $error = '';
+        //     $ok = 1;   
+        //     if ($ok == 1)
+        //     {
+        //         //Tao mang chua thong tin ve user
+        //         $dataEdit = array(
+        //                         'statusBo'     =>  $statusBo,
+        //                         'commentBo'     =>  $commentBo
+        //                         );       
+        //         if ($this->bookingModel->Update($id, $dataEdit))
+        //         {
+        //             //Neu luu thanh cong                   
+        //             $data['model']['error'] = $this->Error('Cập nhật thành công!');                                      
+        //             $this->load->view('admin/layout/layout.phtml', $data);
+        //         }
+        //         else
+        //         {
+        //             //Nguoc lai neu khong luu duoc
                       
-                    $data['model']['error'] = $this->Error('Không cập nhật được user!');                                      
-                    $this->load->view('admin/layout/layout.phtml', $data);
-                }
-            } 
-            else
-            {
-                $data['model']['error'] = $error;                                                            
-                $this->load->view('admin/layout/layout.phtml', $data);
-            }           
-        }
-        else
-        {                                                                                                        
-            $this->load->view('admin/layout/layout.phtml', $data);
-        }
+        //             $data['model']['error'] = $this->Error('Không cập nhật được user!');                                      
+        //             $this->load->view('admin/layout/layout.phtml', $data);
+        //         }
+        //     } 
+        //     else
+        //     {
+        //         $data['model']['error'] = $error;                                                            
+        //         $this->load->view('admin/layout/layout.phtml', $data);
+        //     }           
+        // }
+        // else
+        // {                                                                                                        
+        //     $this->load->view('admin/layout/layout.phtml', $data);
+        // }
+        $this->load->view('admin/layout/layout.phtml', $data);
     }
 
     public function report_statistics() {    
@@ -993,8 +1001,8 @@ class admin extends CI_Controller {
                     'user' => array('user' => $user),
                     'fullname' => $this->session->userdata('fullname'), 
                     'model' => array(      
-                        'restaurant' => $this->restaurantModel->Report_ThongKeChung(),
-                        'news' => $this->newsModel->Report_ThongKeChung(),
+                        'restaurant' => $this->restaurantModel->Report_Statistics(),
+                        'news' => $this->newsModel->Report_Statistics(),
                         )
                     );
         $data['content'] = 'admin/report/statistics.phtml';

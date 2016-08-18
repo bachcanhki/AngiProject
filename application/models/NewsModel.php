@@ -128,7 +128,7 @@ class NewsModel extends CI_Model
         }
     }
     
-    public function Report_ThongKeChung(){
+    public function Report_Statistics(){
         $select = 'select ';
         $select .= '(select count(1) from '.$this->table.' where  statusNews = 0) as numberNotActive, ';
         $select .= '(select count(1) from '.$this->table.' where  statusNews = 1) as numberActived, ';
