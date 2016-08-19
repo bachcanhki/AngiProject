@@ -36,7 +36,7 @@ class RestaurantBannerModel extends CI_Model
         $from = 'from '.$this->table;
         $where = ' where 1 = 1 ';
         if ($resId > 0){
-            $where .= ' and '.$this->table.'.restaurantId = '.$resId.' ';                               
+            $where .= ' and '.$this->table.'.restaurantId = '.$resId.' and imageMain = 0 ';                               
         }
         
         $select = 'select 1 ';
