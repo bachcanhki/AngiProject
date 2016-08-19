@@ -152,5 +152,5 @@
     #home-list-resp{display: block}
     .hidden-nav{display: block !important;}
     .right-title, .main-banner, .top-register, .search{display: none}
-
+    .booking-side{float: none !important;}
 }
