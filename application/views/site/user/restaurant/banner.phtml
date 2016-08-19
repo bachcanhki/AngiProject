@@ -2,7 +2,7 @@
     <ul class="item-content row">
         <li class="col-md-4  col-sm-6 col-xs-12 text-center">
             <a style="cursor: pointer; display: block; position: relative" class="img-item">                                            
-                <img id="img-banner-upload" src="<?php echo base_url(); ?>upload/img_default.jpg" alt="Ảnh món ăn" style="width: 100%; height: 100%;" class="img-thumbnail" <?php if($countBanner<6) {?> onclick="return bannerModule.openCkFinder();" <?php }?>>
+                <img id="img-banner-upload" src="<?php echo base_url(); ?>upload/img_default.jpg" alt="Ảnh món ăn" style="width: 100%; height: 100%;" class="img-thumbnail" <?php if($countBanner<6) {?> onclick="return bannerModule.openCkFinder();" <?php } else { ?> onclick="alert('Chỉ có thể đăng 6 bức ảnh');" <?php }?>>
             </a> 
             <!-- <div class="col-md-12 img-hidden-action" style="display: none;">
               <input id="img-banner-main" type="checkbox">Ảnh đại diện
