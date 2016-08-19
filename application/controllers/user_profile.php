@@ -715,12 +715,12 @@ class user_profile extends CI_Controller{
             if ($imageId > 0){
                 //cap nhat thong tin cho user
                 $ok = $this->usersModel->UpdateMemberships($user-> memID, array('imageID' => $imageId));
-                if ($restaurant != null) $ok = $this->restaurantBannerModel->Create($model);
+                if ($restaurant != null) $ok = $this->restaurantBannerModel->CreateAvatar($model);
             }
         }
         else {
             $ok = $this->imageModel->Update($user->imageID, $imageModel);
-            if ($restaurant != null) $ok = $this->restaurantBannerModel->Create($model);
+            if ($restaurant != null) $ok = $this->restaurantBannerModel->CreateAvatar($model);
         }
         
         if ($ok == 0){
@@ -785,7 +785,7 @@ class user_profile extends CI_Controller{
         $model['restaurantId'] = $restaurant->restaurantID;
 
         //kiem tra du lieu 
-        if ($this->restaurantBannerModel->Create($model))
+        if ($this->restaurantBannerModel->CreateBanner($model))
         {
             //Neu luu thanh cong
             echo $this->returnSuccess('Thêm banner thành công');

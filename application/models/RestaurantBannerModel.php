@@ -51,7 +51,26 @@ class RestaurantBannerModel extends CI_Model
     } 
     
     
-    function Create($info)
+    function CreateBanner($info)
+    {   
+        //Bat dau trans
+        $this->db->trans_begin();        
+        //Insert du lieu vao bang user
+        $this->db->insert($this->table, $info);
+                                          
+        if ($this->db->trans_status() == false)
+        {
+            $this->db->trans_rollback();
+            return false;
+        }
+        else
+        {
+            $this->db->trans_commit();
+            return true;
+        }        
+    }
+
+    function CreateAvatar($info)
     {   
         //Bat dau trans
         $this->db->trans_begin();        
