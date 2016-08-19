@@ -696,26 +696,38 @@ class user_profile extends CI_Controller{
     public function changeAvatar() {
         $userName = $this->session->userdata('user');
         $user = $this->usersModel->GetUserByNamed($userName);
+        $restaurant = $this->restaurantModel->GetByUserId($user-> userID);
         
         $image = $this->imageModel->GetById($user->imageID);    
         $ok = 1;
         $imageModel = array('addressImage' => $this->input->post('addressImage'));
+
+        if ($restaurant != null) {
+            $model['imageUrl'] = $this->input->post('addressImage');
+            $model['imageMain'] = 1;
+            $model['restaurantId'] = $restaurant->restaurantID;   
+        }
+        
+        //kiem tra du lieu 
+        
         if ($image == null){  
             $imageId = $this->imageModel->Create($imageModel);  
             if ($imageId > 0){
                 //cap nhat thong tin cho user
                 $ok = $this->usersModel->UpdateMemberships($user-> memID, array('imageID' => $imageId));
+                if ($restaurant != null) $ok = $this->restaurantBannerModel->Create($model);
             }
         }
         else {
             $ok = $this->imageModel->Update($user->imageID, $imageModel);
+            if ($restaurant != null) $ok = $this->restaurantBannerModel->Create($model);
         }
         
         if ($ok == 0){
             echo $this->returnError('Không cập nhật được ảnh đại diện');  
             return;
         }
-        echo $this->returnSuccess('Cập nhật thành công');
+        echo $this->returnSuccess('Cập nhật thành công'); 
     }
 
     public function Restaurant_Banner($offset=0) {
@@ -749,7 +761,8 @@ class user_profile extends CI_Controller{
             'model' => array(
                 'error' => '',
                 'items' => $items,
-                'pagination' => $pagination
+                'pagination' => $pagination,
+                'countBanner' => $this->restaurantBannerModel->Count_Banner($restaurant->restaurantID)
             )
         );    
                  
@@ -766,11 +779,11 @@ class user_profile extends CI_Controller{
         $userName = $this->session->userdata('user');
         $user = $this->usersModel->GetUserByNamed($userName); 
         $restaurant = $this->restaurantModel->GetByUserId($user-> userID);
-            
-                                                                   
+                                                                       
         $model['imageUrl'] = urldecode($this->input->post('imageUrl'));
-        $model['imageMain'] = $this->input->post('imageMain');   
-        $model['restaurantId'] = $restaurant->restaurantID;   
+        $model['imageMain'] = 0;   
+        $model['restaurantId'] = $restaurant->restaurantID;
+
         //kiem tra du lieu 
         if ($this->restaurantBannerModel->Create($model))
         {

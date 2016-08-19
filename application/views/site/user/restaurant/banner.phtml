@@ -1,11 +1,13 @@
-<h1 class="user-tit">Banner</h1>
+<h1 class="user-tit">Ảnh banner</h1>
     <ul class="item-content row">
         <li class="col-md-4  col-sm-6 col-xs-12 text-center">
-            <a style="cursor: pointer; display: block; position: relative" class="img-item">                                                                         
-                <img id="img-banner-upload" src="<?php echo base_url(); ?>upload/img_default.jpg" alt="Ảnh món ăn" style="width: 100%; height: 100%;" class="img-thumbnail" onclick="return bannerModule.openCkFinder();">
+            <a style="cursor: pointer; display: block; position: relative" class="img-item">                                            
+                <img id="img-banner-upload" src="<?php echo base_url(); ?>upload/img_default.jpg" alt="Ảnh món ăn" style="width: 100%; height: 100%;" class="img-thumbnail" <?php if($countBanner<6) {?> onclick="return bannerModule.openCkFinder();" <?php }?>>
             </a> 
-            <div class="col-md-12 img-hidden-action" style="display: none;"><input id="img-banner-main" type="checkbox">Ảnh đại diện</div>
-            <div class="col-md-12 img-hidden-action" style="display: none;">                                                                                                                
+            <!-- <div class="col-md-12 img-hidden-action" style="display: none;">
+              <input id="img-banner-main" type="checkbox">Ảnh đại diện
+            </div> -->
+            <div class="col-md-12 img-hidden-action" style="display: none;">
                 <button id="btnUpdateBanner" class="btn btn-success" onclick="return bannerModule.uploadImg();">Lưu</button>
             </div>                                                                                                          
         </li>
@@ -74,8 +76,8 @@
         $.ajax({ 
            type : "POST",
            data : {
-               'imageUrl' : encodeURIComponent($('#img-banner-upload').attr('src')),
-               'imageMain' : $('#img-banner-main').is(':checked')               
+               'imageUrl' : encodeURIComponent($('#img-banner-upload').attr('src'))
+               // 'imageMain' : $('#img-banner-main').is(':checked')               
            },
            dataType:'json',                                             
            url: '<?php echo base_url("user_profile/add_restaurant_banner"); ?>', // target element(s) to be updated with server response 

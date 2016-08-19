@@ -16,6 +16,14 @@ class RestaurantBannerModel extends CI_Model
     {
         return $this->db->count_all($this->table);
     }
+
+    function Count_Banner($id)
+    {
+        $this->db->where('imageMain',0);
+        $this->db->where('restaurantId',$id);
+        $num = $this->db->count_all_results($this->table);
+        return $num;
+    }
      
     function GetById($id)
     {
@@ -52,7 +60,7 @@ class RestaurantBannerModel extends CI_Model
         $restaurantImageId = $this->db->insert_id();                  
         if ($info['imageMain'] == 1 || $info['imageMain'] == 'on' || $info['imageMain'] == true){
             //thực hiện đổi các ảnh khác sang ảnh thường
-            $this->db->update($this->table, array('imageMain'=> false), 'restaurantId = '.$info['restaurantId'].' and restaurantImageId != '.$restaurantImageId);
+            $this->db->delete($this->table, 'restaurantId = '.$info['restaurantId'].' and restaurantImageId != '.$restaurantImageId.' and imageMain = 1');
         }                                    
         if ($this->db->trans_status() == false)
         {

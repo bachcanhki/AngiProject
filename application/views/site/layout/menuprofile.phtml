@@ -1,9 +1,9 @@
 <table class="profile-stt">
     <tr>
-        <td> <img id="imageIDSrc" alt src="<?php echo $addressImage; ?>"> </td>
+        <td> <img id="imageIDSrc" alt src="<?php echo $addressImage!= '' ? $addressImage : base_url().'img/no-image.jpg'; ?>"> </td>
         <td>
-            <p>ID ĂnGì: <strong><?php echo $userID; ?></strong></p>
-            <p>ĐT: <strong><?php echo $memName; ?></strong></p>
+            <p>Mã khách hàng: <strong><?php echo $userID; ?></strong></p>
+            <p><strong><?php echo $memName; ?></strong></p>
         </td>
     </tr> 
 
