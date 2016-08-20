@@ -28,23 +28,27 @@ class admin extends CI_Controller {
     }
 
     public function index() {
-        $data = array();
         $user = $this->session->userdata('user');
-        $level = $this->session->userdata('level');
-        
+        $userImage = $this->usersModel->GetUserByNamed($this->session->userdata('user'));
+        $rows = 0;
         $data = array(
-            'title'=> 'Quản trị',
-            'fullname' => $this->session->userdata('fullname'), 
-            'user'=> $user, 
-            'model'=> array()
-         );
-        $data['content'] = 'admin/dashboard.phtml';
+            'title' => 'Thống kê',
+            'user' => array('user' => $user),
+            'fullname' => $this->session->userdata('fullname'),
+            'addressImage' => $userImage->addressImage,
+            'model' => array(
+                'restaurant' => $this->restaurantModel->Report_Statistics(),
+                'news' => $this->newsModel->Report_Statistics(),
+            )
+        );
+        $data['content'] = 'admin/report/statistics.phtml';
+
         $this->load->view('admin/layout/layout.phtml', $data);
     }
 
     public function news($offset = 0) {
         $offset = intval($offset);
-        
+        $userImage = $this->usersModel->GetUserByNamed($this->session->userdata('user'));
         $user = $this->session->userdata('user');  
                                 
         $rows = 0;  
@@ -59,7 +63,8 @@ class admin extends CI_Controller {
         $data = array(
                     'title' => 'Danh sách tin tức',
                     'user' => array('user' => $user),
-                    'fullname' => $this->session->userdata('fullname'), 
+                    'fullname' => $this->session->userdata('fullname'),
+                    'addressImage' => $userImage->addressImage,
                     'model' => array(      
                         'result' => $result,
                         'rows' => $rows,
@@ -71,11 +76,13 @@ class admin extends CI_Controller {
     }
 
     public function add_news() {
+        $userImage = $this->usersModel->GetUserByNamed($this->session->userdata('user'));
         $data = array(
                 'title' => 'Thêm tin tức',
                 'content' => 'admin/news/edit.phtml',
                 'user' => array('user' => $this->session->userdata('user')),
-                'fullname' => $this->session->userdata('fullname'), 
+                'fullname' => $this->session->userdata('fullname'),
+                'addressImage' => $userImage->addressImage,
                 );  
         $model = array(
              'error' => ''
@@ -140,9 +147,10 @@ class admin extends CI_Controller {
     }
 
     public function edit_news($id) {
-        $this->check_id($id, 'admin/news');                   
-                 
-        $data = array(                                                 
+        $this->check_id($id, 'admin/news');
+        $userImage = $this->usersModel->GetUserByNamed($this->session->userdata('user'));
+        $data = array(
+                'addressImage' => $userImage->addressImage,
                 'title' => 'Cập nhật tin tức',
                 'content' => 'admin/news/edit.phtml',
                 'user' => array('user' => $this->session->userdata('user')),
@@ -229,7 +237,7 @@ class admin extends CI_Controller {
 
     public function restaurant($offset = 0) {
         $offset = intval($offset);
-        
+        $userImage = $this->usersModel->GetUserByNamed($this->session->userdata('user'));
         $user = $this->session->userdata('user');  
                                 
         $count = 0;  
@@ -252,6 +260,7 @@ class admin extends CI_Controller {
         
         $data = array(
                     'title' => 'Danh sách nhà hàng',
+                    'addressImage' => $userImage->addressImage,
                     'user' => array('user' => $user),
                     'fullname' => $this->session->userdata('fullname'), 
                     'model' => array(      
@@ -310,11 +319,12 @@ class admin extends CI_Controller {
     }
     
     public function edit_restaurant($id) {
-        $this->check_id($id, 'admin/restaurant');                   
-                 
+        $this->check_id($id, 'admin/restaurant');
+        $userImage = $this->usersModel->GetUserByNamed($this->session->userdata('user'));
         $data = array(                                                 
                 'title' => 'Cập nhật nhà hàng',
                 'content' => 'admin/restaurant/edit.phtml',
+                'addressImage' => $userImage->addressImage,
                 'user' => array('user' => $this->session->userdata('user')),
                 'fullname' => $this->session->userdata('fullname'), 
                 );      
@@ -527,7 +537,7 @@ class admin extends CI_Controller {
     public function eater($level=0, $offset = 0) {
         $level = intval($level);
         $offset = intval($offset);
-        
+        $userImage = $this->usersModel->GetUserByNamed($this->session->userdata('user'));
         $user = $this->session->userdata('user');  
                                 
         $rows = 0;                                         
@@ -543,7 +553,8 @@ class admin extends CI_Controller {
         $data = array(
                     'title' => 'Danh sách tài khoản',  
                     'user' => $this->session->userdata('user'),
-                    'fullname' => $this->session->userdata('fullname'), 
+                    'fullname' => $this->session->userdata('fullname'),
+                    'addressImage' => $userImage->addressImage,
                     'model' => array(
                         'level' => $level,
                         'result' => $result,
@@ -555,6 +566,7 @@ class admin extends CI_Controller {
     }
 
     public function edit_eater($id) {
+        $userImage = $this->usersModel->GetUserByNamed($this->session->userdata('user'));
         $this->check_id($id, 'admin/eater');                   
         $level = 0;                               
         $user = $this->usersModel->Admin_GetUserById($id);
@@ -709,6 +721,7 @@ class admin extends CI_Controller {
                 'title' => 'Cập nhật tài khoản',
                 'content' => 'admin/eater/edit.phtml',
                 'user' => array('user' => $this->session->userdata('user')),
+                'addressImage' => $userImage->addressImage,
                 'fullname' => $this->session->userdata('fullname'), 
                 'model' => $model
                 ); 
@@ -728,14 +741,15 @@ class admin extends CI_Controller {
 //    ================================================================================
 
     public function categories() {  
-        $user = $this->session->userdata('user');  
-                                
+        $user = $this->session->userdata('user');
+        $userImage = $this->usersModel->GetUserByNamed($this->session->userdata('user'));
         $rows = $this->categoriesOfRestaurantModel->Count_All();;                                                    
         $result = $this->categoriesOfRestaurantModel->ListAll();
         
         $data = array(
                     'title' => 'Danh mục',
                     'user' => array('user' => $user),
+                    'addressImage' => $userImage->addressImage,
                     'fullname' => $this->session->userdata('fullname'), 
                     'model' => array(  
                         'result' => $result,
@@ -747,8 +761,10 @@ class admin extends CI_Controller {
     }
 
     public function add_category() {
+        $userImage = $this->usersModel->GetUserByNamed($this->session->userdata('user'));
         $data = array(
                 'title' => 'Thêm danh mục',
+                'addressImage' => $userImage->addressImage,
                 'content' => 'admin/category/edit.phtml',
                 'user' => array('user' => $this->session->userdata('user')),
                 'fullname' => $this->session->userdata('fullname'), 
@@ -810,6 +826,7 @@ class admin extends CI_Controller {
     }
 
     public function edit_category($id) {
+        $userImage = $this->usersModel->GetUserByNamed($this->session->userdata('user'));
         $this->check_id($id, 'admin/categories');                   
         $level = 0;                               
         $user = $this->categoriesOfRestaurantModel->GetById($id);
@@ -818,6 +835,7 @@ class admin extends CI_Controller {
                   
         $data = array(                                                 
                 'title' => 'Cập nhật danh mục',
+                'addressImage' => $userImage->addressImage,
                 'content' => 'admin/category/edit.phtml',
                 'user' => array('user' => $this->session->userdata('user')),
                 'fullname' => $this->session->userdata('fullname'), 
@@ -893,8 +911,8 @@ class admin extends CI_Controller {
 //    ================================================================================
 
     public function booking($offset=0) { 
-        $offset = intval($offset);                  
-                                
+        $offset = intval($offset);
+        $userImage = $this->usersModel->GetUserByNamed($this->session->userdata('user'));
         $count = 0;                                                    
         $config = $this->getConfig();
         $result = $this->bookingModel->Admin_FindBy(null, null, $offset, $config['per_page'], $count);  
@@ -907,6 +925,7 @@ class admin extends CI_Controller {
         $data = array(
                     'title' => 'Danh sách đặt chỗ',
                     'user' => $this->session->userdata('user'),
+                    'addressImage' => $userImage->addressImage,
                     'fullname' => $this->session->userdata('fullname'), 
                     'model' => array(    
                         'result' => $result,
@@ -920,6 +939,7 @@ class admin extends CI_Controller {
     }
 
     public function show_booking($id) {
+        $userImage = $this->usersModel->GetUserByNamed($this->session->userdata('user'));
         $this->check_id($id, 'admin/booking');                   
         $level = 0;                               
         $user = $this->bookingModel->Admin_GetDetail($id);
@@ -930,7 +950,8 @@ class admin extends CI_Controller {
                 'title' => 'Chi tiết đặt chỗ',
                 'content' => 'admin/booking/show.phtml',
                 'user' => array('user' => $this->session->userdata('user')),
-                'fullname' => $this->session->userdata('fullname'), 
+                'fullname' => $this->session->userdata('fullname'),
+                'addressImage' => $userImage->addressImage,
                 );      
         $model = array(
              'error' => ''         
@@ -947,67 +968,7 @@ class admin extends CI_Controller {
         $model['statusBo'] = $user->statusBo;  
         
         $data['model']  = $model;
-        // if($this->input->post('submit'))
-        // {                           
-        //     //Lay du lieu tu forn dong thoi gan bien du gia tri                                 
-        //     $model['statusBo'] = $statusBo = strip_tags($this->input->post('statusBo'));                
-        //     $model['commentBo'] = $commentBo = strip_tags($this->input->post('commentBo')); 
-            
-        //     $data['model']  = $model;
-        //     //kiem tra du lieu
-        //     //kiem tra du lieu
-        //     $error = '';
-        //     $ok = 1;   
-        //     if ($ok == 1)
-        //     {
-        //         //Tao mang chua thong tin ve user
-        //         $dataEdit = array(
-        //                         'statusBo'     =>  $statusBo,
-        //                         'commentBo'     =>  $commentBo
-        //                         );       
-        //         if ($this->bookingModel->Update($id, $dataEdit))
-        //         {
-        //             //Neu luu thanh cong                   
-        //             $data['model']['error'] = $this->Error('Cập nhật thành công!');                                      
-        //             $this->load->view('admin/layout/layout.phtml', $data);
-        //         }
-        //         else
-        //         {
-        //             //Nguoc lai neu khong luu duoc
-                      
-        //             $data['model']['error'] = $this->Error('Không cập nhật được user!');                                      
-        //             $this->load->view('admin/layout/layout.phtml', $data);
-        //         }
-        //     } 
-        //     else
-        //     {
-        //         $data['model']['error'] = $error;                                                            
-        //         $this->load->view('admin/layout/layout.phtml', $data);
-        //     }           
-        // }
-        // else
-        // {                                                                                                        
-        //     $this->load->view('admin/layout/layout.phtml', $data);
-        // }
         $this->load->view('admin/layout/layout.phtml', $data);
-    }
-
-    public function report_statistics() {    
-        $user = $this->session->userdata('user');  
-                                
-        $rows = 0;     
-        $data = array(
-                    'title' => 'Thống kê',
-                    'user' => array('user' => $user),
-                    'fullname' => $this->session->userdata('fullname'), 
-                    'model' => array(      
-                        'restaurant' => $this->restaurantModel->Report_Statistics(),
-                        'news' => $this->newsModel->Report_Statistics(),
-                        )
-                    );
-        $data['content'] = 'admin/report/statistics.phtml';
-        
-        $this->load->view('admin/layout/layout.phtml', $data);  
     }
 
 //    ================================================================================

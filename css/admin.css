@@ -112,3 +112,6 @@ ul{
 .sub-menu a:hover, .sub-menu a.active{
     background: #161e22;
 }
+.cke_contents{
+    height: 400px !important;
+}

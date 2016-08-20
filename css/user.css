@@ -2,21 +2,22 @@
     border: 1px solid #d4d4d4;
     display: table;
     width: 100%;
-    margin-top: 30px;
+    margin-top: 15px;
+    display: table;
+    padding: 10px 0px;
 }
+.profile-stt>div{padding: 0}
 .profile-stt img{
     width: 80px;
     height: 80px;
-    margin: 10px;
     background-color: transparent;
     border: 1px solid #f2f2f2;
     border-radius: 40px;
 }
 .profile-stt p{
-    float: left;
-    width: 100%;
     color: gray;
     font-size: 13px;
+    margin: 10px 0 0 0;
 }
 .profile-stt p strong{
     color: #5c5c5c;
@@ -28,7 +29,7 @@
     border-color: #357ebd;
     font-size: 13px;
     padding: 2px 8px;
-    margin-right: 2px;
+    margin: 10px 0 0 15px;
     border-radius: 4px;
 }
 
@@ -181,3 +182,7 @@
 
 .nav-tabs>li{margin: 0}
 .bg-success, .bg-danger{padding: 15px}
+
+.cke_contents{
+    height: 400px !important;
+}

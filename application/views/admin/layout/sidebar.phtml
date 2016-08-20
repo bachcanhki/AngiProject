@@ -1,6 +1,6 @@
 <div class="profile-sidebar">
     <a href="<?php echo base_url();?>admin">
-        <img src="http://jaybabani.com/slant/preview/angular/data/profile/profile-socialmedia.jpg">
+        <img src="<?php echo $addressImage!= '' ? $addressImage : base_url().'img/no-image.jpg'; ?>">
     </a>
 
     <h4>
@@ -16,15 +16,16 @@
         </a>
     </li>
     <li>
-        <a href="javascrip:;">
+        <a href="<?php echo base_url(); ?>admin">
+            <i class="material-icons">equalizer</i>
+            <span class="title">Báo cáo</span>
+        </a>
+    </li>
+    <li>
+        <a href="<?php echo base_url(); ?>admin/news">
             <i class="material-icons">description</i>
             <span class="title">Tin tức</span>
-            <span class="arrow material-icons">keyboard_arrow_right</span>
         </a>
-        <ul class="sub-menu">                              
-            <li><a href="<?php echo base_url(); ?>admin/news">Tất cả</a></li>    
-            <li><a href="<?php echo base_url(); ?>admin/add_news">Thêm mới</a></li>
-        </ul>
     </li>
     <li>
         <a href="<?php echo base_url(); ?>admin/restaurant">
@@ -48,36 +49,12 @@
     </li>
 
     <li>
-        <a href="javascrip:;">
+        <a href="<?php echo base_url(); ?>admin/categories">
             <i class="material-icons">device_hub</i>
             <span class="title">Danh mục</span>
-            <span class="arrow material-icons">keyboard_arrow_right</span>
         </a>
-        <ul class="sub-menu">   
-            <li><a href="<?php echo base_url(); ?>admin/categories">Tất cả</a></li>
-            <li><a href="<?php echo base_url(); ?>admin/add_category">Thêm mới</a></li>
-        </ul>
     </li>
 
-    <li>
-        <a href="javascrip:;">
-            <i class="material-icons">equalizer</i>
-            <span class="title">Báo cáo</span>
-            <span class="arrow material-icons">keyboard_arrow_right</span>
-        </a>
-        <ul class="sub-menu">
-            <li><a>Trang web</a></li>
-            <li><a>Lượng truy cập</a></li>
-            <li><a href="<?php echo base_url(); ?>admin/report_statistics">Thống kê</a></li>
-        </ul>
-    </li>
-
-    <li>
-        <a href="javascrip:;">
-            <i class="material-icons">settings</i>
-            <span class="title">Cài đặt</span>
-        </a>
-    </li>
     <li>
         <a href="<?php echo base_url(); ?>home/logout">
             <i class="material-icons">undo</i>

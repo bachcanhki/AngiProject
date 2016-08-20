@@ -1,20 +1,18 @@
-<table class="profile-stt">
-    <tr>
-        <td> <img id="imageIDSrc" alt src="<?php echo $addressImage!= '' ? $addressImage : base_url().'img/no-image.jpg'; ?>"> </td>
-        <td>
+
+<ul class="profile-sidebar">
+    <div class="profile-stt">
+        <div class="col-md-5 col-sm-5 col-xs-5" style="text-align: center;">
+            <img id="imageIDSrc" alt src="<?php echo $addressImage!= '' ? $addressImage : base_url().'img/no-image.jpg'; ?>">
+        </div>
+        <div class="col-md-7 col-sm-7 col-xs-7">
             <p>Mã khách hàng: <strong><?php echo $userID; ?></strong></p>
             <p><strong><?php echo $memName; ?></strong></p>
-        </td>
-    </tr> 
-
-    <tr>
-        <td colspan="2" style="padding: 0 8px 20px">  
+        </div>
+        <div class="col-md-12 col-sm-12 col-xs-12">
             <button onclick="return profileModule.openCkFinder();">Chọn ảnh</button>
             <button id="btnUpdateAvatar" style="display: none;" onclick="return profileModule.changeAvatar();">Lưu</button>
-            </td> 
-    </tr>
-</table>
-<ul class="profile-sidebar">
+        </div>
+    </div>
     <li class="active"><a href="<?php echo base_url()?>user_profile"><i class="fa fa-user" aria-hidden="true"></i> Thông tin tài khoản</a></li>
     <?php if ($level == 1){ ?>
     <li><a href="<?php echo base_url()?>user_profile/restaurant_banner"><i class="fa fa-picture-o" aria-hidden="true"></i> Banner nhà hàng</a></li>

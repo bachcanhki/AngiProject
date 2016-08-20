@@ -44,7 +44,7 @@
 }
 .R-topbar li ul.hover-menu li{
     float: none !important;
-    padding: 3px 70px 3px 20px;
+    padding: 3px 20px;
     border-top: 1px solid #ebb7b8;
     background: #da3c3c;
 }
@@ -153,4 +153,5 @@
     .hidden-nav{display: block !important;}
     .right-title, .main-banner, .top-register, .search{display: none}
     .booking-side{float: none !important;}
+    .restaurant-list{padding: 0}
 }
