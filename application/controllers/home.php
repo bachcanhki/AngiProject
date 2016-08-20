@@ -73,22 +73,7 @@ class Home extends CI_Controller {
 
         $this->load->view('site/layout/layout.phtml', $data);
     }
-
-    // function prepareFullTextSearch($keyword=''){
-    //     if (strlen($keyword) == 0)
-    //         return '';
-    //     $keySearch = '';
-    //     $arr = explode(" ", $keyword);
-    //     foreach($arr as $k){
-    //         if (strlen($k) == 0)
-    //             continue;
-    //         if ($k[0] != '+')
-    //             $k = '+'.$k;
-    //         $keySearch .= $k.' ';
-    //     }
-        
-    //     return $keySearch;
-    // }    
+   
 	public function search($cat=0, $district=0, $key='', $offset=0) { 
         $keyword = urldecode($key);
         $isFullTextSeach = true;//tim kiếm toàn văn
@@ -331,7 +316,11 @@ class Home extends CI_Controller {
             $ok = 1;
             $error = '';
             $userActived = 0;
-            if ($userLevel == 1 || $userLevel == 0)//nhà hàng thì tự động active để nhà hàng vào chỉnh sửa thông tin
+            
+            //nhà hàng tự động active để nhà hàng vào chỉnh, sửa đổi thông tin
+            //người dùng tự động active để có thể vào đặt chỗ luôn
+            
+            if ($userLevel == 1 || $userLevel == 0)
                 $userActived = 1;
                 
             if ($memName == '')
@@ -344,7 +333,15 @@ class Home extends CI_Controller {
                 $ok = 0;
                 $error .= 'Chưa nhập tên đăng nhập<br />';
             } 
-            else{
+            else if (strlen($userName)<6) {
+                $ok = 0;
+                $error .= 'Tên đăng nhập phải ít nhất 6 ký tự<br />';
+            } else if (preg_match('/\s/',$userName)>0) 
+            {
+                $ok = 0;
+                $error .= 'Tên đăng nhập không được chứa dấu cách<br />';
+            }
+            else {
                 $userExisted = $this->usersModel->CheckNameOrEmailExisted($userName);
                 if ($userExisted){
                    $ok = 0;
@@ -355,6 +352,11 @@ class Home extends CI_Controller {
             {
                 $ok = 0;
                 $error .= 'Chưa nhập email<br />';
+            }
+            else if (!filter_var($userMail, FILTER_VALIDATE_EMAIL)){
+                $ok = 0;
+                $error = "Chưa đúng dạng email<br />"; 
+
             }
             else{
                 $userExisted = $this->usersModel->CheckNameOrEmailExisted($userMail);
@@ -368,6 +370,10 @@ class Home extends CI_Controller {
                 $ok = 0;
                 $error .= 'Chưa nhập mật khẩu<br />';
             }
+            else if (strlen($userPass)<6) {
+                $ok = 0;
+                $error .= 'Mật khẩu phải ít nhất 6 ký tự<br />';
+            } 
             else {
                 if ($userPass != $userPassRe)
                 {
@@ -386,7 +392,17 @@ class Home extends CI_Controller {
 //                $error .= 'Chưa nhập địa chỉ<br />';
             }
 
-            if($memBirthDay == '') $memBirthDay=date("d/m/Y");
+            if ($memBirthDay == '') {
+                $memBirthDay=date("d/m/y");
+            } 
+            else {
+                $memBirthDay = $this->dateutils->ConvertToDatetime($memBirthDay, 'd/m/Y'); 
+        
+                if (new DateTime('now') < $memBirthDay ){
+                    $ok = 0;
+                    $error .= 'Ngày sinh phải trước ngày hiện tại<br />';
+                }                
+            }
 
             if ($ok == 0){
                 $model['error'] = $error; 

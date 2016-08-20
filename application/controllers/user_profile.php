@@ -90,10 +90,30 @@ class user_profile extends CI_Controller{
             {
                 $ok = false;
                 $error .= $this->Error('Chưa nhập email');
+            } else if (!filter_var($userMail, FILTER_VALIDATE_EMAIL)){
+                $ok = 0;
+                $error = "Chưa đúng dạng email<br />"; 
+
             }
-            if($memBirthDay ==''){
-                $ok = false;
-                $error .= $this->Error('Chưa nhập ngày sinh');
+            else{
+                if ($user-> userMail != $userMail){
+                    $userExisted = $this->usersModel->CheckNameOrEmailExisted($userMail);
+                    if ($userExisted){
+                       $ok = 0;
+                       $error .= 'Email đã tồn tại<br />'; 
+                    }
+                }
+            }
+            if ($memBirthDay == '') {
+                $memBirthDay=date("d/m/y");
+            } 
+            else {
+                $memBirthDay = $this->dateutils->ConvertToDatetime($memBirthDay, 'd/m/Y'); 
+        
+                if (new DateTime('now') < $memBirthDay ){
+                    $ok = 0;
+                    $error .= 'Ngày sinh phải trước ngày hiện tại<br />';
+                }                
             }
             
             if (!$ok){
@@ -579,19 +599,22 @@ class user_profile extends CI_Controller{
         $ok = true;
         if($data['categoryOfResID'] == '')
         {
-            $error .= $this->Error('Chưa chọn loại cửa hàng');
+            $error .= $this->Error('Chưa chọn loại hình ẩm thực');
             $ok = false;
         }  
         if($data['nameRe'] == '')
         {
-            $error .= $this->Error('Chưa nhập tên');
+            $error .= $this->Error('Chưa nhập tên nhà hàng');
             $ok = false;
         }   
         if($data['phoneRe'] == '')
         {
-            $error .= $this->Error('Chưa nhập điện thoại');
+            $error .= $this->Error('Chưa nhập số điện thoại');
             $ok = false;
-        }    
+        } else if (!is_numeric($data['phoneRe'])){
+            $error .= $this->Error('Nhập sai số điện thoại');
+            $ok = false;
+        }
         if($data['descriptionRes'] == '')
         {
             $error .= $this->Error('Chưa nhập mô tả');
@@ -611,7 +634,39 @@ class user_profile extends CI_Controller{
         {
             $error .= $this->Error('Hãy chọn địa chỉ');
             $ok = false;
-        }    
+        }  
+        if($data['latitudeRe'] == '')    
+        {
+            $error .= $this->Error('Chưa nhập vĩ độ');
+            $ok = false;
+        }  
+        if($data['longitudeRe'] == '')    
+        {
+            $error .= $this->Error('Chưa nhập vĩ độ');
+            $ok = false;
+        }  
+        if ($data['minPrice'] == '') {
+            $error .= $this->Error('Chưa nhập giá tiền thấp nhất');
+            $ok = false;
+        } else if (!is_numeric($data['minPrice'])){
+            $error .= $this->Error('Nhập sai giá tiền');
+            $ok = false;
+        }
+        if ($data['maxPrice'] == '') {
+            $error .= $this->Error('Chưa nhập giá tiền cao nhất');
+            $ok = false;
+        } else if (!is_numeric($data['maxPrice'])){
+            $error .= $this->Error('Nhập sai giá tiền');
+            $ok = false;
+        }
+        if (intval($data['maxPrice']) < intval($data['minPrice'])){
+            $error .= $this->Error('Giá tiền cao nhất phải lớn hơn giá tiền thấp nhất');
+            $ok = false;
+        }
+        if ($data['discount'] == '') {
+            $error .= $this->Error('Chưa nhập giảm giá');
+            $ok = false;
+        }
         return $ok;
     }
     
@@ -650,23 +705,28 @@ class user_profile extends CI_Controller{
                 if ($userPassOld != $user-> userPass){
                     $ok = false;
                     $error = $this->Error('Mật khẩu cũ không khớp');
+                } else {
+                    if ($userPass == '')
+                    {
+                        $ok = false;
+                        $error .= $this->Error('Chưa nhập mật khẩu');
+                    } else if (strlen($userPass)<6) {
+                        $ok = false;
+                        $error .= $this->Error('Mật khẩu phải ít nhất 6 ký tự');
+                    } 
+                    else {
+                        if ($userPass != $userPassRe)
+                        {
+                            $ok = false;
+                            $error .= $this->Error('Mật khẩu nhập lại không khớp');  
+                        }
+                        else{
+                            $userPass = $userPassRe = md5($userPass);
+                        }
+                    }
                 }
             } 
-            if ($userPass == '')
-            {
-                $ok = false;
-                $error .= $this->Error('Chưa nhập mật khẩu');
-            }
-            else {
-                if ($userPass != $userPassRe)
-                {
-                    $ok = false;
-                    $error .= $this->Error('Mật khẩu nhập lại không khớp');  
-                }
-                else{
-                    $userPass = $userPassRe = md5($userPass);
-                }
-            }
+            
             
             if (!$ok){
                 $model['error'] = $error;
