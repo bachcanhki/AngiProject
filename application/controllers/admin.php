@@ -992,12 +992,12 @@ class admin extends CI_Controller {
             'last_tagl_close' => "</li>"
         );       
     }  
-    
+
     public function setting() {
         $data = array();
         $data['content'] = 'admin/setting.phtml';
         $this->load->view('admin/layout/layout.phtml', $data);
-    }        
+    }
     
     public function check_id($id, $uri)
     {
