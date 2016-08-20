@@ -1,98 +1,109 @@
 <div class="panel panel-default">
-  <!-- Default panel contents -->
-  <form method="POST" action=""> 
     <div class="panel-heading">
-      <a class="btn btn-default" href="<?php echo base_url()?>admin/eater/<?php echo $level; ?>" role="button">Quay về</a>
-      <input name="submit" id="submit" class="btn btn-info" type="submit" value="Cập nhật" />  
+        <h2>Kích hoạt tài khoản</h2>
     </div>
+  <!-- Default panel contents -->
+    <form method="POST" action="">
     <div class="panel-body">
-          <div class="bg-danger"><?php echo $error; ?></div>
+        <a style="margin-bottom: 15px" class="btn btn-default" href="<?php echo base_url()?>admin/eater/<?php echo $userLevel; ?>" role="button"><i class="fa fa-long-arrow-left" aria-hidden="true"></i> Quay về</a>
+
+        <?php if($error!='' && $error!=null){?>
+            <div class="bg-danger"><?php echo $error; ?></div>
+        <?php }else if($success!='' && $success!=null){?>
+            <div class="bg-success"><?php echo $success; ?></div>
+        <?php }?>
           
-              <div class="row">
-                  <div class="form-group">  
-                      <div class="col-lg-12"> 
-                          <label for="memName">Tên đầy đủ</label>
-                          <input type="hidden" id="userLevel"  name="userLevel"  value="<?php echo isset($userLevel) ? $userLevel : ''; ?>" > 
-                           <input readonly="readonly" type="text" class="form-control" value="<?php echo isset($memName) ? $memName : ''; ?>" id="memName"  name="memName" placeholder=""> 
-                      </div>
-                      <div class="col-lg-6"> 
-                          <label for="userName">Tên đăng nhập</label>
-                          <input readonly="readonly" type="text" class="form-control" id="userName"  name="userName"  value="<?php echo isset($userName) ? $userName : ''; ?>" placeholder="Tên đăng nhập"> 
-                      </div>
-                      <div class="col-lg-6"> 
-                          <label for="userMail">Email</label>
-                          <input readonly="readonly" type="text" class="form-control" id="userMail"  name="userMail"  value="<?php echo isset($userMail) ? $userMail : ''; ?>" placeholder="Email"> 
-                      </div>
-                      
-                      <div class="col-lg-6"> 
-                          <label for="closeTimeRe">Ngày sinh</label>
-                          <div class=' input-group date datepicker'>
-                              <input readonly="readonly" type="text" class="form-control" id="memBirthDay"  name="memBirthDay"  value="<?php echo isset($memBirthDay) ? $memBirthDay : ''; ?>"> 
-                              <span class="input-group-addon">
-                                  <span class="glyphicon glyphicon-calendar"></span>
-                              </span>
-                          </div>
-                      </div>
-                      <div class="col-lg-6"> 
-                          <label for="memGender">Giới tính</label> 
-                          <select id="memGender" name="memGender" class="form-control">
-                            <option id="0" value="0" <?php if(isset($memGender) && $memGender == '0'){ echo 'selected="selected"';} else {echo '';} ?> >Nữ</option>
-                            <option id="1" value="1" <?php if(isset($memGender) && $memGender == '1'){ echo 'selected="selected"';} else {echo '';} ?> >Nam</option>
-                            <option id="1" value="2" <?php if(isset($memGender) && $memGender == '2'){ echo 'selected="selected"'; } else {echo '';} ?>>Khác</option>
-                          </select>
-                          
-                      </div> 
-                      <div class="col-lg-4">
-                          <label for="provinceID">Tỉnh/Thành phố (*)</label> 
-                          <select id="provinceID" name="provinceID" class="form-control">        
-                            <option id="" value="" selected="selected">--chọn địa chỉ--</option>  
-                            <?php foreach($province as $adr){?>
-                               <option id="<?php echo $adr->provinceID; ?>" 
-                               value="<?php echo $adr->provinceID; ?>" 
-                               <?php if(isset($provinceID) && $provinceID == $adr->provinceID.''){ echo 'selected="selected"';} else {echo '';} ?> ><?php echo $adr->namePro; ?></option>
-                            <?php } ?>
-                          </select>
-                      </div>
-                      <div class="col-lg-4"> 
-                          <label for="districtID">Quận/Huyện</label> 
-                          <select id="districtID" name="districtID" class="form-control">        
-                            <option id="" value="" selected="selected">--chọn quận/ huyện--</option>  
-                            <?php foreach($district as $adr){?>
-                               <option id="<?php echo $adr->districtid; ?>" 
-                               value="<?php echo $adr->districtid; ?>" 
-                               <?php if(isset($districtID) && $districtID == $adr->districtid.''){ echo 'selected="selected"';} else {echo '';} ?> ><?php echo $adr->nameDis; ?></option>
-                            <?php } ?>
-                          </select>
-                      </div>
-                      <div class="col-lg-4"> 
-                          <label for="wardID">Xã/Phường</label> 
-                          <select id="wardID" name="wardID" class="form-control">        
-                            <option id="" value="" selected="selected">--chọn xã/ phường--</option>  
-                            <?php foreach($ward as $adr){?>
-                               <option latlng="<?php echo $adr->locationWard;?>" 
-                               id="<?php echo $adr->wardid; ?>" 
-                               value="<?php echo $adr->wardid; ?>" 
-                               <?php if(isset($wardID) && $wardID == $adr->wardid.''){ echo 'selected="selected"';} else {echo '';} ?> ><?php echo $adr->nameWard; ?></option>
-                            <?php } ?>
-                          </select>
-                      </div>
-                      <div class="col-lg-12"> 
-                          <label for="address">Địa chỉ</label> 
-                          <input type="hidden" id="addressID"  name="addressID"  value="<?php echo isset($addressID) ? $addressID : ''; ?>" > 
-                          <input readonly="readonly" type="text" class="form-control" id="address"  name="address"  value="<?php echo isset($address) ? $address : ''; ?>" placeholder="Địa chỉ"> 
-                      </div>  
-                      <div class="col-lg-12">                                                                                                                                
-                            <div class="checkbox">
-                              <label>
-                                <input type="checkbox" name="userActived" id="userActived" <?php echo (isset($userActived) && $userActived) ? 'checked': ''; ?>>Duyệt
-                              </label>
-                            </div>
-                      </div>
-                       
-                  </div>
-              </div>   
-              
-          
+        <div class="row">
+            <div class="col-lg-12 form-group">
+                <label for="memName">Tên đầy đủ</label>
+                <input type="hidden" id="userLevel"  name="userLevel"  value="<?php echo isset($userLevel) ? $userLevel : ''; ?>" >
+                <input readonly="readonly" type="text" class="form-control" value="<?php echo isset($memName) ? $memName : ''; ?>" id="memName"  name="memName" placeholder="">
+            </div>
+            <div class="col-lg-6 form-group">
+                <label for="userName">Tên đăng nhập</label>
+                <input readonly="readonly" type="text" class="form-control" id="userName"  name="userName"  value="<?php echo isset($userName) ? $userName : ''; ?>" placeholder="Tên đăng nhập">
+            </div>
+            <div class="col-lg-6 form-group">
+                <label for="userMail">Email</label>
+                <input readonly="readonly" type="text" class="form-control" id="userMail"  name="userMail"  value="<?php echo isset($userMail) ? $userMail : ''; ?>" placeholder="Email">
+            </div>
+
+            <div class="col-lg-6 form-group">
+                <label for="closeTimeRe">Ngày sinh</label>
+                <div class=' input-group date datepicker'>
+                    <input readonly="readonly" type="text" class="form-control" id="memBirthDay"  name="memBirthDay"  value="<?php echo isset($memBirthDay) ? $memBirthDay : ''; ?>">
+                    <span class="input-group-addon">
+                        <span class="glyphicon glyphicon-calendar"></span>
+                    </span>
+                </div>
+            </div>
+            <div class="col-lg-6 form-group">
+                <label for="memGender">Giới tính</label>
+                <select disabled="true" class="form-control">
+                    <?php if(isset($memGender) && $memGender == '0'){?>
+                        <option>Nữ</option>
+                    <?php }else if(isset($memGender) && $memGender == '1'){?>
+                        <option>Man</option>
+                    <?php }else if(isset($memGender) && $memGender == '2'){?>
+                        <option>Khác</option>
+                    <?php }?>
+                </select>
+                <input hidden id="memGender" name="memGender" type="text" value="<?php echo isset($memGender) ? $memGender : ''; ?>">
+
+            </div>
+
+            <div class="col-lg-4 form-group">
+                <label for="provinceID">Tỉnh/Thành phố (*)</label>
+                <select disabled="true" class="form-control">
+                    <?php foreach($province as $adr){?>
+                        <option id="<?php echo $adr->provinceID; ?>"
+                                value="<?php echo $adr->provinceID; ?>"
+                            <?php if(isset($provinceID) && $provinceID == $adr->provinceID.''){ echo 'selected="selected"';} else {echo '';} ?> ><?php echo $adr->namePro; ?></option>
+                    <?php } ?>
+                </select>
+                <input hidden type="text" id="provinceID" name="provinceID" value="<?php echo isset($adr->provinceID) ? $adr->provinceID : ''; ?>">
+            </div>
+
+            <div class="col-lg-4 form-group">
+                <label for="districtID">Quận/Huyện</label>
+                <select disabled="true" id="districtID" name="districtID" class="form-control">
+                    <?php foreach($district as $adr){?>
+                        <option id="<?php echo $adr->districtid; ?>"
+                                value="<?php echo $adr->districtid; ?>"
+                            <?php if(isset($districtID) && $districtID == $adr->districtid.''){ echo 'selected="selected"';} else {echo '';} ?> ><?php echo $adr->nameDis; ?></option>
+                    <?php } ?>
+                </select>
+                <input hidden type="text" id="districtID" name="districtID" value="<?php echo isset($adr->districtid) ? $adr->districtid : ''; ?>">
+            </div>
+
+            <div class="col-lg-4 form-group">
+                <label for="wardID">Xã/Phường</label>
+                <select disabled="true" class="form-control">
+                    <?php foreach($ward as $adr){?>
+                        <option latlng="<?php echo $adr->locationWard;?>"
+                                id="<?php echo $adr->wardid; ?>"
+                                value="<?php echo $adr->wardid; ?>"
+                            <?php if(isset($wardID) && $wardID == $adr->wardid.''){ echo 'selected="selected"';} else {echo '';} ?> ><?php echo $adr->nameWard; ?></option>
+                    <?php } ?>
+                </select>
+                <input hidden id="wardID" name="wardID" type="text" value="<?php echo isset($adr->wardid) ? $adr->wardid : ''; ?>">
+            </div>
+
+            <div class="col-lg-12 form-group">
+                <label for="address">Địa chỉ</label>
+                <input type="hidden" id="addressID"  name="addressID"  value="<?php echo isset($addressID) ? $addressID : ''; ?>" >
+                <input readonly="readonly" type="text" class="form-control" id="address"  name="address"  value="<?php echo isset($address) ? $address : ''; ?>" placeholder="Địa chỉ">
+            </div>
+            <div class="col-lg-12 form-group">
+                <div class="checkbox">
+                    <label>
+                        <input type="checkbox" name="userActived" id="userActived" <?php echo (isset($userActived) && $userActived) ? 'checked': ''; ?>>Duyệt
+                    </label>
+                </div>
+            </div>
+        </div>
+
+        <button name="submit" id="submit" class="btn btn-primary" value="save"><i class="fa fa-floppy-o" aria-hidden="true"></i> Lưu</button>
         </div> 
   </form>
 </div>
@@ -105,7 +116,17 @@
         $('#districtID').change(function(){
             signupModule.findWardByDistrictId($(this).val())
         });
+
+        var ok = '<?php echo isset($ok) ? $ok : ''; ?>';
+        if (ok == '1')
+        {
+            setTimeout(function(){
+                location.href = '<?php echo base_url().'admin/eater/'.$userLevel; ?>';
+            }, 2000)
+        }
     })
+
+
     window.signupModule = window.signupModule || {};
     signupModule.findDistrictByProvinceId = signupModule.findDistrictByProvinceId || function(id){ 
         $.ajax({ 

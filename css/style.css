@@ -54,7 +54,7 @@ ul, li{
     box-shadow: 1px 1px 5px 1px #000;
     width: 105px;
 }
-.logo img{width: 100%}
+.logo img{max-width: 100%}
 .navbar{
     min-height: 0 !important;
     margin: 0 !important;

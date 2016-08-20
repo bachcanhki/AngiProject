@@ -26,8 +26,8 @@
             <td><?php echo $item->nameCOR; ?></td>  
             <td class="text-center"><?php echo $item->statusCOR == 1 ? 'Hoạt động' : 'Chưa kích hoạt'; ?></td>
             <td class="text-center">
-            <a class="btn btn-info" href="<?php echo base_url()?>admin/edit_category/<?php echo $item->categoryOfResID; ?>">Sửa</a>
-            <a class="btn btn-danger" onclick="return categoryModule.delete('<?php echo $item->nameCOR; ?>');" href="<?php echo base_url()?>admin/delete_category/<?php echo $item->categoryOfResID; ?>">Xóa</a>   
+            <a class="btn btn-info" href="<?php echo base_url()?>admin/edit_category/<?php echo $item->categoryOfResID; ?>"><i class="fa fa-pencil-square-o" aria-hidden="true"></i> Xem</a>
+            <a class="btn btn-danger" onclick="return categoryModule.delete('<?php echo $item->nameCOR; ?>');" href="<?php echo base_url()?>admin/delete_category/<?php echo $item->categoryOfResID; ?>"><i class="fa fa-trash-o" aria-hidden="true"></i> Xóa</a>
             </td>
         </tr>
         <?php } ?>

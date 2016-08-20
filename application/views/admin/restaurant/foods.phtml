@@ -1,48 +1,49 @@
-<div class="panel panel-default">
+<div class="col-md-12 form-group" style="padding-top: 15px">
   <!-- Default panel contents -->
   
   <!-- Table -->
-<table class="table table-bordered">
-    <thead>
-        <tr>
-            <th class="text-center">Ảnh</th>
-            <th>Tên</th>
-            <th class="text-center col-lg-2">Giá</th>
-            <th  class="text-center col-lg-2">Loại</th>  
-            <th class=" col-lg-2 text-center">Trạng thái</th>
-            <th class=" col-lg-2"></th>
-        </tr>
-    </thead>
-    <tbody>
-        <?php if (isset($foods)){ ?>
-        <?php foreach ($foods as $item) {?>
-        <tr>
-            <td class="text-center"><img src="<?php echo $item->imageIDSrc; ?>" alt="Ảnh món ăn" height="50px"></td> 
-            <td><?php echo $item->nameFo; ?></td>
-            <td class="text-right"><?php echo $item->priceFo; ?></td>   
-            <td class="text-center"><?php 
-                switch ($item->typeFo){
-                    case 0:
-                        echo 'Tráng miệng';
-                        break;
-                    case 1:
-                        echo 'Ăn nhanh';
-                        break;
-                    case 2:
-                        echo 'Bữa chính';
-                        break;
-                }
-            ?></td>
-            <td class="text-center"><?php echo $item->statusFo == 1 ? 'Hoạt động' : 'Chưa kích hoạt'; ?></td>
-            <td class="text-center">
-            <a class="btn btn-info" href="#" onclick='return foodModule.edit(<?php echo $item->foodID; ?>)'>Xem</a>          
-            </td>
-        </tr>
-        <?php } ?>
-        <?php } ?>
-    </tbody>
-  </table>
-  </div>
+    <table class="table table-bordered">
+        <thead>
+            <tr>
+                <th class="text-center">Ảnh</th>
+                <th>Tên</th>
+                <th class="text-center col-lg-2">Giá</th>
+                <th  class="text-center col-lg-2">Loại</th>
+                <th class=" col-lg-2 text-center">Trạng thái</th>
+                <th class=" col-lg-2"></th>
+            </tr>
+        </thead>
+        <tbody>
+            <?php if (isset($foods)){ ?>
+            <?php foreach ($foods as $item) {?>
+            <tr>
+                <td class="text-center"><img src="<?php echo $item->imageIDSrc; ?>" alt="Ảnh món ăn" height="50px"></td>
+                <td><?php echo $item->nameFo; ?></td>
+                <td class="text-right"><?php echo $item->priceFo; ?></td>
+                <td class="text-center"><?php
+                    switch ($item->typeFo){
+                        case 0:
+                            echo 'Tráng miệng';
+                            break;
+                        case 1:
+                            echo 'Ăn nhanh';
+                            break;
+                        case 2:
+                            echo 'Bữa chính';
+                            break;
+                    }
+                ?></td>
+                <td class="text-center"><?php echo $item->statusFo == 1 ? 'Hoạt động' : 'Chưa kích hoạt'; ?></td>
+                <td class="text-center">
+                <a class="btn btn-info" href="#" onclick='return foodModule.edit(<?php echo $item->foodID; ?>)'><i class="fa fa-pencil-square-o" aria-hidden="true"></i> Xem</a>
+                </td>
+            </tr>
+            <?php } ?>
+            <?php } ?>
+        </tbody>
+    </table>
+</div>
+
 <div class="modal fade" id="food-edit" role="dialog">
     <div class="modal-dialog">
         <!-- Modal content-->
@@ -95,7 +96,6 @@
             </div> 
         </div>  
     </div>
-    </div>    
 </div>
 <script type="text/javascript">
     window.foodModule = window.foodModule || {};

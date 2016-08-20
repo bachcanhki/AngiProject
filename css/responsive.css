@@ -142,7 +142,7 @@
 	.chosen-container{width: 75% !important;}
 }
 
-@media screen and (min-width: 768px) {
+@media screen and (min-width: 769px) {
     .topbar{display: block !important;}
     .topbar>li>ul.hover-menu, .topbar>li>.cross-down{display: none !important;}
     .search{display: block}

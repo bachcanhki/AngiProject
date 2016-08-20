@@ -85,8 +85,9 @@ class admin extends CI_Controller {
                 'addressImage' => $userImage->addressImage,
                 );  
         $model = array(
-             'error' => ''
-        );                      
+             'error' => '',
+            'success' => '',
+        );
   
         $submit = $this->input->post('submit');
         if ($submit){
@@ -130,7 +131,7 @@ class admin extends CI_Controller {
                 if ($this->newsModel->Create($entity))
                 {                         
                     //Neu luu thanh cong  
-                    $model['error'] = $this->Error('Cập nhật thành công!'); 
+                    $model['success'] = $this->Success('Thêm mới thành công!');
                     $model['ok']  = 1;
                 }
                 else
@@ -157,7 +158,8 @@ class admin extends CI_Controller {
                 'fullname' => $this->session->userdata('fullname'), 
                 );      
         $model = array(
-             'error' => ''
+             'error' => '',
+            'success' => '',
         );
         if (!$this->input->post('submit')){
             $news = $this->newsModel->GetById($id);
@@ -178,7 +180,7 @@ class admin extends CI_Controller {
             $model['contentNews'] = $this->input->post('contentNews');
             $model['imageNews'] = strip_tags($this->input->post('imageNews')); 
             $model['imageNewsTemp'] = strip_tags($this->input->post('imageNewsTemp')); 
-            $model['typeNews'] = strip_tags($this->input->post('typeNews')); 
+            $model['typeNews'] = strip_tags($this->input->post('typeNews'));
             $model['statusNews'] = strip_tags($this->input->post('statusNews')); 
             $data['model']  = $model;
             //kiem tra du lieu
@@ -198,8 +200,9 @@ class admin extends CI_Controller {
                 $model['imageNews'] = $model['imageNewsTemp'];
             }
             
-            if ($ok == 1)
-            {
+            if ($ok == 0){
+                $model['error']=$error;
+            }else{
                 $entity = array(
                                 'titleNews' => $model['titleNews'],
                                 'contentNews' => $model['contentNews'],
@@ -212,7 +215,7 @@ class admin extends CI_Controller {
                 {    
                     //Neu luu thanh cong   
                     $model['ok'] = 1;
-                    $model['error'] = $this->Error('Cập nhật thành công!'); 
+                    $model['success'] = $this->Success('Cập nhật thành công!');
                 }
                 else
                 {
@@ -329,7 +332,8 @@ class admin extends CI_Controller {
                 'fullname' => $this->session->userdata('fullname'), 
                 );      
         $model = array(
-             'error' => '',                             
+             'error' => '',
+            'success' => '',
              'users' => $this->usersModel->Admin_GetUser(1, 100000, 0),                       
              'province' => $this->addressModel->ListAllProvince(),
              'categories' => $this->categoriesOfRestaurantModel->ListByStatus(1),    
@@ -470,9 +474,9 @@ class admin extends CI_Controller {
                 );         
                 if ($this->restaurantModel->Update($id, $dataEdit))
                 {    
-                    //Neu luu thanh cong   
+                    //Neu luu thanh cong
+                    $model['success'] = $this->Success('Cập nhật thành công!');
                     $model['ok'] = 1;
-                    $model['error'] = $this->Error('Cập nhật thành công!'); 
                 }
                 else
                 {
@@ -538,8 +542,7 @@ class admin extends CI_Controller {
         $level = intval($level);
         $offset = intval($offset);
         $userImage = $this->usersModel->GetUserByNamed($this->session->userdata('user'));
-        $user = $this->session->userdata('user');  
-                                
+        $user = $this->session->userdata('user');
         $rows = 0;                                         
         $config = $this->getConfig();                                                  
         $result = $this->usersModel->Admin_GetUser($level, $config['per_page'], $offset);
@@ -575,7 +578,7 @@ class admin extends CI_Controller {
         
         $model = array(
             'error' => '',
-            'level' => $level,
+            'success' => '',
             'userLevel' => $level,
             'province' => $this->addressModel->ListAllProvince(),  
             'district' => $this->addressModel->FindDistrictByProvinceId($user->provinceID),
@@ -704,8 +707,9 @@ class admin extends CI_Controller {
                 );                                   
                 if ($this->usersModel->Update($id, $editInfo))
                 {
-                    //Neu luu thanh cong      
-                    redirect(base_url('admin/eater/'.$level));
+                    //Neu luu thanh cong
+                    $model['ok'] = 1;
+                    $model['success'] = $this->Success('Cập nhật thành công!');
                 }
                 else
                 {
@@ -770,18 +774,19 @@ class admin extends CI_Controller {
                 'fullname' => $this->session->userdata('fullname'), 
                 );  
         $model = array(
-             'error' => ''
+             'error' => '',
+            'success' => '',
         );
-        $data['model'] = $model;
-  
-        if($this->input->post('submit'))
-        {       
+
+        $submit = $this->input->post('submit');
+        if($submit) {
             //Lay du lieu tu forn dong thoi gan bien du gia tri                                         
-            $model['statusCOR'] = $statusCOR = strip_tags($this->input->post('statusCOR')); 
+            $model['statusCOR'] = $statusCOR = strip_tags($this->input->post('statusCOR'));
             $model['nameCOR'] = $nameCOR = strip_tags($this->input->post('nameCOR'));
-            $model['desciptionCOR'] = $desciptionCOR = strip_tags($this->input->post('desciptionCOR')); 
-            
-            $data['model'] = $model;   
+            $model['desciptionCOR'] = $desciptionCOR = strip_tags($this->input->post('desciptionCOR'));
+        }
+
+        if($submit) {
             //kiem tra du lieu
             $error = '';
             $ok = 1;
@@ -791,38 +796,34 @@ class admin extends CI_Controller {
                 $ok = 0;
             }
             
-            if ($ok == 1)
+            if (!$ok)
+            {
+                $data['model']['error'] = $error;
+            } else
             {
                 //Tao mang chua thong tin ve user
                 $dataAdd = array(
                                 'nameCOR'     =>  $nameCOR,
                                 'desciptionCOR'     =>  $desciptionCOR,
                                 'statusCOR'     =>  $statusCOR
-                                );  
-                                
+                                );
+
                 if ($this->categoriesOfRestaurantModel->Create($dataAdd))
                 {
                     //Neu luu thanh cong
-                    redirect(base_url('admin/categories/'));
+                    $model['success'] = $this->Success('Thêm mới thành công!');
+                    $model['ok'] = 1;
                 }
                 else
                 {
                     //Nguoc lai neu khong luu duoc
                       
-                    $data['model']['error'] = $this->Error('Không tạo được danh mục!');                                      
-                    $this->load->view('admin/layout/layout.phtml', $data);  
+                    $data['model']['error'] = $this->Error('Không tạo được danh mục!');
                 }
-            } 
-            else
-            {
-                $data['model']['error'] = $error;                                                            
-                $this->load->view('admin/layout/layout.phtml', $data);  
-            }           
+            }
         }
-        else
-        {                                                                                     
-             $this->load->view('admin/layout/layout.phtml', $data);  
-        }
+        $data['model'] = $model;
+        $this->load->view('admin/layout/layout.phtml', $data);
     }
 
     public function edit_category($id) {
@@ -841,64 +842,58 @@ class admin extends CI_Controller {
                 'fullname' => $this->session->userdata('fullname'), 
                 );      
         $model = array(
-             'error' => ''         
+             'error' => '',
+            'success' => '',
         );
-              
-        //Lay du lieu tu forn dong thoi gan bien du gia tri 
-        $model['nameCOR'] = $user->nameCOR; 
-        $model['statusCOR'] = $user->statusCOR;
-        $model['desciptionCOR'] = $user->desciptionCOR;   
-        
-        $data['model']  = $model;
-        if($this->input->post('submit'))
-        {                           
+
+        if(!$this->input->post('submit')){
+            //Lay du lieu tu forn dong thoi gan bien du gia tri
+            $model['nameCOR'] = $user->nameCOR;
+            $model['statusCOR'] = $user->statusCOR;
+            $model['desciptionCOR'] = $user->desciptionCOR;
+            $data['model']  = $model;
+        }else{
             //Lay du lieu tu forn dong thoi gan bien du gia tri                                 
-            $model['nameCOR'] = $nameCOR = strip_tags($this->input->post('nameCOR'));
-            $model['statusCOR'] = $statusCOR = strip_tags($this->input->post('statusCOR'));
-            $model['desciptionCOR'] = $desciptionCOR = strip_tags($this->input->post('desciptionCOR'));   
+            $model['nameCOR'] = strip_tags($this->input->post('nameCOR'));
+            $model['statusCOR'] = strip_tags($this->input->post('statusCOR'));
+            $model['desciptionCOR'] = strip_tags($this->input->post('desciptionCOR'));
 
             $data['model']  = $model;
             //kiem tra du lieu
-            //kiem tra du lieu
             $error = '';
             $ok = 1;        
-            if($nameCOR == '')
+            if($model['nameCOR'] == '')
             {
                 $error .= $this->Error('Chưa nhập tên');
                 $ok = 0;
             }
             
-            if ($ok == 1)
+            if ($ok == 0)
             {
+                $data['model']['error'] = $error;
+            }else{
                 //Tao mang chua thong tin ve user
                 $dataEdit = array(
-                                'nameCOR'     =>  $nameCOR,
-                                'desciptionCOR'     =>  $desciptionCOR,
-                                'statusCOR'     =>  $statusCOR
+                                'nameCOR'     =>  $model['nameCOR'],
+                                'desciptionCOR'     =>  $model['desciptionCOR'],
+                                'statusCOR'     =>  $model['statusCOR']
                                 );       
                 if ($this->categoriesOfRestaurantModel->Update($id, $dataEdit))
                 {
                     //Neu luu thanh cong
-                    redirect(base_url('admin/categories/'));
+                    $model['success'] = $this->Success('Cập nhật thành công!');
+                    $model['ok'] = 1;
                 }
                 else
                 {
                     //Nguoc lai neu khong luu duoc
-                      
-                    $data['model']['error'] = $this->Error('Không cập nhật được user!');                                      
-                    $this->load->view('admin/layout/layout.phtml', $data);
+                    $data['model']['error'] = $this->Error('Không cập nhật được user!');
                 }
-            } 
-            else
-            {
-                $data['model']['error'] = $error;                                                            
-                $this->load->view('admin/layout/layout.phtml', $data);
-            }           
+            }
+
         }
-        else
-        {                                                                                                        
-            $this->load->view('admin/layout/layout.phtml', $data);
-        }
+        $data['model'] = $model;
+        $this->load->view('admin/layout/layout.phtml', $data);
     }
 
     public function delete_category($id)
@@ -991,12 +986,6 @@ class admin extends CI_Controller {
             'last_tag_open' => "<li>",
             'last_tagl_close' => "</li>"
         );       
-    }  
-
-    public function setting() {
-        $data = array();
-        $data['content'] = 'admin/setting.phtml';
-        $this->load->view('admin/layout/layout.phtml', $data);
     }
     
     public function check_id($id, $uri)
@@ -1009,6 +998,10 @@ class admin extends CI_Controller {
     
     public function Error($value)
     {
-        return '<br /><font color=red>- '.$value.'</font>';
+        return '<p style="color:red">- '.$value.'</p>';
+    }
+    public function Success($value)
+    {
+        return '<p style="color:green">- '.$value.'</p>';
     }
 }

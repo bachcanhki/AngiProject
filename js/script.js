@@ -77,7 +77,7 @@ $(document).ready(function(){
 			$(".news-title>a").width($(window).width()-30);
             $(".quick-description").width($(window).width()-40);
         }
-        if(window.matchMedia('(min-width: 768px)').matches){
+        if(window.matchMedia('(min-width: 769px)').matches){
             if($(".navbar>ul").hasClass("R-topbar")){
                 $(".navbar>ul").removeClass("R-topbar")
                 $(".navbar>ul").addClass("topbar")

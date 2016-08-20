@@ -1,48 +1,51 @@
-<div class="form-group">   
-    <div class="col-lg-4">
+<div style="display: table; padding-top: 15px">
+    <div class="col-lg-4 form-group">
         <label for="provinceID">Tỉnh/Thành phố</label> 
-        <select id="provinceID" name="provinceID" class="form-control">        
-          <option id="" value="" selected="selected">--Chọn địa chỉ--</option>  
+        <select disabled="true" class="form-control">
           <?php foreach($province as $adr){?>
-             <option id="<?php echo $adr->provinceID; ?>" 
+             <option id="<?php echo $adr->provinceID; ?>"
              value="<?php echo $adr->provinceID; ?>" 
              <?php if(isset($provinceID) && $provinceID == $adr->provinceID.''){ echo 'selected="selected"';} else {echo '';} ?> ><?php echo $adr->namePro; ?></option>
           <?php } ?>
         </select>
+        <input hidden type="text" id="provinceID" name="provinceID" value="<?php echo isset($adr->provinceID) ? $adr->provinceID : ''; ?>">
     </div>
-    <div class="col-lg-4"> 
+
+    <div class="col-lg-4 form-group">
         <label for="districtID">Quận/Huyện</label> 
-        <select id="districtID" name="districtID" class="form-control">        
-          <option id="" value="" selected="selected">--Chọn quận/ huyện--</option>  
+        <select disabled="true" id="districtID" name="districtID" class="form-control">
           <?php foreach($district as $adr){?>
-             <option id="<?php echo $adr->districtid; ?>" 
+             <option id="<?php echo $adr->districtid; ?>"
              value="<?php echo $adr->districtid; ?>" 
              <?php if(isset($districtID) && $districtID == $adr->districtid.''){ echo 'selected="selected"';} else {echo '';} ?> ><?php echo $adr->nameDis; ?></option>
           <?php } ?>
         </select>
+        <input hidden type="text" id="districtID" name="districtID" value="<?php echo isset($adr->districtid) ? $adr->districtid : ''; ?>">
     </div>
-    <div class="col-lg-4"> 
+
+    <div class="col-lg-4 form-group">
         <label for="wardID">Xã/Phường</label> 
-        <select id="wardID" name="wardID" class="form-control">        
-          <option id="" value="" selected="selected">--Chọn xã/ phường--</option>  
+        <select disabled="true" class="form-control">
           <?php foreach($ward as $adr){?>
-             <option latlng="<?php echo $adr->locationWard;?>" 
+             <option latlng="<?php echo $adr->locationWard;?>"
              id="<?php echo $adr->wardid; ?>" 
              value="<?php echo $adr->wardid; ?>" 
              <?php if(isset($wardID) && $wardID == $adr->wardid.''){ echo 'selected="selected"';} else {echo '';} ?> ><?php echo $adr->nameWard; ?></option>
           <?php } ?>
         </select>
+        <input hidden id="wardID" name="wardID" type="text" value="<?php echo isset($adr->wardid) ? $adr->wardid : ''; ?>">
     </div>
-    <div class="col-lg-12"> 
+
+    <div class="col-lg-12 form-group">
         <label for="address">Địa chỉ</label> 
         <input type="hidden" id="addressID"  name="addressID"  value="<?php echo isset($addressID) ? $addressID : ''; ?>" > 
         <input readonly="readonly" type="text" class="form-control" id="address"  name="address"  value="<?php echo isset($address) ? $address : ''; ?>" placeholder="Địa chỉ"> 
     </div>  
-    <div class="col-lg-4"> 
+    <div class="col-lg-4 form-group">
         <label for="latitudeRe">Vĩ độ</label>
         <input readonly="readonly" type="text" class="form-control" id="latitudeRe"  name="latitudeRe"  value="<?php echo isset($latitudeRe) ? $latitudeRe : ''; ?>"> 
     </div>
-    <div class="col-lg-4"> 
+    <div class="col-lg-4 form-group">
         <label for="longitudeRe">Kinh độ</label>
         <input readonly="readonly" type="text" class="form-control" id="longitudeRe"  name="longitudeRe"  value="<?php echo isset($longitudeRe) ? $longitudeRe : ''; ?>"> 
     </div> 

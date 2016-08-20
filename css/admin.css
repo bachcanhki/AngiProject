@@ -5,6 +5,7 @@ ul{
 .sidebar{
     background-color: #37474f;
     color: #b0bec5;
+    margin-bottom: 20px;
 }
 .sidebar a{
     color: #b0bec5;
@@ -37,6 +38,7 @@ ul{
 .manage-sb{
     margin: 0 -15px;
 }
+.manage-sb>li{border-bottom: 1px solid}
 .manage-sb>li>a{
     position: relative;
     display: block;
@@ -115,3 +117,8 @@ ul{
 .cke_contents{
     height: 400px !important;
 }
+.bg-success, .bg-danger{
+    padding: 15px;
+    margin-bottom: 15px;
+}
+input[readonly]{cursor: not-allowed}

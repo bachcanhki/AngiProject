@@ -38,8 +38,6 @@
             ?></td>
             <td class="text-center">
             <a class="btn btn-info" href="<?php echo base_url()?>user_profile/edit_booking/<?php echo $item->bookingID; ?>">Xem</a>
-            <a class="btn btn-danger" onclick="return bookingModule.delete('<?php echo $item->bookingID; ?>');" 
-                href="<?php echo base_url()?>user_profile/delete_booking/<?php echo $item->bookingID; ?>">Xóa</a>   
             </td>
         </tr>
         <?php } ?>
@@ -53,13 +51,3 @@
         </tr>
     </tfoot>
   </table>
-
-<script type="text/javascript">
-    window.bookingModule = window.bookingModule || {};
-    
-    bookingModule.delete = bookingModule.delete || function(name){
-        if (confirm('Xóa đơn đặt chỗ số ' + name + '?'))
-            return true;
-        return false;
-    }
-</script>

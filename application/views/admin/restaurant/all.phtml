@@ -29,8 +29,8 @@
             <td><?php echo $user->address; ?></td>   
             <td class="text-center"><?php echo $user->statusRes ? 'Hoạt động' : 'Chưa kích hoạt'; ?></td>
             <td class="text-center">
-            <a class="btn btn-info" href="<?php echo base_url()?>admin/edit_restaurant/<?php echo $user->restaurantID; ?>">Sửa</a>
-            <a class="btn btn-danger" onclick="return resModule.delete('<?php echo $user->nameRe; ?>');" href="<?php echo base_url()?>admin/delete_restaurant/<?php echo $user->restaurantID; ?>">Xóa</a>   
+            <a class="btn btn-info" href="<?php echo base_url()?>admin/edit_restaurant/<?php echo $user->restaurantID; ?>"><i class="fa fa-pencil-square-o" aria-hidden="true"></i> Xem</a>
+            <a class="btn btn-danger" onclick="return resModule.delete('<?php echo $user->nameRe; ?>');" href="<?php echo base_url()?>admin/delete_restaurant/<?php echo $user->restaurantID; ?>"><i class="fa fa-trash-o" aria-hidden="true"></i> Xóa</a>
             </td>
         </tr>
         <?php } ?>
