@@ -8,6 +8,7 @@
              <?php if(isset($provinceID) && $provinceID == $adr->provinceID.''){ echo 'selected="selected"';} else {echo '';} ?> ><?php echo $adr->namePro; ?></option>
           <?php } ?>
         </select>
+
         <input hidden type="text" id="provinceID" name="provinceID" value="<?php echo isset($provinceID) ? $provinceID : ''; ?>">
     </div>
 
@@ -20,6 +21,7 @@
              <?php if(isset($districtID) && $districtID == $adr->districtid.''){ echo 'selected="selected"';} else {echo '';} ?> ><?php echo $adr->nameDis; ?></option>
           <?php } ?>
         </select>
+
         <input hidden type="text" id="districtID" name="districtID" value="<?php echo isset($districtID) ? $districtID : ''; ?>">
     </div>
 
@@ -33,6 +35,7 @@
              <?php if(isset($wardID) && $wardID == $adr->wardid.''){ echo 'selected="selected"';} else {echo '';} ?> ><?php echo $adr->nameWard; ?></option>
           <?php } ?>
         </select>
+        
         <input hidden id="wardID" name="wardID" type="text" value="<?php echo isset($wardID) ? $wardID : ''; ?>">
     </div>
 
