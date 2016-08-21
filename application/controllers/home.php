@@ -509,21 +509,21 @@ class Home extends CI_Controller {
     function GetNameOfTypeNews($cat=0){
         $typeNew = '';
         switch($cat){
-            case 30:
-                $typeNew.= 'Tất cả';
-                break;
             case 31:
                 $typeNew.= 'Tin cập nhật';
                 break;
             case 32:
                 $typeNew.= 'Sự kiện';
-            break;
+                break;
             case 33:
                 $typeNew.= 'Khuyến mại';
-            break;
+                break;
             case 34:
                 $typeNew.= 'Trải nghiệm';
-            break; 
+                break; 
+            default:
+                $typeNew.= 'Tất cả';
+                break;
         }
         return $typeNew;
     }

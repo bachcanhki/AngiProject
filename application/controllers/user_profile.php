@@ -472,19 +472,23 @@ class user_profile extends CI_Controller{
         //kiem tra du lieu
         $error = '';
         $ok = 1;
+        if ($image['addressImage'] == '') 
+        {
+            $error .= 'Chưa nhập ảnh món ăn<br />';
+            $ok = 0;
+        }
         if ($model['nameFo'] == '') 
         {
             $error .= 'Chưa nhập tên <br />';
             $ok = 0;
         }
-        if ($model['desciptionFo'] == '') 
-        {
-            $error .= 'Chưa nhập mô tả <br />';
-            $ok = 0;
-        }
+        
         if ($model['priceFo'] == '') 
         {
             $error .= 'Chưa nhập giá <br />';
+            $ok = 0;
+        } else if (!is_numeric($model['priceFo'])){
+            $error .= 'Nhập sai giá <br />';
             $ok = 0;
         }
         if ($model['typeFo'] == '') 
@@ -492,6 +496,7 @@ class user_profile extends CI_Controller{
             $error .= 'Chưa chọn loại <br />';
             $ok = 0;
         }
+
         if ($ok == 1)
         {   
             if ($this->foodModel->Create($model, $image))
@@ -1108,7 +1113,6 @@ class user_profile extends CI_Controller{
         
         $this->load->view('site/layout/layoutprofile.phtml', $data); 
     }
-
 
     public function check_id($id, $uri)
     {

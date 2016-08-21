@@ -17,12 +17,12 @@
                 <label for="memName">Tên</label>
                 <input type="text" class="form-control" value="<?php echo isset($nameCOR) ? $nameCOR : ''; ?>" id="nameCOR"  name="nameCOR" placeholder="">
             </div>
-            <div class="form-group">
+        	<div class="form-group">
                 <label for="userName">Mô tả</label>
                 <div>
                     <textarea id="desciptionCOR"  name="desciptionCOR"   class="form-control"><?php echo isset($desciptionCOR) ? $desciptionCOR : ''; ?></textarea>
                 </div>
-            </div>
+        	</div>
             <div class="form-group">
                   <div class="checkbox">
                     <label>
@@ -35,7 +35,7 @@
         </form>
   </div> 
 </div>
-
+  
 <script>
     $(document).ready(function(){
         var ok = '<?php echo isset($ok) ? $ok : ''; ?>';
