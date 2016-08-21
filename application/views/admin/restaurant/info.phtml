@@ -1,6 +1,6 @@
 
 <div style="display: table; padding-top: 15px">
-    <div class="col-lg-6 form-group">
+    <div class="col-lg-12 form-group">
         <label for="categoryOfResID">Danh mục nhà hàng</label> 
         <select disabled="true" id="categoryOfResID" name="categoryOfResID"  data-placeholder="--Chọn loại nhà hàng--" multiple class="chosen-select">
            <?php foreach($categories as $item){?>
@@ -13,7 +13,7 @@
     	<input type="hidden" name="categoryOfResIDs" id="categoryOfResIDs" value="<?php echo isset($categoryOfResIDs) ? $categoryOfResIDs : ''; ?>">
     </div>
 
-    <div class="col-lg-6 form-group">
+    <div class="col-lg-12 form-group">
         <input type="hidden" id="restaurantID" name="restaurantID" value="<?php echo isset($restaurantID) ? $restaurantID : '0'; ?>">
         <input type="hidden" id="userID" name="userID" value="<?php echo isset($userID) ? $userID : '0'; ?>">
         <label for="memName">Tên nhà hàng</label>

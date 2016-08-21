@@ -70,6 +70,7 @@ h2.restaurant-name{
 .read-more>p{
     text-align: justify;
 }
+.read-more>p>img{text-align: center}
 .read-more>h4{
     font-weight: bold; margin: 20px 0 10px
 }

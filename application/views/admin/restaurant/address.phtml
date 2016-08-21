@@ -35,7 +35,7 @@
              <?php if(isset($wardID) && $wardID == $adr->wardid.''){ echo 'selected="selected"';} else {echo '';} ?> ><?php echo $adr->nameWard; ?></option>
           <?php } ?>
         </select>
-        
+
         <input hidden id="wardID" name="wardID" type="text" value="<?php echo isset($wardID) ? $wardID : ''; ?>">
     </div>
 
