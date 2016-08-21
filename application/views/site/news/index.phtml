@@ -19,7 +19,7 @@
                     </a>
 
                     <div style="text-align: center">     
-                        <h4 class="news-title"><a href=""><?php echo $this->xulychuoi->GetTitleNew( $item->titleNews, 60); ?></a></h4>
+                        <h4 class="news-title"><a href="<?php echo $this->uriutils->BuildViewNewsUrl($item->newsID); ?>"><?php echo $this->xulychuoi->GetTitleNew( $item->titleNews, 60); ?></a></h4>
                         <p class="news-desc"><?php echo $this->xulychuoi->GetIntroText( $item->contentNews, 200); ?></p>
                     </div>
                 </li>
