@@ -20,10 +20,10 @@
                     <h4>Danh mục</h4>
                     <ul class="sidebar-list">
                         <?php if (isset($categories)){
-                            foreach($categories as $item){
+                            foreach($categories as $item){                              
                              ?>
                              <li>
-                                <a href="<?php echo $this->uriutils->BuildSearchUrl($item->categoryOfResID, $district, $keyword); ?>">
+                                <a href="<?php echo $this->uriutils->BuildSearchUrl($item->categoryOfResID, $district,$keyword); ?>">
                                     <?php echo $item->nameCOR; ?>
                                 </a>
                              </li>
@@ -57,7 +57,7 @@
                         ?>
                         <div class="col-md-3 col-sm-6 restaurant-list">
                             <a style="display: block; position: relative" class="img-item" href="<?php echo $base_url.'restaurant/view/'.$item->restaurantID; ?>">
-                                <img src="<?php echo $item->imageUrl != '' ? $item->imageUrl : 'http://cdn.pasgo.vn/anh-diem-den/nha-hang-ao-quan-ngo-19-dong-tac-avatarjpg-5138.jpg'; ?>">
+                                <img src="<?php echo $item->imageUrl != '' ? $item->imageUrl : base_url().'img/no-image.jpg'; ?>">
                                 <div class="item-infor">
                                     <label class="item-name item-name-sm"><?php echo $item->nameRe ?></label>
                                     <span class="rate-star">
