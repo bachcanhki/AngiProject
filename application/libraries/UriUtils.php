@@ -4,10 +4,11 @@ class UriUtils
 {
     function BuildSearchUrl($cat=0, $dist=0, $key='', $offset=null)
     { 
-        $key = urlencode($key);
+        $key = urldecode($key);
+        
         if ($offset = null)
-            return base_url().'/home/search/'.$cat.'/'.$dist.'/'.$key.'/';
-        return base_url().'/home/search/'.$cat.'/'.$dist.'/'.$key.'/'.$offset;
+            return base_url().'home/search/'.$cat.'/'.$dist.'/'.$key.'/';
+        return base_url().'home/search/'.$cat.'/'.$dist.'/'.$key.'/'.$offset;
     }     
     function BuildViewResUrl($resId=0)
     {                    
