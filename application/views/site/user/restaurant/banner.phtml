@@ -25,7 +25,7 @@
       ?>
         <li class="col-md-4 col-sm-6 col-xs-12" >
             <a style="display: block; position: relative" class="img-item">
-                <img alt="Ảnh món ăn" style="width: 100%;" class="img-thumbnail" src="<?php echo $item->imageUrl; ?>">
+                <img alt="Ảnh món ăn" style="width: 100%;" class="img-thumbnail" src="<?php echo base_url().$item->imageUrl; ?>">
                 <i class="fa fa-remove remove-img" title="Delete" onclick="return bannerModule.delete('<?php echo $item->restaurantImageId; ?>');"></i>
             </a>                                                                                                            
     <?php }} ?>

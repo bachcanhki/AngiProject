@@ -19,7 +19,7 @@
               </div>
 
               <div class="form-group col-md-6" style="text-align: right">
-                  <img src="<?php echo isset($imageNews) ? $imageNews : '/upload/img_default.jpg'; ?>" id="imageIDSrc" alt="Ảnh tin tức" style="width: 50%; cursor: pointer;" class="img-thumbnail" onclick="return newsModule.openCkFinder();">
+                  <img src="<?php echo isset($imageNews) ? base_url().$imageNews : base_url().'/upload/img_default.jpg'; ?>" id="imageIDSrc" alt="Ảnh tin tức" style="width: 50%; cursor: pointer;" class="img-thumbnail" onclick="return newsModule.openCkFinder();">
                   <input type="hidden" id="imageNews" name="imageNews" class="form-control" value="<?php echo isset($imageNews) ? $imageNews : '/upload/img_default.jpg'; ?>">
                   <input type="hidden" id="imageNewsTemp" name="imageNewsTemp" class="form-control" value="">
               </div>

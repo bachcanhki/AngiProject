@@ -2,7 +2,7 @@
 <ul class="profile-sidebar">
     <div class="profile-stt">
         <div class="col-md-5 col-sm-5 col-xs-5" style="text-align: center;">
-            <img id="imageIDSrc" alt src="<?php echo $addressImage!= '' ? $addressImage : base_url().'img/no-image.jpg'; ?>">
+            <img id="imageIDSrc" alt src="<?php echo $addressImage!= '' ? base_url().$addressImage : base_url().'img/no-image.jpg'; ?>">
         </div>
         <div class="col-md-7 col-sm-7 col-xs-7">
             <p>Mã khách hàng: <strong><?php echo $userID; ?></strong></p>

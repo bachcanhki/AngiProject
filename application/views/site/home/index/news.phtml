@@ -25,7 +25,7 @@
         ?>
         <li class="col-md-4 col-sm-6">
             <a style="display: block; position: relative" class="img-item" href="<?php echo $this->uriutils->BuildViewNewsUrl($item->newsID); ?>">
-                <img src="<?php echo $item->imageNews != '' ? $item->imageNews : base_url().'img/no-image.jpg'; ?>">
+                <img src="<?php echo $item->imageNews != '' ? base_url().$item->imageNews : base_url().'img/no-image.jpg'; ?>">
             </a>
 
             <div style="text-align: center">

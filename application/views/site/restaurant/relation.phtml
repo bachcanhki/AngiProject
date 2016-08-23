@@ -15,7 +15,7 @@
         ?>
         <li class="col-md-3 col-sm-6">
             <a style="display: block; position: relative" class="img-item" href="<?php echo $this->uriutils->BuildViewResUrl($item->restaurantID); ?>">
-                <img src="<?php echo $item->imageUrl != '' ? $item->imageUrl : base_url().'img/no-image.jpg'; ?>">
+                <img src="<?php echo $item->imageUrl != '' ? base_url().$item->imageUrl : base_url().'img/no-image.jpg'; ?>">
                 <div class="item-infor">
                     <label class="item-name item-name-sm"><?php echo $item->nameRe; ?></label>
                     <span class="rate-star">

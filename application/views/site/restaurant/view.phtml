@@ -59,7 +59,7 @@
                                     $item = $restaurantBanners[$i];
                                  ?>
                                 <div class="item <?php echo $active; ?>">
-                                    <img src="<?php echo $item->imageUrl; ?>">
+                                    <img src="<?php echo base_url().$item->imageUrl; ?>">
                                 </div>
                                 <?php } ?>   
                             </div>
@@ -118,10 +118,7 @@
                                 <?php echo $restaurant->descriptionRes; ?>
                                 <h4>Thông tin liên hệ</h4>
                                 <p><strong><?php echo $restaurant->address;  ?></strong></p>
-
-
                                  <div class="fb-like" data-href="<?php echo base_url(); ?>restaurant/view/<?php echo $restaurant->restaurantID; ?>" data-layout="standard" data-action="like" data-show-faces="true" data-share="true"></div>
-
                             </div>
                         </div>
 

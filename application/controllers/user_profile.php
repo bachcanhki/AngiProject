@@ -105,7 +105,7 @@ class user_profile extends CI_Controller{
                 }
             }
             if ($memBirthDay == '') {
-                $memBirthDay=date("d/m/y");
+                $memBirthDay = date("d/m/y");
             } 
             else {
                 $memBirthDay = $this->dateutils->ConvertToDatetime($memBirthDay, 'd/m/Y'); 
@@ -566,7 +566,8 @@ class user_profile extends CI_Controller{
             $error .= 'Chưa nhập tên <br />';
             $ok = 0;
         }
-                if ($model['priceFo'] == '') 
+        
+        if ($model['priceFo'] == '') 
         {
             $error .= 'Chưa nhập giá <br />';
             $ok = 0;
@@ -577,7 +578,6 @@ class user_profile extends CI_Controller{
             $error .= 'Nhập sai giá <br />';
             $ok = 0;
         }
-
         if ($model['typeFo'] == '') 
         {
             $error .= 'Chưa chọn loại <br />';

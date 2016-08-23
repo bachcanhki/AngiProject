@@ -21,7 +21,7 @@
         <?php if (isset($foods)){ ?>
         <?php foreach ($foods as $item) {?>
         <tr>
-            <td class="text-center"><img src="<?php echo $item->imageIDSrc; ?>" alt="Ảnh món ăn" height="50px"></td> 
+            <td class="text-center"><img src="<?php echo base_url().$item->imageIDSrc; ?>" alt="Ảnh món ăn" height="50px"></td> 
             <td><?php echo $item->nameFo; ?></td>
             <td class="text-right"><?php echo $item->priceFo; ?></td>   
             <td class="text-center"><?php 
