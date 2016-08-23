@@ -127,7 +127,7 @@ class user_profile extends CI_Controller{
                     'mem'    => array(
                         'memName' => $model['memName'],
                         'memGender' => $model['memGender'],
-                        'memBirthDay' => $this->dateutils->VnStrDatetimeToDb($model['memBirthDay'], 'd/m/Y')
+                        'memBirthDay' => $this->dateutils->VnStrDatetimeToDb($memBirthDay, 'd/m/Y')
                     )
                 );
                 if ($this->usersModel->Update($user-> userID, $dataEdit)){ 
@@ -490,7 +490,11 @@ class user_profile extends CI_Controller{
         } else if (!is_numeric($model['priceFo'])){
             $error .= 'Nhập sai giá <br />';
             $ok = 0;
+        } else if ($model['priceFo'] < 0 ){
+            $error .= 'Nhập sai giá <br />';
+            $ok = 0;
         }
+
         if ($model['typeFo'] == '') 
         {
             $error .= 'Chưa chọn loại <br />';
@@ -562,15 +566,18 @@ class user_profile extends CI_Controller{
             $error .= 'Chưa nhập tên <br />';
             $ok = 0;
         }
-        
-        if ($model['priceFo'] == '') 
+                if ($model['priceFo'] == '') 
         {
             $error .= 'Chưa nhập giá <br />';
             $ok = 0;
         } else if (!is_numeric($model['priceFo'])){
             $error .= 'Nhập sai giá <br />';
             $ok = 0;
+        } else if ($model['priceFo'] < 0 ){
+            $error .= 'Nhập sai giá <br />';
+            $ok = 0;
         }
+
         if ($model['typeFo'] == '') 
         {
             $error .= 'Chưa chọn loại <br />';
@@ -648,12 +655,18 @@ class user_profile extends CI_Controller{
         {
             $error .= $this->Error('Chưa nhập vĩ độ');
             $ok = false;
-        }  
+        } else if (!is_numeric($data['latitudeRe'])){
+            $error .= $this->Error('Nhập sai vĩ độ');
+            $ok = false;
+        } 
         if($data['longitudeRe'] == '')    
         {
             $error .= $this->Error('Chưa nhập vĩ độ');
             $ok = false;
-        }  
+        } else if (!is_numeric($data['longitudeRe'])){
+            $error .= $this->Error('Nhập sai kinh độ');
+            $ok = false;
+        } 
         if ($data['minPrice'] == '') {
             $error .= $this->Error('Chưa nhập giá tiền thấp nhất');
             $ok = false;
@@ -674,6 +687,9 @@ class user_profile extends CI_Controller{
         }
         if ($data['discount'] == '') {
             $error .= $this->Error('Chưa nhập giảm giá');
+            $ok = false;
+        } else if ($data['discount'] < 0 || $data['discount'] > 100){
+            $error .= $this->Error('Nhập sai giảm giá');
             $ok = false;
         }
         return $ok;

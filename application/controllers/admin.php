@@ -801,7 +801,7 @@ class admin extends CI_Controller {
             
             if (!$ok)
             {
-                $data['model']['error'] = $error;
+                $model['error'] = $error;
             } else{
                 //Tao mang chua thong tin ve user
                 $dataAdd = array(
