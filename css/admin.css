@@ -38,7 +38,9 @@ ul{
 .manage-sb{
     margin: 0 -15px;
 }
-.manage-sb>li{border-bottom: 1px solid}
+.manage-sb>li{
+    border-bottom: 1px solid
+}
 .manage-sb>li>a{
     position: relative;
     display: block;
