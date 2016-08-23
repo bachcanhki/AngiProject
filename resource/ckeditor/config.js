@@ -25,12 +25,14 @@ CKEDITOR.editorConfig = function( config ) {
              { name: 'about', groups: ['about'] }
     ];
     
-    config.filebrowserBrowseUrl = 'http://localhost/AnGiProject/resource/ckfinder/ckfinder.html';
-    config.filebrowserImageBrowseUrl = 'http://localhost/AnGiProject/resource/ckfinder/ckfinder.html?type=Images';
-    config.filebrowserFlashBrowseUrl = 'http://localhost/AnGiProject/resource/ckfinder/ckfinder.html?type=Flash';
-    config.filebrowserUploadUrl = 'http://localhost/AnGiProject/resource/ckfinder/core/connector/php/connector.php?command=QuickUpload&type=Files';
-    config.filebrowserImageUploadUrl = 'http://localhost/AnGiProject/resource/ckfinder/core/connector/php/connector.php?command=QuickUpload&type=Images';
-    config.filebrowserFlashUploadUrl = 'http://localhost/AnGiProject/resource/ckfinder/core/connector/php/connector.php?command=QuickUpload&type=Flash';
+    var link = 'http://angivn.top/';
+
+    config.filebrowserBrowseUrl = link + 'resource/ckfinder/ckfinder.html';
+    config.filebrowserImageBrowseUrl = link + 'resource/ckfinder/ckfinder.html?type=Images';
+    config.filebrowserFlashBrowseUrl = link + 'resource/ckfinder/ckfinder.html?type=Flash';
+    config.filebrowserUploadUrl = link + 'resource/ckfinder/core/connector/php/connector.php?command=QuickUpload&type=Files';
+    config.filebrowserImageUploadUrl = link + 'resource/ckfinder/core/connector/php/connector.php?command=QuickUpload&type=Images';
+    config.filebrowserFlashUploadUrl = link + 'resource/ckfinder/core/connector/php/connector.php?command=QuickUpload&type=Flash';
     
     config.removeButtons = 'Save,NewPage,Preview,Print,Templates,Find,Replace,SelectAll,Scayt,Form,Checkbox,Radio,TextField,Textarea,Select,Button,ImageButton,HiddenField,BidiLtr,BidiRtl,Language,CreateDiv,Superscript,Subscript,Strike,SpecialChar,PageBreak,Iframe,Smiley,HorizontalRule,Flash,Anchor,ShowBlocks,About';
     config.language = 'vi';
